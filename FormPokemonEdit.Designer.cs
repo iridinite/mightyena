@@ -23,6 +23,7 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
+            this.components = new System.ComponentModel.Container();
             this.txtNickname = new System.Windows.Forms.TextBox();
             this.txtTrainerID = new System.Windows.Forms.TextBox();
             this.txtSecretID = new System.Windows.Forms.TextBox();
@@ -36,11 +37,18 @@
             this.fraOT = new System.Windows.Forms.GroupBox();
             this.cmbTrainerGender = new System.Windows.Forms.ComboBox();
             this.lblTrainerGender = new System.Windows.Forms.Label();
-            this.chkFatefulEncounter = new System.Windows.Forms.CheckBox();
             this.cmdSetOT = new System.Windows.Forms.Button();
+            this.chkFatefulEncounter = new System.Windows.Forms.CheckBox();
             this.fraPVal = new System.Windows.Forms.GroupBox();
+            this.lblAbility = new System.Windows.Forms.Label();
+            this.lblShiny = new System.Windows.Forms.Label();
+            this.lblNature = new System.Windows.Forms.Label();
+            this.lblGender = new System.Windows.Forms.Label();
+            this.lblAbilityH = new System.Windows.Forms.Label();
+            this.lblShinyH = new System.Windows.Forms.Label();
             this.cmdEditPval = new System.Windows.Forms.Button();
             this.txtPval = new System.Windows.Forms.TextBox();
+            this.lblPval = new System.Windows.Forms.Label();
             this.lblNatureH = new System.Windows.Forms.Label();
             this.lblGenderH = new System.Windows.Forms.Label();
             this.lblLanguage = new System.Windows.Forms.Label();
@@ -68,6 +76,30 @@
             this.cmbMove2 = new System.Windows.Forms.ComboBox();
             this.cmbMove1 = new System.Windows.Forms.ComboBox();
             this.fraTraining = new System.Windows.Forms.GroupBox();
+            this.cmdGenerateEV = new System.Windows.Forms.Button();
+            this.cmdGenerateIV = new System.Windows.Forms.Button();
+            this.lblEV2 = new System.Windows.Forms.Label();
+            this.lblIV2 = new System.Windows.Forms.Label();
+            this.lblEV1 = new System.Windows.Forms.Label();
+            this.lblIV1 = new System.Windows.Forms.Label();
+            this.nudEVSpDefense = new System.Windows.Forms.NumericUpDown();
+            this.nudEVDefense = new System.Windows.Forms.NumericUpDown();
+            this.nudEVSpAttack = new System.Windows.Forms.NumericUpDown();
+            this.nudEVAttack = new System.Windows.Forms.NumericUpDown();
+            this.nudEVSpeed = new System.Windows.Forms.NumericUpDown();
+            this.nudEVHP = new System.Windows.Forms.NumericUpDown();
+            this.lblSpDefense = new System.Windows.Forms.Label();
+            this.lblSpAttack = new System.Windows.Forms.Label();
+            this.lblSpeed = new System.Windows.Forms.Label();
+            this.lblDefense = new System.Windows.Forms.Label();
+            this.lblAttack = new System.Windows.Forms.Label();
+            this.lblHP = new System.Windows.Forms.Label();
+            this.nudIVSpDefense = new System.Windows.Forms.NumericUpDown();
+            this.nudIVSpAttack = new System.Windows.Forms.NumericUpDown();
+            this.nudIVSpeed = new System.Windows.Forms.NumericUpDown();
+            this.nudIVDefense = new System.Windows.Forms.NumericUpDown();
+            this.nudIVAttack = new System.Windows.Forms.NumericUpDown();
+            this.nudIVHP = new System.Windows.Forms.NumericUpDown();
             this.fraOrigins = new System.Windows.Forms.GroupBox();
             this.lblLevelMet = new System.Windows.Forms.Label();
             this.nudLevelMet = new System.Windows.Forms.NumericUpDown();
@@ -80,40 +112,23 @@
             this.cmdAccept = new System.Windows.Forms.Button();
             this.cmdCancel = new System.Windows.Forms.Button();
             this.picSprite = new System.Windows.Forms.PictureBox();
-            this.lblShinyH = new System.Windows.Forms.Label();
-            this.lblAbilityH = new System.Windows.Forms.Label();
-            this.lblAbility = new System.Windows.Forms.Label();
-            this.lblShiny = new System.Windows.Forms.Label();
-            this.lblNature = new System.Windows.Forms.Label();
-            this.lblGender = new System.Windows.Forms.Label();
-            this.nudIVHP = new System.Windows.Forms.NumericUpDown();
-            this.nudIVAttack = new System.Windows.Forms.NumericUpDown();
-            this.nudIVDefense = new System.Windows.Forms.NumericUpDown();
-            this.nudIVSpeed = new System.Windows.Forms.NumericUpDown();
-            this.nudIVSpAttack = new System.Windows.Forms.NumericUpDown();
-            this.nudIVSpDefense = new System.Windows.Forms.NumericUpDown();
-            this.lblHP = new System.Windows.Forms.Label();
-            this.lblAttack = new System.Windows.Forms.Label();
-            this.lblDefense = new System.Windows.Forms.Label();
-            this.lblSpeed = new System.Windows.Forms.Label();
-            this.lblSpAttack = new System.Windows.Forms.Label();
-            this.lblSpDefense = new System.Windows.Forms.Label();
-            this.nudEVHP = new System.Windows.Forms.NumericUpDown();
-            this.nudEVSpeed = new System.Windows.Forms.NumericUpDown();
-            this.nudEVSpAttack = new System.Windows.Forms.NumericUpDown();
-            this.nudEVAttack = new System.Windows.Forms.NumericUpDown();
-            this.nudEVSpDefense = new System.Windows.Forms.NumericUpDown();
-            this.nudEVDefense = new System.Windows.Forms.NumericUpDown();
-            this.lblIV1 = new System.Windows.Forms.Label();
-            this.lblEV1 = new System.Windows.Forms.Label();
-            this.lblEV2 = new System.Windows.Forms.Label();
-            this.lblIV2 = new System.Windows.Forms.Label();
-            this.cmdGenerateIV = new System.Windows.Forms.Button();
-            this.lblPval = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.cmdRibbons = new System.Windows.Forms.Button();
-            this.cmdGenerateEV = new System.Windows.Forms.Button();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.cmsGenerateIV = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.mnuIV31 = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuIV0 = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuIVSep1 = new System.Windows.Forms.ToolStripSeparator();
+            this.mnuIVRandNatural = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuIVRandPoor = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuIVRandAverage = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuIVRandGood = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuEVSep2 = new System.Windows.Forms.ToolStripSeparator();
+            this.cmsGenerateEV = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.mnuEV255 = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuEV0 = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuEVSep1 = new System.Windows.Forms.ToolStripSeparator();
+            this.mnuEVRedist520 = new System.Windows.Forms.ToolStripMenuItem();
             this.fraOT.SuspendLayout();
             this.fraPVal.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudLevel)).BeginInit();
@@ -124,22 +139,24 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudPP2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudPP1)).BeginInit();
             this.fraTraining.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudEVSpDefense)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudEVDefense)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudEVSpAttack)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudEVAttack)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudEVSpeed)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudEVHP)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudIVSpDefense)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudIVSpAttack)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudIVSpeed)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudIVDefense)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudIVAttack)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudIVHP)).BeginInit();
             this.fraOrigins.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudLevelMet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picSprite)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudIVHP)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudIVAttack)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudIVDefense)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudIVSpeed)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudIVSpAttack)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudIVSpDefense)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudEVHP)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudEVSpeed)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudEVSpAttack)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudEVAttack)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudEVSpDefense)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudEVDefense)).BeginInit();
             this.groupBox1.SuspendLayout();
+            this.cmsGenerateIV.SuspendLayout();
+            this.cmsGenerateEV.SuspendLayout();
             this.SuspendLayout();
             // 
             // txtNickname
@@ -269,16 +286,6 @@
             this.lblTrainerGender.TabIndex = 23;
             this.lblTrainerGender.Text = "Trainer Gender:";
             // 
-            // chkFatefulEncounter
-            // 
-            this.chkFatefulEncounter.AutoSize = true;
-            this.chkFatefulEncounter.Location = new System.Drawing.Point(16, 48);
-            this.chkFatefulEncounter.Name = "chkFatefulEncounter";
-            this.chkFatefulEncounter.Size = new System.Drawing.Size(110, 17);
-            this.chkFatefulEncounter.TabIndex = 27;
-            this.chkFatefulEncounter.Text = "Fateful Encounter";
-            this.chkFatefulEncounter.UseVisualStyleBackColor = true;
-            // 
             // cmdSetOT
             // 
             this.cmdSetOT.Location = new System.Drawing.Point(24, 152);
@@ -288,6 +295,16 @@
             this.cmdSetOT.Text = "Set OT to Self";
             this.cmdSetOT.UseVisualStyleBackColor = true;
             this.cmdSetOT.Click += new System.EventHandler(this.cmdSetOT_Click);
+            // 
+            // chkFatefulEncounter
+            // 
+            this.chkFatefulEncounter.AutoSize = true;
+            this.chkFatefulEncounter.Location = new System.Drawing.Point(16, 48);
+            this.chkFatefulEncounter.Name = "chkFatefulEncounter";
+            this.chkFatefulEncounter.Size = new System.Drawing.Size(110, 17);
+            this.chkFatefulEncounter.TabIndex = 27;
+            this.chkFatefulEncounter.Text = "Fateful Encounter";
+            this.chkFatefulEncounter.UseVisualStyleBackColor = true;
             // 
             // fraPVal
             // 
@@ -309,6 +326,60 @@
             this.fraPVal.TabStop = false;
             this.fraPVal.Text = "Personality";
             // 
+            // lblAbility
+            // 
+            this.lblAbility.AutoSize = true;
+            this.lblAbility.Location = new System.Drawing.Point(72, 112);
+            this.lblAbility.Name = "lblAbility";
+            this.lblAbility.Size = new System.Drawing.Size(25, 13);
+            this.lblAbility.TabIndex = 36;
+            this.lblAbility.Text = "???";
+            // 
+            // lblShiny
+            // 
+            this.lblShiny.AutoSize = true;
+            this.lblShiny.Location = new System.Drawing.Point(72, 96);
+            this.lblShiny.Name = "lblShiny";
+            this.lblShiny.Size = new System.Drawing.Size(25, 13);
+            this.lblShiny.TabIndex = 35;
+            this.lblShiny.Text = "???";
+            // 
+            // lblNature
+            // 
+            this.lblNature.AutoSize = true;
+            this.lblNature.Location = new System.Drawing.Point(72, 80);
+            this.lblNature.Name = "lblNature";
+            this.lblNature.Size = new System.Drawing.Size(25, 13);
+            this.lblNature.TabIndex = 34;
+            this.lblNature.Text = "???";
+            // 
+            // lblGender
+            // 
+            this.lblGender.AutoSize = true;
+            this.lblGender.Location = new System.Drawing.Point(72, 64);
+            this.lblGender.Name = "lblGender";
+            this.lblGender.Size = new System.Drawing.Size(25, 13);
+            this.lblGender.TabIndex = 33;
+            this.lblGender.Text = "???";
+            // 
+            // lblAbilityH
+            // 
+            this.lblAbilityH.AutoSize = true;
+            this.lblAbilityH.Location = new System.Drawing.Point(8, 112);
+            this.lblAbilityH.Name = "lblAbilityH";
+            this.lblAbilityH.Size = new System.Drawing.Size(37, 13);
+            this.lblAbilityH.TabIndex = 32;
+            this.lblAbilityH.Text = "Ability:";
+            // 
+            // lblShinyH
+            // 
+            this.lblShinyH.AutoSize = true;
+            this.lblShinyH.Location = new System.Drawing.Point(8, 96);
+            this.lblShinyH.Name = "lblShinyH";
+            this.lblShinyH.Size = new System.Drawing.Size(36, 13);
+            this.lblShinyH.TabIndex = 31;
+            this.lblShinyH.Text = "Shiny:";
+            // 
             // cmdEditPval
             // 
             this.cmdEditPval.Location = new System.Drawing.Point(24, 144);
@@ -327,6 +398,15 @@
             this.txtPval.Size = new System.Drawing.Size(136, 20);
             this.txtPval.TabIndex = 29;
             this.txtPval.Leave += new System.EventHandler(this.txtPval_Leave);
+            // 
+            // lblPval
+            // 
+            this.lblPval.AutoSize = true;
+            this.lblPval.Location = new System.Drawing.Point(8, 16);
+            this.lblPval.Name = "lblPval";
+            this.lblPval.Size = new System.Drawing.Size(91, 13);
+            this.lblPval.TabIndex = 28;
+            this.lblPval.Text = "Personality Value:";
             // 
             // lblNatureH
             // 
@@ -663,6 +743,260 @@
             this.fraTraining.TabStop = false;
             this.fraTraining.Text = "Training";
             // 
+            // cmdGenerateEV
+            // 
+            this.cmdGenerateEV.Location = new System.Drawing.Point(160, 112);
+            this.cmdGenerateEV.Name = "cmdGenerateEV";
+            this.cmdGenerateEV.Size = new System.Drawing.Size(120, 24);
+            this.cmdGenerateEV.TabIndex = 50;
+            this.cmdGenerateEV.Text = "Regenerate EVs...";
+            this.cmdGenerateEV.UseVisualStyleBackColor = true;
+            this.cmdGenerateEV.Click += new System.EventHandler(this.cmdGenerateEV_Click);
+            // 
+            // cmdGenerateIV
+            // 
+            this.cmdGenerateIV.Location = new System.Drawing.Point(32, 112);
+            this.cmdGenerateIV.Name = "cmdGenerateIV";
+            this.cmdGenerateIV.Size = new System.Drawing.Size(120, 24);
+            this.cmdGenerateIV.TabIndex = 49;
+            this.cmdGenerateIV.Text = "Regenerate IVs...";
+            this.cmdGenerateIV.UseVisualStyleBackColor = true;
+            this.cmdGenerateIV.Click += new System.EventHandler(this.cmdGenerateIV_Click);
+            // 
+            // lblEV2
+            // 
+            this.lblEV2.Location = new System.Drawing.Point(240, 16);
+            this.lblEV2.Name = "lblEV2";
+            this.lblEV2.Size = new System.Drawing.Size(40, 12);
+            this.lblEV2.TabIndex = 48;
+            this.lblEV2.Text = "EV";
+            this.lblEV2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblIV2
+            // 
+            this.lblIV2.Location = new System.Drawing.Point(192, 16);
+            this.lblIV2.Name = "lblIV2";
+            this.lblIV2.Size = new System.Drawing.Size(40, 12);
+            this.lblIV2.TabIndex = 47;
+            this.lblIV2.Text = "IV";
+            this.lblIV2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblEV1
+            // 
+            this.lblEV1.Location = new System.Drawing.Point(96, 16);
+            this.lblEV1.Name = "lblEV1";
+            this.lblEV1.Size = new System.Drawing.Size(40, 12);
+            this.lblEV1.TabIndex = 46;
+            this.lblEV1.Text = "EV";
+            this.lblEV1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblIV1
+            // 
+            this.lblIV1.Location = new System.Drawing.Point(48, 16);
+            this.lblIV1.Name = "lblIV1";
+            this.lblIV1.Size = new System.Drawing.Size(40, 12);
+            this.lblIV1.TabIndex = 45;
+            this.lblIV1.Text = "IV";
+            this.lblIV1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // nudEVSpDefense
+            // 
+            this.nudEVSpDefense.Location = new System.Drawing.Point(240, 80);
+            this.nudEVSpDefense.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.nudEVSpDefense.Name = "nudEVSpDefense";
+            this.nudEVSpDefense.Size = new System.Drawing.Size(40, 20);
+            this.nudEVSpDefense.TabIndex = 44;
+            // 
+            // nudEVDefense
+            // 
+            this.nudEVDefense.Location = new System.Drawing.Point(96, 80);
+            this.nudEVDefense.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.nudEVDefense.Name = "nudEVDefense";
+            this.nudEVDefense.Size = new System.Drawing.Size(40, 20);
+            this.nudEVDefense.TabIndex = 43;
+            // 
+            // nudEVSpAttack
+            // 
+            this.nudEVSpAttack.Location = new System.Drawing.Point(240, 56);
+            this.nudEVSpAttack.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.nudEVSpAttack.Name = "nudEVSpAttack";
+            this.nudEVSpAttack.Size = new System.Drawing.Size(40, 20);
+            this.nudEVSpAttack.TabIndex = 42;
+            // 
+            // nudEVAttack
+            // 
+            this.nudEVAttack.Location = new System.Drawing.Point(96, 56);
+            this.nudEVAttack.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.nudEVAttack.Name = "nudEVAttack";
+            this.nudEVAttack.Size = new System.Drawing.Size(40, 20);
+            this.nudEVAttack.TabIndex = 41;
+            // 
+            // nudEVSpeed
+            // 
+            this.nudEVSpeed.Location = new System.Drawing.Point(240, 32);
+            this.nudEVSpeed.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.nudEVSpeed.Name = "nudEVSpeed";
+            this.nudEVSpeed.Size = new System.Drawing.Size(40, 20);
+            this.nudEVSpeed.TabIndex = 40;
+            // 
+            // nudEVHP
+            // 
+            this.nudEVHP.Location = new System.Drawing.Point(96, 32);
+            this.nudEVHP.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.nudEVHP.Name = "nudEVHP";
+            this.nudEVHP.Size = new System.Drawing.Size(40, 20);
+            this.nudEVHP.TabIndex = 39;
+            // 
+            // lblSpDefense
+            // 
+            this.lblSpDefense.Location = new System.Drawing.Point(152, 80);
+            this.lblSpDefense.Name = "lblSpDefense";
+            this.lblSpDefense.Size = new System.Drawing.Size(40, 22);
+            this.lblSpDefense.TabIndex = 38;
+            this.lblSpDefense.Text = "SpDef:";
+            this.lblSpDefense.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblSpAttack
+            // 
+            this.lblSpAttack.Location = new System.Drawing.Point(152, 56);
+            this.lblSpAttack.Name = "lblSpAttack";
+            this.lblSpAttack.Size = new System.Drawing.Size(40, 20);
+            this.lblSpAttack.TabIndex = 37;
+            this.lblSpAttack.Text = "SpAtk:";
+            this.lblSpAttack.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblSpeed
+            // 
+            this.lblSpeed.Location = new System.Drawing.Point(152, 32);
+            this.lblSpeed.Name = "lblSpeed";
+            this.lblSpeed.Size = new System.Drawing.Size(40, 20);
+            this.lblSpeed.TabIndex = 36;
+            this.lblSpeed.Text = "Spd:";
+            this.lblSpeed.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblDefense
+            // 
+            this.lblDefense.Location = new System.Drawing.Point(8, 80);
+            this.lblDefense.Name = "lblDefense";
+            this.lblDefense.Size = new System.Drawing.Size(40, 20);
+            this.lblDefense.TabIndex = 35;
+            this.lblDefense.Text = "Def:";
+            this.lblDefense.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblAttack
+            // 
+            this.lblAttack.Location = new System.Drawing.Point(8, 56);
+            this.lblAttack.Name = "lblAttack";
+            this.lblAttack.Size = new System.Drawing.Size(40, 20);
+            this.lblAttack.TabIndex = 34;
+            this.lblAttack.Text = "Atk:";
+            this.lblAttack.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblHP
+            // 
+            this.lblHP.Location = new System.Drawing.Point(8, 32);
+            this.lblHP.Name = "lblHP";
+            this.lblHP.Size = new System.Drawing.Size(40, 20);
+            this.lblHP.TabIndex = 33;
+            this.lblHP.Text = "HP:";
+            this.lblHP.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // nudIVSpDefense
+            // 
+            this.nudIVSpDefense.Location = new System.Drawing.Point(192, 80);
+            this.nudIVSpDefense.Maximum = new decimal(new int[] {
+            31,
+            0,
+            0,
+            0});
+            this.nudIVSpDefense.Name = "nudIVSpDefense";
+            this.nudIVSpDefense.Size = new System.Drawing.Size(40, 20);
+            this.nudIVSpDefense.TabIndex = 32;
+            // 
+            // nudIVSpAttack
+            // 
+            this.nudIVSpAttack.Location = new System.Drawing.Point(192, 56);
+            this.nudIVSpAttack.Maximum = new decimal(new int[] {
+            31,
+            0,
+            0,
+            0});
+            this.nudIVSpAttack.Name = "nudIVSpAttack";
+            this.nudIVSpAttack.Size = new System.Drawing.Size(40, 20);
+            this.nudIVSpAttack.TabIndex = 31;
+            // 
+            // nudIVSpeed
+            // 
+            this.nudIVSpeed.Location = new System.Drawing.Point(192, 32);
+            this.nudIVSpeed.Maximum = new decimal(new int[] {
+            31,
+            0,
+            0,
+            0});
+            this.nudIVSpeed.Name = "nudIVSpeed";
+            this.nudIVSpeed.Size = new System.Drawing.Size(40, 20);
+            this.nudIVSpeed.TabIndex = 30;
+            // 
+            // nudIVDefense
+            // 
+            this.nudIVDefense.Location = new System.Drawing.Point(48, 80);
+            this.nudIVDefense.Maximum = new decimal(new int[] {
+            31,
+            0,
+            0,
+            0});
+            this.nudIVDefense.Name = "nudIVDefense";
+            this.nudIVDefense.Size = new System.Drawing.Size(40, 20);
+            this.nudIVDefense.TabIndex = 29;
+            // 
+            // nudIVAttack
+            // 
+            this.nudIVAttack.Location = new System.Drawing.Point(48, 56);
+            this.nudIVAttack.Maximum = new decimal(new int[] {
+            31,
+            0,
+            0,
+            0});
+            this.nudIVAttack.Name = "nudIVAttack";
+            this.nudIVAttack.Size = new System.Drawing.Size(40, 20);
+            this.nudIVAttack.TabIndex = 28;
+            // 
+            // nudIVHP
+            // 
+            this.nudIVHP.Location = new System.Drawing.Point(48, 32);
+            this.nudIVHP.Maximum = new decimal(new int[] {
+            31,
+            0,
+            0,
+            0});
+            this.nudIVHP.Name = "nudIVHP";
+            this.nudIVHP.Size = new System.Drawing.Size(40, 20);
+            this.nudIVHP.TabIndex = 27;
+            // 
             // fraOrigins
             // 
             this.fraOrigins.Controls.Add(this.lblLevelMet);
@@ -815,313 +1149,6 @@
             this.picSprite.TabStop = false;
             this.picSprite.Paint += new System.Windows.Forms.PaintEventHandler(this.picSprite_Paint);
             // 
-            // lblShinyH
-            // 
-            this.lblShinyH.AutoSize = true;
-            this.lblShinyH.Location = new System.Drawing.Point(8, 96);
-            this.lblShinyH.Name = "lblShinyH";
-            this.lblShinyH.Size = new System.Drawing.Size(36, 13);
-            this.lblShinyH.TabIndex = 31;
-            this.lblShinyH.Text = "Shiny:";
-            // 
-            // lblAbilityH
-            // 
-            this.lblAbilityH.AutoSize = true;
-            this.lblAbilityH.Location = new System.Drawing.Point(8, 112);
-            this.lblAbilityH.Name = "lblAbilityH";
-            this.lblAbilityH.Size = new System.Drawing.Size(37, 13);
-            this.lblAbilityH.TabIndex = 32;
-            this.lblAbilityH.Text = "Ability:";
-            // 
-            // lblAbility
-            // 
-            this.lblAbility.AutoSize = true;
-            this.lblAbility.Location = new System.Drawing.Point(72, 112);
-            this.lblAbility.Name = "lblAbility";
-            this.lblAbility.Size = new System.Drawing.Size(25, 13);
-            this.lblAbility.TabIndex = 36;
-            this.lblAbility.Text = "???";
-            // 
-            // lblShiny
-            // 
-            this.lblShiny.AutoSize = true;
-            this.lblShiny.Location = new System.Drawing.Point(72, 96);
-            this.lblShiny.Name = "lblShiny";
-            this.lblShiny.Size = new System.Drawing.Size(25, 13);
-            this.lblShiny.TabIndex = 35;
-            this.lblShiny.Text = "???";
-            // 
-            // lblNature
-            // 
-            this.lblNature.AutoSize = true;
-            this.lblNature.Location = new System.Drawing.Point(72, 80);
-            this.lblNature.Name = "lblNature";
-            this.lblNature.Size = new System.Drawing.Size(25, 13);
-            this.lblNature.TabIndex = 34;
-            this.lblNature.Text = "???";
-            // 
-            // lblGender
-            // 
-            this.lblGender.AutoSize = true;
-            this.lblGender.Location = new System.Drawing.Point(72, 64);
-            this.lblGender.Name = "lblGender";
-            this.lblGender.Size = new System.Drawing.Size(25, 13);
-            this.lblGender.TabIndex = 33;
-            this.lblGender.Text = "???";
-            // 
-            // nudIVHP
-            // 
-            this.nudIVHP.Location = new System.Drawing.Point(48, 32);
-            this.nudIVHP.Maximum = new decimal(new int[] {
-            31,
-            0,
-            0,
-            0});
-            this.nudIVHP.Name = "nudIVHP";
-            this.nudIVHP.Size = new System.Drawing.Size(40, 20);
-            this.nudIVHP.TabIndex = 27;
-            // 
-            // nudIVAttack
-            // 
-            this.nudIVAttack.Location = new System.Drawing.Point(48, 56);
-            this.nudIVAttack.Maximum = new decimal(new int[] {
-            31,
-            0,
-            0,
-            0});
-            this.nudIVAttack.Name = "nudIVAttack";
-            this.nudIVAttack.Size = new System.Drawing.Size(40, 20);
-            this.nudIVAttack.TabIndex = 28;
-            // 
-            // nudIVDefense
-            // 
-            this.nudIVDefense.Location = new System.Drawing.Point(48, 80);
-            this.nudIVDefense.Maximum = new decimal(new int[] {
-            31,
-            0,
-            0,
-            0});
-            this.nudIVDefense.Name = "nudIVDefense";
-            this.nudIVDefense.Size = new System.Drawing.Size(40, 20);
-            this.nudIVDefense.TabIndex = 29;
-            // 
-            // nudIVSpeed
-            // 
-            this.nudIVSpeed.Location = new System.Drawing.Point(192, 32);
-            this.nudIVSpeed.Maximum = new decimal(new int[] {
-            31,
-            0,
-            0,
-            0});
-            this.nudIVSpeed.Name = "nudIVSpeed";
-            this.nudIVSpeed.Size = new System.Drawing.Size(40, 20);
-            this.nudIVSpeed.TabIndex = 30;
-            // 
-            // nudIVSpAttack
-            // 
-            this.nudIVSpAttack.Location = new System.Drawing.Point(192, 56);
-            this.nudIVSpAttack.Maximum = new decimal(new int[] {
-            31,
-            0,
-            0,
-            0});
-            this.nudIVSpAttack.Name = "nudIVSpAttack";
-            this.nudIVSpAttack.Size = new System.Drawing.Size(40, 20);
-            this.nudIVSpAttack.TabIndex = 31;
-            // 
-            // nudIVSpDefense
-            // 
-            this.nudIVSpDefense.Location = new System.Drawing.Point(192, 80);
-            this.nudIVSpDefense.Maximum = new decimal(new int[] {
-            31,
-            0,
-            0,
-            0});
-            this.nudIVSpDefense.Name = "nudIVSpDefense";
-            this.nudIVSpDefense.Size = new System.Drawing.Size(40, 20);
-            this.nudIVSpDefense.TabIndex = 32;
-            // 
-            // lblHP
-            // 
-            this.lblHP.Location = new System.Drawing.Point(8, 32);
-            this.lblHP.Name = "lblHP";
-            this.lblHP.Size = new System.Drawing.Size(40, 20);
-            this.lblHP.TabIndex = 33;
-            this.lblHP.Text = "HP:";
-            this.lblHP.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // lblAttack
-            // 
-            this.lblAttack.Location = new System.Drawing.Point(8, 56);
-            this.lblAttack.Name = "lblAttack";
-            this.lblAttack.Size = new System.Drawing.Size(40, 20);
-            this.lblAttack.TabIndex = 34;
-            this.lblAttack.Text = "Atk:";
-            this.lblAttack.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // lblDefense
-            // 
-            this.lblDefense.Location = new System.Drawing.Point(8, 80);
-            this.lblDefense.Name = "lblDefense";
-            this.lblDefense.Size = new System.Drawing.Size(40, 20);
-            this.lblDefense.TabIndex = 35;
-            this.lblDefense.Text = "Def:";
-            this.lblDefense.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // lblSpeed
-            // 
-            this.lblSpeed.Location = new System.Drawing.Point(152, 32);
-            this.lblSpeed.Name = "lblSpeed";
-            this.lblSpeed.Size = new System.Drawing.Size(40, 20);
-            this.lblSpeed.TabIndex = 36;
-            this.lblSpeed.Text = "Spd:";
-            this.lblSpeed.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // lblSpAttack
-            // 
-            this.lblSpAttack.Location = new System.Drawing.Point(152, 56);
-            this.lblSpAttack.Name = "lblSpAttack";
-            this.lblSpAttack.Size = new System.Drawing.Size(40, 20);
-            this.lblSpAttack.TabIndex = 37;
-            this.lblSpAttack.Text = "SpAtk:";
-            this.lblSpAttack.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // lblSpDefense
-            // 
-            this.lblSpDefense.Location = new System.Drawing.Point(152, 80);
-            this.lblSpDefense.Name = "lblSpDefense";
-            this.lblSpDefense.Size = new System.Drawing.Size(40, 22);
-            this.lblSpDefense.TabIndex = 38;
-            this.lblSpDefense.Text = "SpDef:";
-            this.lblSpDefense.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // nudEVHP
-            // 
-            this.nudEVHP.Location = new System.Drawing.Point(96, 32);
-            this.nudEVHP.Maximum = new decimal(new int[] {
-            255,
-            0,
-            0,
-            0});
-            this.nudEVHP.Name = "nudEVHP";
-            this.nudEVHP.Size = new System.Drawing.Size(40, 20);
-            this.nudEVHP.TabIndex = 39;
-            // 
-            // nudEVSpeed
-            // 
-            this.nudEVSpeed.Location = new System.Drawing.Point(240, 32);
-            this.nudEVSpeed.Maximum = new decimal(new int[] {
-            255,
-            0,
-            0,
-            0});
-            this.nudEVSpeed.Name = "nudEVSpeed";
-            this.nudEVSpeed.Size = new System.Drawing.Size(40, 20);
-            this.nudEVSpeed.TabIndex = 40;
-            // 
-            // nudEVSpAttack
-            // 
-            this.nudEVSpAttack.Location = new System.Drawing.Point(240, 56);
-            this.nudEVSpAttack.Maximum = new decimal(new int[] {
-            255,
-            0,
-            0,
-            0});
-            this.nudEVSpAttack.Name = "nudEVSpAttack";
-            this.nudEVSpAttack.Size = new System.Drawing.Size(40, 20);
-            this.nudEVSpAttack.TabIndex = 42;
-            // 
-            // nudEVAttack
-            // 
-            this.nudEVAttack.Location = new System.Drawing.Point(96, 56);
-            this.nudEVAttack.Maximum = new decimal(new int[] {
-            255,
-            0,
-            0,
-            0});
-            this.nudEVAttack.Name = "nudEVAttack";
-            this.nudEVAttack.Size = new System.Drawing.Size(40, 20);
-            this.nudEVAttack.TabIndex = 41;
-            // 
-            // nudEVSpDefense
-            // 
-            this.nudEVSpDefense.Location = new System.Drawing.Point(240, 80);
-            this.nudEVSpDefense.Maximum = new decimal(new int[] {
-            255,
-            0,
-            0,
-            0});
-            this.nudEVSpDefense.Name = "nudEVSpDefense";
-            this.nudEVSpDefense.Size = new System.Drawing.Size(40, 20);
-            this.nudEVSpDefense.TabIndex = 44;
-            // 
-            // nudEVDefense
-            // 
-            this.nudEVDefense.Location = new System.Drawing.Point(96, 80);
-            this.nudEVDefense.Maximum = new decimal(new int[] {
-            255,
-            0,
-            0,
-            0});
-            this.nudEVDefense.Name = "nudEVDefense";
-            this.nudEVDefense.Size = new System.Drawing.Size(40, 20);
-            this.nudEVDefense.TabIndex = 43;
-            // 
-            // lblIV1
-            // 
-            this.lblIV1.Location = new System.Drawing.Point(48, 16);
-            this.lblIV1.Name = "lblIV1";
-            this.lblIV1.Size = new System.Drawing.Size(40, 12);
-            this.lblIV1.TabIndex = 45;
-            this.lblIV1.Text = "IV";
-            this.lblIV1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblEV1
-            // 
-            this.lblEV1.Location = new System.Drawing.Point(96, 16);
-            this.lblEV1.Name = "lblEV1";
-            this.lblEV1.Size = new System.Drawing.Size(40, 12);
-            this.lblEV1.TabIndex = 46;
-            this.lblEV1.Text = "EV";
-            this.lblEV1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblEV2
-            // 
-            this.lblEV2.Location = new System.Drawing.Point(240, 16);
-            this.lblEV2.Name = "lblEV2";
-            this.lblEV2.Size = new System.Drawing.Size(40, 12);
-            this.lblEV2.TabIndex = 48;
-            this.lblEV2.Text = "EV";
-            this.lblEV2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblIV2
-            // 
-            this.lblIV2.Location = new System.Drawing.Point(192, 16);
-            this.lblIV2.Name = "lblIV2";
-            this.lblIV2.Size = new System.Drawing.Size(40, 12);
-            this.lblIV2.TabIndex = 47;
-            this.lblIV2.Text = "IV";
-            this.lblIV2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // cmdGenerateIV
-            // 
-            this.cmdGenerateIV.Enabled = false;
-            this.cmdGenerateIV.Location = new System.Drawing.Point(32, 112);
-            this.cmdGenerateIV.Name = "cmdGenerateIV";
-            this.cmdGenerateIV.Size = new System.Drawing.Size(120, 24);
-            this.cmdGenerateIV.TabIndex = 49;
-            this.cmdGenerateIV.Text = "Regenerate IVs...";
-            this.cmdGenerateIV.UseVisualStyleBackColor = true;
-            // 
-            // lblPval
-            // 
-            this.lblPval.AutoSize = true;
-            this.lblPval.Location = new System.Drawing.Point(8, 16);
-            this.lblPval.Name = "lblPval";
-            this.lblPval.Size = new System.Drawing.Size(91, 13);
-            this.lblPval.TabIndex = 28;
-            this.lblPval.Text = "Personality Value:";
-            // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.cmdRibbons);
@@ -1134,16 +1161,6 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Misc";
             // 
-            // checkBox1
-            // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(16, 24);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(56, 17);
-            this.checkBox1.TabIndex = 28;
-            this.checkBox1.Text = "Is Egg";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            // 
             // cmdRibbons
             // 
             this.cmdRibbons.Enabled = false;
@@ -1154,15 +1171,117 @@
             this.cmdRibbons.Text = "Ribbons...";
             this.cmdRibbons.UseVisualStyleBackColor = true;
             // 
-            // cmdGenerateEV
+            // checkBox1
             // 
-            this.cmdGenerateEV.Enabled = false;
-            this.cmdGenerateEV.Location = new System.Drawing.Point(160, 112);
-            this.cmdGenerateEV.Name = "cmdGenerateEV";
-            this.cmdGenerateEV.Size = new System.Drawing.Size(120, 24);
-            this.cmdGenerateEV.TabIndex = 50;
-            this.cmdGenerateEV.Text = "Regenerate EVs...";
-            this.cmdGenerateEV.UseVisualStyleBackColor = true;
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(16, 24);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(56, 17);
+            this.checkBox1.TabIndex = 28;
+            this.checkBox1.Text = "Is Egg";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            // 
+            // cmsGenerateIV
+            // 
+            this.cmsGenerateIV.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnuIV31,
+            this.mnuIV0,
+            this.mnuIVSep1,
+            this.mnuIVRandNatural,
+            this.mnuEVSep2,
+            this.mnuIVRandPoor,
+            this.mnuIVRandAverage,
+            this.mnuIVRandGood});
+            this.cmsGenerateIV.Name = "cmsGenerateIV";
+            this.cmsGenerateIV.Size = new System.Drawing.Size(174, 148);
+            // 
+            // mnuIV31
+            // 
+            this.mnuIV31.Name = "mnuIV31";
+            this.mnuIV31.Size = new System.Drawing.Size(173, 22);
+            this.mnuIV31.Text = "All 31";
+            this.mnuIV31.Click += new System.EventHandler(this.mnuIV31_Click);
+            // 
+            // mnuIV0
+            // 
+            this.mnuIV0.Name = "mnuIV0";
+            this.mnuIV0.Size = new System.Drawing.Size(173, 22);
+            this.mnuIV0.Text = "All 0";
+            this.mnuIV0.Click += new System.EventHandler(this.mnuIV0_Click);
+            // 
+            // mnuIVSep1
+            // 
+            this.mnuIVSep1.Name = "mnuIVSep1";
+            this.mnuIVSep1.Size = new System.Drawing.Size(170, 6);
+            // 
+            // mnuIVRandNatural
+            // 
+            this.mnuIVRandNatural.Name = "mnuIVRandNatural";
+            this.mnuIVRandNatural.Size = new System.Drawing.Size(173, 22);
+            this.mnuIVRandNatural.Text = "Random (Natural)";
+            this.mnuIVRandNatural.Click += new System.EventHandler(this.mnuIVRandNatural_Click);
+            // 
+            // mnuIVRandPoor
+            // 
+            this.mnuIVRandPoor.Name = "mnuIVRandPoor";
+            this.mnuIVRandPoor.Size = new System.Drawing.Size(173, 22);
+            this.mnuIVRandPoor.Text = "Random (Poor)";
+            this.mnuIVRandPoor.Click += new System.EventHandler(this.mnuIVRandPoor_Click);
+            // 
+            // mnuIVRandAverage
+            // 
+            this.mnuIVRandAverage.Name = "mnuIVRandAverage";
+            this.mnuIVRandAverage.Size = new System.Drawing.Size(173, 22);
+            this.mnuIVRandAverage.Text = "Random (Average)";
+            this.mnuIVRandAverage.Click += new System.EventHandler(this.mnuIVRandAverage_Click);
+            // 
+            // mnuIVRandGood
+            // 
+            this.mnuIVRandGood.Name = "mnuIVRandGood";
+            this.mnuIVRandGood.Size = new System.Drawing.Size(173, 22);
+            this.mnuIVRandGood.Text = "Random (Good)";
+            this.mnuIVRandGood.Click += new System.EventHandler(this.mnuIVRandGood_Click);
+            // 
+            // mnuEVSep2
+            // 
+            this.mnuEVSep2.Name = "mnuEVSep2";
+            this.mnuEVSep2.Size = new System.Drawing.Size(170, 6);
+            // 
+            // cmsGenerateEV
+            // 
+            this.cmsGenerateEV.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnuEV255,
+            this.mnuEV0,
+            this.mnuEVSep1,
+            this.mnuEVRedist520});
+            this.cmsGenerateEV.Name = "cmsGenerateEV";
+            this.cmsGenerateEV.Size = new System.Drawing.Size(159, 98);
+            // 
+            // mnuEV255
+            // 
+            this.mnuEV255.Name = "mnuEV255";
+            this.mnuEV255.Size = new System.Drawing.Size(158, 22);
+            this.mnuEV255.Text = "All 255";
+            this.mnuEV255.Click += new System.EventHandler(this.mnuEV255_Click);
+            // 
+            // mnuEV0
+            // 
+            this.mnuEV0.Name = "mnuEV0";
+            this.mnuEV0.Size = new System.Drawing.Size(158, 22);
+            this.mnuEV0.Text = "All 0";
+            this.mnuEV0.Click += new System.EventHandler(this.mnuEV0_Click);
+            // 
+            // mnuEVSep1
+            // 
+            this.mnuEVSep1.Name = "mnuEVSep1";
+            this.mnuEVSep1.Size = new System.Drawing.Size(155, 6);
+            // 
+            // mnuEVRedist520
+            // 
+            this.mnuEVRedist520.Name = "mnuEVRedist520";
+            this.mnuEVRedist520.Size = new System.Drawing.Size(158, 22);
+            this.mnuEVRedist520.Text = "Redistribute 520";
+            this.mnuEVRedist520.Click += new System.EventHandler(this.mnuEVRedist520_Click);
             // 
             // FormPokemonEdit
             // 
@@ -1213,24 +1332,26 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudPP2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudPP1)).EndInit();
             this.fraTraining.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.nudEVSpDefense)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudEVDefense)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudEVSpAttack)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudEVAttack)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudEVSpeed)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudEVHP)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudIVSpDefense)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudIVSpAttack)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudIVSpeed)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudIVDefense)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudIVAttack)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudIVHP)).EndInit();
             this.fraOrigins.ResumeLayout(false);
             this.fraOrigins.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudLevelMet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picSprite)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudIVHP)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudIVAttack)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudIVDefense)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudIVSpeed)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudIVSpAttack)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudIVSpDefense)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudEVHP)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudEVSpeed)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudEVSpAttack)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudEVAttack)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudEVSpDefense)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudEVDefense)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.cmsGenerateIV.ResumeLayout(false);
+            this.cmsGenerateEV.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1329,5 +1450,19 @@
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.Button cmdGenerateEV;
         private System.Windows.Forms.Button cmdRibbons;
+        private System.Windows.Forms.ContextMenuStrip cmsGenerateIV;
+        private System.Windows.Forms.ToolStripMenuItem mnuIV31;
+        private System.Windows.Forms.ToolStripMenuItem mnuIV0;
+        private System.Windows.Forms.ToolStripSeparator mnuIVSep1;
+        private System.Windows.Forms.ToolStripMenuItem mnuIVRandNatural;
+        private System.Windows.Forms.ToolStripSeparator mnuEVSep2;
+        private System.Windows.Forms.ToolStripMenuItem mnuIVRandPoor;
+        private System.Windows.Forms.ToolStripMenuItem mnuIVRandAverage;
+        private System.Windows.Forms.ToolStripMenuItem mnuIVRandGood;
+        private System.Windows.Forms.ContextMenuStrip cmsGenerateEV;
+        private System.Windows.Forms.ToolStripMenuItem mnuEV255;
+        private System.Windows.Forms.ToolStripMenuItem mnuEV0;
+        private System.Windows.Forms.ToolStripSeparator mnuEVSep1;
+        private System.Windows.Forms.ToolStripMenuItem mnuEVRedist520;
     }
 }

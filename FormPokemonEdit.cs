@@ -10,7 +10,7 @@ using System.Windows.Forms;
 namespace Mightyena {
 
     public partial class FormPokemonEdit : Form {
-        
+
         public Gen3Pokemon Target { get; set; }
 
         private uint currentOTID;
@@ -21,7 +21,7 @@ namespace Mightyena {
         public FormPokemonEdit() {
             init = true;
             InitializeComponent();
-            
+
             // initialize comboboxes with lists of possible items
             object[] movelist = Utils.MoveNames.ToArray();
             cmbSpecies.Items.AddRange(Species.SpeciesNames.ToArray());
@@ -190,6 +190,114 @@ namespace Mightyena {
             txtTrainerName.Text = Gen3Save.Inst.Name;
             cmbTrainerGender.SelectedIndex = Gen3Save.Inst.Gender;
             UpdateDynamicStats();
+        }
+
+        private void cmdGenerateIV_Click(object sender, System.EventArgs e) {
+            Button self = (Button)sender;
+            cmsGenerateIV.Show(self, new Point(0, self.Size.Height));
+        }
+
+        private void cmdGenerateEV_Click(object sender, System.EventArgs e) {
+            Button self = (Button)sender;
+            cmsGenerateEV.Show(self, new Point(0, self.Size.Height));
+        }
+
+        private void mnuIV31_Click(object sender, System.EventArgs e) {
+            nudIVHP.Value = 31;
+            nudIVAttack.Value = 31;
+            nudIVDefense.Value = 31;
+            nudIVSpeed.Value = 31;
+            nudIVSpAttack.Value = 31;
+            nudIVSpDefense.Value = 31;
+        }
+
+        private void mnuIV0_Click(object sender, System.EventArgs e) {
+            nudIVHP.Value = 0;
+            nudIVAttack.Value = 0;
+            nudIVDefense.Value = 0;
+            nudIVSpeed.Value = 0;
+            nudIVSpAttack.Value = 0;
+            nudIVSpDefense.Value = 0;
+        }
+
+        private void RandomizeIV(int min, int max) {
+            max++; // upperbound in rng is exclusive
+            nudIVHP.Value = Utils.RandInt(min, max);
+            nudIVAttack.Value = Utils.RandInt(min, max);
+            nudIVDefense.Value = Utils.RandInt(min, max);
+            nudIVSpeed.Value = Utils.RandInt(min, max);
+            nudIVSpAttack.Value = Utils.RandInt(min, max);
+            nudIVSpDefense.Value = Utils.RandInt(min, max);
+        }
+
+        private void mnuIVRandNatural_Click(object sender, System.EventArgs e) {
+            RandomizeIV(0, 31);
+        }
+
+        private void mnuIVRandPoor_Click(object sender, System.EventArgs e) {
+            RandomizeIV(0, 12);
+        }
+
+        private void mnuIVRandAverage_Click(object sender, System.EventArgs e) {
+            RandomizeIV(6, 24);
+        }
+
+        private void mnuIVRandGood_Click(object sender, System.EventArgs e) {
+            RandomizeIV(12, 31);
+        }
+
+        private void mnuEV255_Click(object sender, System.EventArgs e) {
+            nudEVHP.Value = 255;
+            nudEVAttack.Value = 255;
+            nudEVDefense.Value = 255;
+            nudEVSpeed.Value = 255;
+            nudEVSpAttack.Value = 255;
+            nudEVSpDefense.Value = 255;
+        }
+
+        private void mnuEV0_Click(object sender, System.EventArgs e) {
+            nudEVHP.Value = 0;
+            nudEVAttack.Value = 0;
+            nudEVDefense.Value = 0;
+            nudEVSpeed.Value = 0;
+            nudEVSpAttack.Value = 0;
+            nudEVSpDefense.Value = 0;
+        }
+
+        private void mnuEVRedist520_Click(object sender, System.EventArgs e) {
+            nudEVHP.Value = 0;
+            nudEVAttack.Value = 0;
+            nudEVDefense.Value = 0;
+            nudEVSpeed.Value = 0;
+            nudEVSpAttack.Value = 0;
+            nudEVSpDefense.Value = 0;
+
+            int pointsLeft = 520;
+            while (pointsLeft > 0) {
+                pointsLeft--;
+
+                int stat = Utils.RandInt(0, 6);
+                switch (stat) {
+                    case 0:
+                        nudEVHP.Value++;
+                        break;
+                    case 1:
+                        nudEVAttack.Value++;
+                        break;
+                    case 2:
+                        nudEVDefense.Value++;
+                        break;
+                    case 3:
+                        nudEVSpeed.Value++;
+                        break;
+                    case 4:
+                        nudEVSpAttack.Value++;
+                        break;
+                    case 5:
+                        nudEVSpDefense.Value++;
+                        break;
+                }
+            }
         }
 
     }
