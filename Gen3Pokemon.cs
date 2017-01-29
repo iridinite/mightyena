@@ -235,33 +235,33 @@ namespace Mightyena {
         }
 
         public byte IVHP {
-            get { return (byte)((Genes & 0xF8000000U) >> 27); }
-            set { Genes = (Genes & ~0xF8000000U) | ((uint)(value & 0x1F) << 27); }
+            get { return (byte)(Genes & 0x1FU); }
+            set { Genes = (Genes & ~0x1FU) | (uint)(value & 0x1F); }
         }
 
         public byte IVAttack {
-            get { return (byte)((Genes & 0x07C00000U) >> 22); }
-            set { Genes = (Genes & ~0x07C00000U) | ((uint)(value & 0x1F) << 22); }
+            get { return (byte)((Genes & 0x3E0U) >> 5); }
+            set { Genes = (Genes & ~0x3E0U) | ((uint)(value & 0x1F) << 5); }
         }
 
         public byte IVDefense {
-            get { return (byte)((Genes & 0x3E0000U) >> 17); }
-            set { Genes = (Genes & ~0x3E0000U) | ((uint)(value & 0x1F) << 17); }
+            get { return (byte)((Genes & 0x7C00U) >> 10); }
+            set { Genes = (Genes & ~0x7C00U) | ((uint)(value & 0x1F) << 10); }
         }
 
         public byte IVSpeed {
-            get { return (byte)((Genes & 0x1F000U) >> 12); }
-            set { Genes = (Genes & ~0x1F000U) | ((uint)(value & 0x1F) << 12); }
+            get { return (byte)((Genes & 0xF8000U) >> 15); }
+            set { Genes = (Genes & ~0xF8000U) | ((uint)(value & 0x1F) << 15); }
         }
 
         public byte IVSpAttack {
-            get { return (byte)((Genes & 0xF80U) >> 7); }
-            set { Genes = (Genes & ~0xF80U) | ((uint)(value & 0x1F) << 7); }
+            get { return (byte)((Genes & 0x1F00000U) >> 20); }
+            set { Genes = (Genes & ~0x1F00000U) | ((uint)(value & 0x1F) << 20); }
         }
 
         public byte IVSpDefense {
-            get { return (byte)((Genes & 0x7CU) >> 2); }
-            set { Genes = (Genes & ~0x7CU) | ((uint)(value & 0x1F) << 2); }
+            get { return (byte)((Genes & 0x3E000000U) >> 25); }
+            set { Genes = (Genes & ~0x3E000000U) | ((uint)(value & 0x1F) << 25); }
         }
 
         public byte EVHP {
