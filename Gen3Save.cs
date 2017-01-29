@@ -209,7 +209,6 @@ namespace Mightyena {
                 section.id = (SectionID)BitConverter.ToUInt16(section.data, 0x0FF4);
                 section.checksum = BitConverter.ToUInt16(section.data, 0x0FF6);
                 section.saveindex = BitConverter.ToUInt32(section.data, 0x0FFC);
-                section.CalculateChecksum();
                 ret.sections[i] = section;
             }
 
