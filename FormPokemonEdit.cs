@@ -349,6 +349,8 @@ namespace Mightyena {
             Target.MetLocation = (byte)cmbMetLocation.SelectedIndex;
 
             Target.FatefulEncounter = chkFatefulEncounter.Checked;
+            Target.Genes = (uint)((Target.Genes & ~0x3)
+                | (currentPVal & 0x1)); // ability flag
 
             Target.OTID = currentOTID;
             Target.Personality = currentPVal;
