@@ -68,11 +68,13 @@ namespace Mightyena {
         }
 
         private void PartyButton_Click(object sender, EventArgs e) {
-            int partyIndex = int.Parse((string)((Button)sender).Tag);
+            Button self = (Button)sender;
+            int partyIndex = int.Parse((string)self.Tag);
 
             FormPokemonEdit frm = new FormPokemonEdit();
             frm.Target = Gen3Save.Inst.Team[partyIndex];
-            frm.ShowDialog();
+            if (frm.ShowDialog() == DialogResult.OK)
+                self.Invalidate();
         }
 
         private void PartyButton_Paint(object sender, PaintEventArgs e) {
@@ -118,12 +120,14 @@ namespace Mightyena {
         }
 
         private void BoxButton_Click(object sender, EventArgs e) {
-            int index = (int)((Button)sender).Tag;
+            Button self = (Button)sender;
+            int index = (int)self.Tag;
             int boxNo = (int)nudBoxActive.Value;
 
             FormPokemonEdit frm = new FormPokemonEdit();
             frm.Target = Gen3Save.Inst.Box[(boxNo - 1) * 30 + index];
-            frm.ShowDialog();
+            if (frm.ShowDialog() == DialogResult.OK)
+                self.Invalidate();
         }
 
         private void BoxButton_MouseEnter(object sender, EventArgs e) {
