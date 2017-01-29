@@ -16,7 +16,7 @@ namespace Mightyena {
         FireRedLeafGreen,
         Emerald
     }
-    
+
     /// <summary>
     /// Represents a Gen-III save game file.
     /// </summary>
@@ -311,8 +311,32 @@ namespace Mightyena {
                 ret.BoxNames[i] = Gen3String.Decode(ret.boxdata, 0x8344 + i * 9, 8, false);
                 ret.BoxWallpapers[i] = ret.boxdata[0x83C2 + i];
             }
-            
+
             return ret;
+        }
+
+        /// <summary>
+        /// Writes all changes back to the SRAM dump and saves that to a file.
+        /// </summary>
+        /// <param name="filename">The path to the save file.</param>
+        public void Save(string filename) {
+            // TODO: write Trainer section
+            // TODO: recompile PC box sections
+
+            // recalculate checksums on all sections and copy them back to sram
+            for (int i = 0; i < 28; i++) {
+                Section section = sections[i];
+                section.CalculateChecksum();
+                // save metadata back to the section footer
+                Buffer.BlockCopy(BitConverter.GetBytes((ushort)section.id), 0, section.data, 0x0FF4, 2);
+                Buffer.BlockCopy(BitConverter.GetBytes(section.checksum), 0, section.data, 0x0FF6, 2);
+                Buffer.BlockCopy(BitConverter.GetBytes(section.saveindex), 0, section.data, 0x0FFC, 4);
+                // write section to sram
+                Buffer.BlockCopy(section.data, 0, sram, 4096 * i, 4096);
+            }
+
+            // finally, flush the sram to disk
+            File.WriteAllBytes(filename, sram);
         }
 
     }
