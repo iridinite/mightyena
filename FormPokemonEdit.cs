@@ -352,6 +352,7 @@ namespace Mightyena {
 
             Target.OTID = currentOTID;
             Target.Personality = currentPVal;
+            Target.Save();
 
             DialogResult = DialogResult.OK;
             Close();
