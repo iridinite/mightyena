@@ -23,6 +23,7 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormAbout));
             this.lblTitle = new System.Windows.Forms.Label();
             this.lblCredits = new System.Windows.Forms.Label();
             this.cmdClose = new System.Windows.Forms.Button();
@@ -45,16 +46,15 @@
             // 
             this.lblCredits.Location = new System.Drawing.Point(112, 64);
             this.lblCredits.Name = "lblCredits";
-            this.lblCredits.Size = new System.Drawing.Size(256, 80);
+            this.lblCredits.Size = new System.Drawing.Size(256, 120);
             this.lblCredits.TabIndex = 2;
-            this.lblCredits.Text = "Programmed by Mika Molenkamp, for the lolz and for educational purposes.\r\n\r\nContr" +
-    "ibute to the project on GitHub:\r\ngithub.com/iridinite/mightyena\r\n";
+            this.lblCredits.Text = resources.GetString("lblCredits.Text");
             // 
             // cmdClose
             // 
             this.cmdClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.cmdClose.Image = global::Mightyena.Properties.Resources.accept;
-            this.cmdClose.Location = new System.Drawing.Point(256, 168);
+            this.cmdClose.Location = new System.Drawing.Point(256, 200);
             this.cmdClose.Name = "cmdClose";
             this.cmdClose.Size = new System.Drawing.Size(112, 24);
             this.cmdClose.TabIndex = 3;
@@ -87,7 +87,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.cmdClose;
-            this.ClientSize = new System.Drawing.Size(386, 209);
+            this.ClientSize = new System.Drawing.Size(386, 241);
             this.Controls.Add(this.lblVersion);
             this.Controls.Add(this.cmdClose);
             this.Controls.Add(this.lblCredits);

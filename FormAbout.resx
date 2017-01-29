@@ -117,4 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="lblCredits.Text" xml:space="preserve">
+    <value>Programmed by Mika Molenkamp, for the lolz and for educational purposes.
+
+"Fugue" icon set by Yusuke Kamiyamane. Licensed under a Creative Commons Attribution 3.0 License.
+
+Contribute to the project on GitHub:
+github.com/iridinite/mightyena
+</value>
+  </data>
 </root>
