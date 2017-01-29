@@ -389,18 +389,65 @@ namespace Mightyena {
         }
 
         /// <summary>
+        /// Calculates the final value of a statistic.
+        /// </summary>
+        /// <param name="level">The level of the Pokémon.</param>
+        /// <param name="statbase">The base value of the stat, as determined by the species.</param>
+        /// <param name="iv">The Inherent Value of the stat.</param>
+        /// <param name="ev">The Effort Value of the stat.</param>
+        /// <param name="nature">The stat multiplier. 0.9 if hindered, 1.0 if neutral, 1.1 if benificial.</param>
+        private static ushort CalculateStat(byte level, byte statbase, ushort iv, ushort ev, double nature) {
+            double neutralstat = Math.Floor((2.0 * statbase + iv + Math.Floor(ev / 4.0) * level) / 100) + 5;
+            return (ushort)Math.Floor(neutralstat * nature);
+        }
+
+        /// <summary>
         /// Saves and re-encrypts changes back to the encapsulating frame.
         /// </summary>
         public void Save() {
-            // recalculate the checksum
+            // recalculate statistics
+            if (!boxed) {
+                byte level = (byte)Utils.GetLevelForExp(Species.ExpGroup, Experience);
+                ushort hp = (ushort)(Math.Floor((2.0 * Species.BaseHP + IVHP + Math.Floor(EVHP / 4.0) * level) / 100) + level + 10);
+
+                // write stats
+                frame[offset + 84] = level;
+                Buffer.BlockCopy(BitConverter.GetBytes(hp), 0, frame, offset + 86, 2); // current hp
+                Buffer.BlockCopy(BitConverter.GetBytes(hp), 0, frame, offset + 88, 2); // total hp
+                Buffer.BlockCopy(BitConverter.GetBytes(CalculateStat(level, Species.BaseAttack, IVAttack, EVAttack, 1.0)), 0, frame, offset + 90, 2);
+                Buffer.BlockCopy(BitConverter.GetBytes(CalculateStat(level, Species.BaseDefense, IVDefense, EVDefense, 1.0)), 0, frame, offset + 92, 2);
+                Buffer.BlockCopy(BitConverter.GetBytes(CalculateStat(level, Species.BaseSpeed, IVSpeed, EVSpeed, 1.0)), 0, frame, offset + 94, 2);
+                Buffer.BlockCopy(BitConverter.GetBytes(CalculateStat(level, Species.BaseSpAttack, IVSpAttack, EVSpAttack, 1.0)), 0, frame, offset + 96, 2);
+                Buffer.BlockCopy(BitConverter.GetBytes(CalculateStat(level, Species.BaseSpDefense, IVSpDefense, EVSpDefense, 1.0)), 0, frame, offset + 98, 2);
+            }
+
+            // save strings
+            Nickname.Encode(frame, offset + 0x08);
+            OTName.Encode(frame, offset + 0x14);
+
+            // re-order the substructures based on the new pval (it might have changed)
+            byte[] finaldata = new byte[48];
+            var neworder = structOrders[(int)(Personality % 24)];
+            Buffer.BlockCopy(data, order.GrowthOffset, finaldata, neworder.GrowthOffset, 12);
+            Buffer.BlockCopy(data, order.AttackOffset, finaldata, neworder.AttackOffset, 12);
+            Buffer.BlockCopy(data, order.EVOffset, finaldata, neworder.EVOffset, 12);
+            Buffer.BlockCopy(data, order.MiscOffset, finaldata, neworder.MiscOffset, 12);
+
+            // calculate the data checksum
             ushort calculatedSum = 0;
             for (int i = 0; i < 24; i++)
                 unchecked {
-                    calculatedSum += BitConverter.ToUInt16(data, i * 2);
+                    calculatedSum += BitConverter.ToUInt16(finaldata, i * 2);
                 }
             Checksum = calculatedSum;
 
-            // TODO; re-encrypt data and strings
+            // re-encrypt the data
+            uint cryptokey = OTID ^ Personality;
+            for (int i = 0; i < 12; i++) {
+                // 4 bytes at a time, and copy it back to the frame
+                uint encrypted = BitConverter.ToUInt32(finaldata, i * 4) ^ cryptokey;
+                Buffer.BlockCopy(BitConverter.GetBytes(encrypted), 0, frame, offset + 32 + i * 4, 4);
+            }
         }
 
         /// <summary>
