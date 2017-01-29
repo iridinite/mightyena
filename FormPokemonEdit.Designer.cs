@@ -76,8 +76,15 @@
             this.cmbMove2 = new System.Windows.Forms.ComboBox();
             this.cmbMove1 = new System.Windows.Forms.ComboBox();
             this.fraTraining = new System.Windows.Forms.GroupBox();
+            this.chkMark3 = new System.Windows.Forms.CheckBox();
+            this.chkMark2 = new System.Windows.Forms.CheckBox();
+            this.chkMark1 = new System.Windows.Forms.CheckBox();
+            this.chkMark0 = new System.Windows.Forms.CheckBox();
+            this.lblMarkings = new System.Windows.Forms.Label();
+            this.lblFriendship = new System.Windows.Forms.Label();
             this.cmdGenerateEV = new System.Windows.Forms.Button();
             this.cmdGenerateIV = new System.Windows.Forms.Button();
+            this.nudFriendship = new System.Windows.Forms.NumericUpDown();
             this.lblEV2 = new System.Windows.Forms.Label();
             this.lblIV2 = new System.Windows.Forms.Label();
             this.lblEV1 = new System.Windows.Forms.Label();
@@ -102,6 +109,7 @@
             this.nudIVHP = new System.Windows.Forms.NumericUpDown();
             this.fraOrigins = new System.Windows.Forms.GroupBox();
             this.lblLevelMet = new System.Windows.Forms.Label();
+            this.chkEgg = new System.Windows.Forms.CheckBox();
             this.nudLevelMet = new System.Windows.Forms.NumericUpDown();
             this.cmbMetLocation = new System.Windows.Forms.ComboBox();
             this.lblMetLocation = new System.Windows.Forms.Label();
@@ -112,23 +120,27 @@
             this.cmdAccept = new System.Windows.Forms.Button();
             this.cmdCancel = new System.Windows.Forms.Button();
             this.picSprite = new System.Windows.Forms.PictureBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.fraPokerus = new System.Windows.Forms.GroupBox();
+            this.nudPokerusDays = new System.Windows.Forms.NumericUpDown();
+            this.lblPokerusDays = new System.Windows.Forms.Label();
+            this.lblPokerusStrain = new System.Windows.Forms.Label();
+            this.nudPokerusStrain = new System.Windows.Forms.NumericUpDown();
             this.cmdRibbons = new System.Windows.Forms.Button();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.cmsGenerateIV = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.mnuIV31 = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuIV0 = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuIVSep1 = new System.Windows.Forms.ToolStripSeparator();
             this.mnuIVRandNatural = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuEVSep2 = new System.Windows.Forms.ToolStripSeparator();
             this.mnuIVRandPoor = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuIVRandAverage = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuIVRandGood = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuEVSep2 = new System.Windows.Forms.ToolStripSeparator();
             this.cmsGenerateEV = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.mnuEV255 = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuEV0 = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuEVSep1 = new System.Windows.Forms.ToolStripSeparator();
             this.mnuEVRedist520 = new System.Windows.Forms.ToolStripMenuItem();
+            this.button1 = new System.Windows.Forms.Button();
             this.fraOT.SuspendLayout();
             this.fraPVal.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudLevel)).BeginInit();
@@ -139,6 +151,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudPP2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudPP1)).BeginInit();
             this.fraTraining.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudFriendship)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudEVSpDefense)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudEVDefense)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudEVSpAttack)).BeginInit();
@@ -154,7 +167,9 @@
             this.fraOrigins.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudLevelMet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picSprite)).BeginInit();
-            this.groupBox1.SuspendLayout();
+            this.fraPokerus.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudPokerusDays)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudPokerusStrain)).BeginInit();
             this.cmsGenerateIV.SuspendLayout();
             this.cmsGenerateEV.SuspendLayout();
             this.SuspendLayout();
@@ -299,7 +314,7 @@
             // chkFatefulEncounter
             // 
             this.chkFatefulEncounter.AutoSize = true;
-            this.chkFatefulEncounter.Location = new System.Drawing.Point(16, 48);
+            this.chkFatefulEncounter.Location = new System.Drawing.Point(16, 112);
             this.chkFatefulEncounter.Name = "chkFatefulEncounter";
             this.chkFatefulEncounter.Size = new System.Drawing.Size(110, 17);
             this.chkFatefulEncounter.TabIndex = 27;
@@ -712,8 +727,15 @@
             // 
             // fraTraining
             // 
+            this.fraTraining.Controls.Add(this.chkMark3);
+            this.fraTraining.Controls.Add(this.chkMark2);
+            this.fraTraining.Controls.Add(this.chkMark1);
+            this.fraTraining.Controls.Add(this.chkMark0);
+            this.fraTraining.Controls.Add(this.lblMarkings);
+            this.fraTraining.Controls.Add(this.lblFriendship);
             this.fraTraining.Controls.Add(this.cmdGenerateEV);
             this.fraTraining.Controls.Add(this.cmdGenerateIV);
+            this.fraTraining.Controls.Add(this.nudFriendship);
             this.fraTraining.Controls.Add(this.lblEV2);
             this.fraTraining.Controls.Add(this.lblIV2);
             this.fraTraining.Controls.Add(this.lblEV1);
@@ -738,10 +760,68 @@
             this.fraTraining.Controls.Add(this.nudIVHP);
             this.fraTraining.Location = new System.Drawing.Point(184, 264);
             this.fraTraining.Name = "fraTraining";
-            this.fraTraining.Size = new System.Drawing.Size(288, 152);
+            this.fraTraining.Size = new System.Drawing.Size(288, 200);
             this.fraTraining.TabIndex = 31;
             this.fraTraining.TabStop = false;
             this.fraTraining.Text = "Training";
+            // 
+            // chkMark3
+            // 
+            this.chkMark3.AutoSize = true;
+            this.chkMark3.Location = new System.Drawing.Point(208, 168);
+            this.chkMark3.Name = "chkMark3";
+            this.chkMark3.Size = new System.Drawing.Size(34, 17);
+            this.chkMark3.TabIndex = 56;
+            this.chkMark3.Text = "♥";
+            this.chkMark3.UseVisualStyleBackColor = true;
+            // 
+            // chkMark2
+            // 
+            this.chkMark2.AutoSize = true;
+            this.chkMark2.Location = new System.Drawing.Point(168, 168);
+            this.chkMark2.Name = "chkMark2";
+            this.chkMark2.Size = new System.Drawing.Size(35, 17);
+            this.chkMark2.TabIndex = 55;
+            this.chkMark2.Text = "▲";
+            this.chkMark2.UseVisualStyleBackColor = true;
+            // 
+            // chkMark1
+            // 
+            this.chkMark1.AutoSize = true;
+            this.chkMark1.Location = new System.Drawing.Point(128, 168);
+            this.chkMark1.Name = "chkMark1";
+            this.chkMark1.Size = new System.Drawing.Size(35, 17);
+            this.chkMark1.TabIndex = 54;
+            this.chkMark1.Text = "■";
+            this.chkMark1.UseVisualStyleBackColor = true;
+            // 
+            // chkMark0
+            // 
+            this.chkMark0.AutoSize = true;
+            this.chkMark0.Location = new System.Drawing.Point(88, 168);
+            this.chkMark0.Name = "chkMark0";
+            this.chkMark0.Size = new System.Drawing.Size(33, 17);
+            this.chkMark0.TabIndex = 53;
+            this.chkMark0.Text = "●";
+            this.chkMark0.UseVisualStyleBackColor = true;
+            // 
+            // lblMarkings
+            // 
+            this.lblMarkings.AutoSize = true;
+            this.lblMarkings.Location = new System.Drawing.Point(88, 152);
+            this.lblMarkings.Name = "lblMarkings";
+            this.lblMarkings.Size = new System.Drawing.Size(53, 13);
+            this.lblMarkings.TabIndex = 51;
+            this.lblMarkings.Text = "Markings:";
+            // 
+            // lblFriendship
+            // 
+            this.lblFriendship.AutoSize = true;
+            this.lblFriendship.Location = new System.Drawing.Point(8, 152);
+            this.lblFriendship.Name = "lblFriendship";
+            this.lblFriendship.Size = new System.Drawing.Size(58, 13);
+            this.lblFriendship.TabIndex = 31;
+            this.lblFriendship.Text = "Friendship:";
             // 
             // cmdGenerateEV
             // 
@@ -762,6 +842,23 @@
             this.cmdGenerateIV.Text = "Regenerate IVs...";
             this.cmdGenerateIV.UseVisualStyleBackColor = true;
             this.cmdGenerateIV.Click += new System.EventHandler(this.cmdGenerateIV_Click);
+            // 
+            // nudFriendship
+            // 
+            this.nudFriendship.Location = new System.Drawing.Point(8, 168);
+            this.nudFriendship.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.nudFriendship.Name = "nudFriendship";
+            this.nudFriendship.Size = new System.Drawing.Size(64, 20);
+            this.nudFriendship.TabIndex = 30;
+            this.nudFriendship.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // lblEV2
             // 
@@ -999,7 +1096,9 @@
             // 
             // fraOrigins
             // 
+            this.fraOrigins.Controls.Add(this.chkFatefulEncounter);
             this.fraOrigins.Controls.Add(this.lblLevelMet);
+            this.fraOrigins.Controls.Add(this.chkEgg);
             this.fraOrigins.Controls.Add(this.nudLevelMet);
             this.fraOrigins.Controls.Add(this.cmbMetLocation);
             this.fraOrigins.Controls.Add(this.lblMetLocation);
@@ -1007,9 +1106,9 @@
             this.fraOrigins.Controls.Add(this.lblGameOfOrigin);
             this.fraOrigins.Controls.Add(this.cmbPokeBall);
             this.fraOrigins.Controls.Add(this.lblPokeBall);
-            this.fraOrigins.Location = new System.Drawing.Point(184, 432);
+            this.fraOrigins.Location = new System.Drawing.Point(184, 480);
             this.fraOrigins.Name = "fraOrigins";
-            this.fraOrigins.Size = new System.Drawing.Size(288, 112);
+            this.fraOrigins.Size = new System.Drawing.Size(288, 144);
             this.fraOrigins.TabIndex = 32;
             this.fraOrigins.TabStop = false;
             this.fraOrigins.Text = "Origins";
@@ -1022,6 +1121,17 @@
             this.lblLevelMet.Size = new System.Drawing.Size(57, 13);
             this.lblLevelMet.TabIndex = 29;
             this.lblLevelMet.Text = "Level Met:";
+            // 
+            // chkEgg
+            // 
+            this.chkEgg.AutoSize = true;
+            this.chkEgg.Location = new System.Drawing.Point(200, 112);
+            this.chkEgg.Name = "chkEgg";
+            this.chkEgg.Size = new System.Drawing.Size(56, 17);
+            this.chkEgg.TabIndex = 28;
+            this.chkEgg.Text = "Is Egg";
+            this.chkEgg.UseVisualStyleBackColor = true;
+            this.chkEgg.CheckedChanged += new System.EventHandler(this.chkEgg_CheckedChanged);
             // 
             // nudLevelMet
             // 
@@ -1118,7 +1228,7 @@
             // cmdAccept
             // 
             this.cmdAccept.Image = global::Mightyena.Properties.Resources.accept;
-            this.cmdAccept.Location = new System.Drawing.Point(248, 616);
+            this.cmdAccept.Location = new System.Drawing.Point(248, 648);
             this.cmdAccept.Name = "cmdAccept";
             this.cmdAccept.Size = new System.Drawing.Size(112, 24);
             this.cmdAccept.TabIndex = 24;
@@ -1132,7 +1242,7 @@
             // 
             this.cmdCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.cmdCancel.Image = global::Mightyena.Properties.Resources.decline;
-            this.cmdCancel.Location = new System.Drawing.Point(368, 616);
+            this.cmdCancel.Location = new System.Drawing.Point(368, 648);
             this.cmdCancel.Name = "cmdCancel";
             this.cmdCancel.Size = new System.Drawing.Size(104, 24);
             this.cmdCancel.TabIndex = 25;
@@ -1150,37 +1260,72 @@
             this.picSprite.TabStop = false;
             this.picSprite.Paint += new System.Windows.Forms.PaintEventHandler(this.picSprite_Paint);
             // 
-            // groupBox1
+            // fraPokerus
             // 
-            this.groupBox1.Controls.Add(this.cmdRibbons);
-            this.groupBox1.Controls.Add(this.checkBox1);
-            this.groupBox1.Controls.Add(this.chkFatefulEncounter);
-            this.groupBox1.Location = new System.Drawing.Point(16, 520);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(152, 120);
-            this.groupBox1.TabIndex = 33;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Misc";
+            this.fraPokerus.Controls.Add(this.nudPokerusDays);
+            this.fraPokerus.Controls.Add(this.lblPokerusDays);
+            this.fraPokerus.Controls.Add(this.lblPokerusStrain);
+            this.fraPokerus.Controls.Add(this.nudPokerusStrain);
+            this.fraPokerus.Location = new System.Drawing.Point(16, 520);
+            this.fraPokerus.Name = "fraPokerus";
+            this.fraPokerus.Size = new System.Drawing.Size(152, 64);
+            this.fraPokerus.TabIndex = 33;
+            this.fraPokerus.TabStop = false;
+            this.fraPokerus.Text = "Pokérus";
+            // 
+            // nudPokerusDays
+            // 
+            this.nudPokerusDays.Location = new System.Drawing.Point(80, 32);
+            this.nudPokerusDays.Maximum = new decimal(new int[] {
+            4,
+            0,
+            0,
+            0});
+            this.nudPokerusDays.Name = "nudPokerusDays";
+            this.nudPokerusDays.Size = new System.Drawing.Size(64, 20);
+            this.nudPokerusDays.TabIndex = 53;
+            this.nudPokerusDays.ValueChanged += new System.EventHandler(this.Pokerus_ValueChanged);
+            // 
+            // lblPokerusDays
+            // 
+            this.lblPokerusDays.AutoSize = true;
+            this.lblPokerusDays.Location = new System.Drawing.Point(80, 16);
+            this.lblPokerusDays.Name = "lblPokerusDays";
+            this.lblPokerusDays.Size = new System.Drawing.Size(55, 13);
+            this.lblPokerusDays.TabIndex = 54;
+            this.lblPokerusDays.Text = "Days Left:";
+            // 
+            // lblPokerusStrain
+            // 
+            this.lblPokerusStrain.AutoSize = true;
+            this.lblPokerusStrain.Location = new System.Drawing.Point(8, 16);
+            this.lblPokerusStrain.Name = "lblPokerusStrain";
+            this.lblPokerusStrain.Size = new System.Drawing.Size(37, 13);
+            this.lblPokerusStrain.TabIndex = 52;
+            this.lblPokerusStrain.Text = "Strain:";
+            // 
+            // nudPokerusStrain
+            // 
+            this.nudPokerusStrain.Location = new System.Drawing.Point(8, 32);
+            this.nudPokerusStrain.Maximum = new decimal(new int[] {
+            4,
+            0,
+            0,
+            0});
+            this.nudPokerusStrain.Name = "nudPokerusStrain";
+            this.nudPokerusStrain.Size = new System.Drawing.Size(64, 20);
+            this.nudPokerusStrain.TabIndex = 51;
+            this.nudPokerusStrain.ValueChanged += new System.EventHandler(this.Pokerus_ValueChanged);
             // 
             // cmdRibbons
             // 
             this.cmdRibbons.Enabled = false;
-            this.cmdRibbons.Location = new System.Drawing.Point(24, 80);
+            this.cmdRibbons.Location = new System.Drawing.Point(32, 632);
             this.cmdRibbons.Name = "cmdRibbons";
-            this.cmdRibbons.Size = new System.Drawing.Size(104, 24);
+            this.cmdRibbons.Size = new System.Drawing.Size(120, 24);
             this.cmdRibbons.TabIndex = 31;
             this.cmdRibbons.Text = "Ribbons...";
             this.cmdRibbons.UseVisualStyleBackColor = true;
-            // 
-            // checkBox1
-            // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(16, 24);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(56, 17);
-            this.checkBox1.TabIndex = 28;
-            this.checkBox1.Text = "Is Egg";
-            this.checkBox1.UseVisualStyleBackColor = true;
             // 
             // cmsGenerateIV
             // 
@@ -1222,6 +1367,11 @@
             this.mnuIVRandNatural.Text = "Random (Natural)";
             this.mnuIVRandNatural.Click += new System.EventHandler(this.mnuIVRandNatural_Click);
             // 
+            // mnuEVSep2
+            // 
+            this.mnuEVSep2.Name = "mnuEVSep2";
+            this.mnuEVSep2.Size = new System.Drawing.Size(170, 6);
+            // 
             // mnuIVRandPoor
             // 
             this.mnuIVRandPoor.Name = "mnuIVRandPoor";
@@ -1242,11 +1392,6 @@
             this.mnuIVRandGood.Size = new System.Drawing.Size(173, 22);
             this.mnuIVRandGood.Text = "Random (Good)";
             this.mnuIVRandGood.Click += new System.EventHandler(this.mnuIVRandGood_Click);
-            // 
-            // mnuEVSep2
-            // 
-            this.mnuEVSep2.Name = "mnuEVSep2";
-            this.mnuEVSep2.Size = new System.Drawing.Size(170, 6);
             // 
             // cmsGenerateEV
             // 
@@ -1284,14 +1429,26 @@
             this.mnuEVRedist520.Text = "Redistribute 520";
             this.mnuEVRedist520.Click += new System.EventHandler(this.mnuEVRedist520_Click);
             // 
+            // button1
+            // 
+            this.button1.Enabled = false;
+            this.button1.Location = new System.Drawing.Point(32, 600);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(120, 24);
+            this.button1.TabIndex = 32;
+            this.button1.Text = "Condition...";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
             // FormPokemonEdit
             // 
             this.AcceptButton = this.cmdAccept;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.cmdCancel;
-            this.ClientSize = new System.Drawing.Size(489, 657);
-            this.Controls.Add(this.groupBox1);
+            this.ClientSize = new System.Drawing.Size(489, 689);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.cmdRibbons);
+            this.Controls.Add(this.fraPokerus);
             this.Controls.Add(this.fraOrigins);
             this.Controls.Add(this.fraTraining);
             this.Controls.Add(this.fraMoves);
@@ -1333,6 +1490,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudPP2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudPP1)).EndInit();
             this.fraTraining.ResumeLayout(false);
+            this.fraTraining.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudFriendship)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudEVSpDefense)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudEVDefense)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudEVSpAttack)).EndInit();
@@ -1349,8 +1508,10 @@
             this.fraOrigins.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudLevelMet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picSprite)).EndInit();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.fraPokerus.ResumeLayout(false);
+            this.fraPokerus.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudPokerusDays)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudPokerusStrain)).EndInit();
             this.cmsGenerateIV.ResumeLayout(false);
             this.cmsGenerateEV.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -1447,8 +1608,8 @@
         private System.Windows.Forms.NumericUpDown nudIVHP;
         private System.Windows.Forms.Button cmdGenerateIV;
         private System.Windows.Forms.Label lblPval;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.GroupBox fraPokerus;
+        private System.Windows.Forms.CheckBox chkEgg;
         private System.Windows.Forms.Button cmdGenerateEV;
         private System.Windows.Forms.Button cmdRibbons;
         private System.Windows.Forms.ContextMenuStrip cmsGenerateIV;
@@ -1465,5 +1626,17 @@
         private System.Windows.Forms.ToolStripMenuItem mnuEV0;
         private System.Windows.Forms.ToolStripSeparator mnuEVSep1;
         private System.Windows.Forms.ToolStripMenuItem mnuEVRedist520;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label lblFriendship;
+        private System.Windows.Forms.NumericUpDown nudFriendship;
+        private System.Windows.Forms.Label lblPokerusDays;
+        private System.Windows.Forms.NumericUpDown nudPokerusDays;
+        private System.Windows.Forms.Label lblPokerusStrain;
+        private System.Windows.Forms.NumericUpDown nudPokerusStrain;
+        private System.Windows.Forms.Label lblMarkings;
+        private System.Windows.Forms.CheckBox chkMark3;
+        private System.Windows.Forms.CheckBox chkMark2;
+        private System.Windows.Forms.CheckBox chkMark1;
+        private System.Windows.Forms.CheckBox chkMark0;
     }
 }

@@ -75,12 +75,23 @@ namespace Mightyena {
             nudEVSpDefense.Value = Target.EVSpDefense;
             nudEVSpeed.Value = Target.EVSpeed;
 
+            nudFriendship.Value = Target.Friendship;
+            chkMark0.Checked = (Target.Markings & 0x1) > 0;
+            chkMark1.Checked = (Target.Markings & 0x2) > 0;
+            chkMark2.Checked = (Target.Markings & 0x4) > 0;
+            chkMark3.Checked = (Target.Markings & 0x8) > 0;
+
             cmbPokeBall.SelectedIndex = ((Target.Origins & 0x7800) >> 11) - 1;
             cmbGameOfOrigin.SelectedIndex = (Target.Origins & 0x0780) >> 7;
             cmbMetLocation.SelectedIndex = Target.MetLocation;
             nudLevelMet.Value = Target.Origins & 0x003F;
 
             chkFatefulEncounter.Checked = Target.FatefulEncounter;
+            chkEgg.Checked = (Target.Genes & 0x40000000) > 0;
+
+            nudPokerusStrain.Value = Target.PokeRus & 0xF;
+            nudPokerusDays.Value = (Target.PokeRus & 0xF0) >> 4;
+            Pokerus_ValueChanged(null, EventArgs.Empty); // make sure the text is updated
 
             currentOTID = Target.OTID;
             currentPVal = Target.Personality;
@@ -341,6 +352,13 @@ namespace Mightyena {
             Target.EVSpDefense = (byte)nudEVSpDefense.Value;
             Target.EVSpeed = (byte)nudEVSpeed.Value;
 
+            Target.Friendship = (byte)nudFriendship.Value;
+            Target.Markings = (byte)(
+                (chkMark0.Checked ? 0x1 : 0) |
+                (chkMark1.Checked ? 0x2 : 0) |
+                (chkMark2.Checked ? 0x4 : 0) |
+                (chkMark3.Checked ? 0x8 : 0));
+
             Target.Origins = (ushort)
                 ((cmbTrainerGender.SelectedIndex << 15) |
                 ((cmbPokeBall.SelectedIndex + 1) << 11) |
@@ -349,8 +367,11 @@ namespace Mightyena {
             Target.MetLocation = (byte)cmbMetLocation.SelectedIndex;
 
             Target.FatefulEncounter = chkFatefulEncounter.Checked;
-            Target.Genes = (uint)((Target.Genes & ~0x3)
-                | (currentPVal & 0x1)); // ability flag
+            Target.Genes = (Target.Genes & ~0xC0000000)
+                           | ((currentPVal & 0x1) << 31) // ability flag
+                           | ((chkEgg.Checked ? 1U : 0U) << 30); // egg flag
+
+            Target.PokeRus = (byte)((int)nudPokerusStrain.Value | ((int)nudPokerusDays.Value << 4));
 
             Target.OTID = currentOTID;
             Target.Personality = currentPVal;
@@ -358,6 +379,20 @@ namespace Mightyena {
 
             DialogResult = DialogResult.OK;
             Close();
+        }
+
+        private void Pokerus_ValueChanged(object sender, EventArgs e) {
+            if (nudPokerusStrain.Value == 0) {
+                fraPokerus.Text = "Pokérus (Not Infected)";
+            } else if (nudPokerusDays.Value == 0) {
+                fraPokerus.Text = "Pokérus (Cured)";
+            } else {
+                fraPokerus.Text = "Pokérus (Infected)";
+            }
+        }
+
+        private void chkEgg_CheckedChanged(object sender, EventArgs e) {
+            lblFriendship.Text = chkEgg.Checked ? "Egg Cycles:" : "Friendship:";
         }
 
     }
