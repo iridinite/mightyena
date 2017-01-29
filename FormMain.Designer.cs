@@ -35,6 +35,8 @@
             this.cmdParty4 = new System.Windows.Forms.Button();
             this.cmdParty3 = new System.Windows.Forms.Button();
             this.fraTrainer = new System.Windows.Forms.GroupBox();
+            this.nudCoins = new System.Windows.Forms.NumericUpDown();
+            this.nudMoney = new System.Windows.Forms.NumericUpDown();
             this.lblName = new System.Windows.Forms.Label();
             this.txtName = new System.Windows.Forms.TextBox();
             this.cmbGender = new System.Windows.Forms.ComboBox();
@@ -62,18 +64,18 @@
             this.mnuFileExit = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuHelp = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuHelpAbout = new System.Windows.Forms.ToolStripMenuItem();
-            this.nudMoney = new System.Windows.Forms.NumericUpDown();
-            this.nudCoins = new System.Windows.Forms.NumericUpDown();
+            this.dlgOpen = new System.Windows.Forms.OpenFileDialog();
+            this.dlgSaveAs = new System.Windows.Forms.SaveFileDialog();
             this.tabs.SuspendLayout();
             this.tbpGeneral.SuspendLayout();
             this.fraParty.SuspendLayout();
             this.fraTrainer.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudCoins)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMoney)).BeginInit();
             this.tbpBoxes.SuspendLayout();
             this.pnlBoxButtons.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudBoxActive)).BeginInit();
             this.mnsMenu.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudMoney)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudCoins)).BeginInit();
             this.SuspendLayout();
             // 
             // tabs
@@ -82,6 +84,7 @@
             this.tabs.Controls.Add(this.tbpBags);
             this.tabs.Controls.Add(this.tbpBoxes);
             this.tabs.Controls.Add(this.tbpDex);
+            this.tabs.Enabled = false;
             this.tabs.Location = new System.Drawing.Point(8, 32);
             this.tabs.Name = "tabs";
             this.tabs.SelectedIndex = 0;
@@ -234,6 +237,44 @@
             this.fraTrainer.TabStop = false;
             this.fraTrainer.Text = "Trainer";
             // 
+            // nudCoins
+            // 
+            this.nudCoins.Increment = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.nudCoins.Location = new System.Drawing.Point(8, 224);
+            this.nudCoins.Maximum = new decimal(new int[] {
+            9999,
+            0,
+            0,
+            0});
+            this.nudCoins.Name = "nudCoins";
+            this.nudCoins.Size = new System.Drawing.Size(136, 20);
+            this.nudCoins.TabIndex = 18;
+            this.nudCoins.ThousandsSeparator = true;
+            this.nudCoins.ValueChanged += new System.EventHandler(this.MakeDirtyEventHandler);
+            // 
+            // nudMoney
+            // 
+            this.nudMoney.Increment = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.nudMoney.Location = new System.Drawing.Point(8, 176);
+            this.nudMoney.Maximum = new decimal(new int[] {
+            999999,
+            0,
+            0,
+            0});
+            this.nudMoney.Name = "nudMoney";
+            this.nudMoney.Size = new System.Drawing.Size(136, 20);
+            this.nudMoney.TabIndex = 17;
+            this.nudMoney.ThousandsSeparator = true;
+            this.nudMoney.ValueChanged += new System.EventHandler(this.MakeDirtyEventHandler);
+            // 
             // lblName
             // 
             this.lblName.AutoSize = true;
@@ -250,6 +291,7 @@
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(136, 20);
             this.txtName.TabIndex = 1;
+            this.txtName.TextChanged += new System.EventHandler(this.MakeDirtyEventHandler);
             // 
             // cmbGender
             // 
@@ -262,6 +304,7 @@
             this.cmbGender.Name = "cmbGender";
             this.cmbGender.Size = new System.Drawing.Size(136, 21);
             this.cmbGender.TabIndex = 4;
+            this.cmbGender.SelectedIndexChanged += new System.EventHandler(this.MakeDirtyEventHandler);
             // 
             // lblGender
             // 
@@ -297,6 +340,7 @@
             this.txtTrainerID.Name = "txtTrainerID";
             this.txtTrainerID.Size = new System.Drawing.Size(64, 20);
             this.txtTrainerID.TabIndex = 5;
+            this.txtTrainerID.TextChanged += new System.EventHandler(this.MakeDirtyEventHandler);
             // 
             // lblSecretID
             // 
@@ -323,6 +367,7 @@
             this.txtSecretID.Name = "txtSecretID";
             this.txtSecretID.Size = new System.Drawing.Size(64, 20);
             this.txtSecretID.TabIndex = 7;
+            this.txtSecretID.TextChanged += new System.EventHandler(this.MakeDirtyEventHandler);
             // 
             // tbpBags
             // 
@@ -442,23 +487,28 @@
             this.mnuFileLoad.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
             this.mnuFileLoad.Size = new System.Drawing.Size(192, 22);
             this.mnuFileLoad.Text = "Load Battery...";
+            this.mnuFileLoad.Click += new System.EventHandler(this.mnuFileLoad_Click);
             // 
             // mnuFileSave
             // 
+            this.mnuFileSave.Enabled = false;
             this.mnuFileSave.Image = global::Mightyena.Properties.Resources.save;
             this.mnuFileSave.Name = "mnuFileSave";
             this.mnuFileSave.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
             this.mnuFileSave.Size = new System.Drawing.Size(192, 22);
             this.mnuFileSave.Text = "Save Battery";
+            this.mnuFileSave.Click += new System.EventHandler(this.mnuFileSave_Click);
             // 
             // mnuFileSaveAs
             // 
+            this.mnuFileSaveAs.Enabled = false;
             this.mnuFileSaveAs.Image = global::Mightyena.Properties.Resources.save_as;
             this.mnuFileSaveAs.Name = "mnuFileSaveAs";
             this.mnuFileSaveAs.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt) 
             | System.Windows.Forms.Keys.S)));
             this.mnuFileSaveAs.Size = new System.Drawing.Size(192, 22);
             this.mnuFileSaveAs.Text = "Save As...";
+            this.mnuFileSaveAs.Click += new System.EventHandler(this.mnuFileSaveAs_Click);
             // 
             // mnsFileSep1
             // 
@@ -487,41 +537,15 @@
             this.mnuHelpAbout.Text = "About...";
             this.mnuHelpAbout.Click += new System.EventHandler(this.mnuHelpAbout_Click);
             // 
-            // nudMoney
+            // dlgOpen
             // 
-            this.nudMoney.Increment = new decimal(new int[] {
-            100,
-            0,
-            0,
-            0});
-            this.nudMoney.Location = new System.Drawing.Point(8, 176);
-            this.nudMoney.Maximum = new decimal(new int[] {
-            999999,
-            0,
-            0,
-            0});
-            this.nudMoney.Name = "nudMoney";
-            this.nudMoney.Size = new System.Drawing.Size(136, 20);
-            this.nudMoney.TabIndex = 17;
-            this.nudMoney.ThousandsSeparator = true;
+            this.dlgOpen.Filter = "Battery Save Files (*.sav)|*.sav";
+            this.dlgOpen.Title = "Load Battery";
             // 
-            // nudCoins
+            // dlgSaveAs
             // 
-            this.nudCoins.Increment = new decimal(new int[] {
-            10,
-            0,
-            0,
-            0});
-            this.nudCoins.Location = new System.Drawing.Point(8, 224);
-            this.nudCoins.Maximum = new decimal(new int[] {
-            9999,
-            0,
-            0,
-            0});
-            this.nudCoins.Name = "nudCoins";
-            this.nudCoins.Size = new System.Drawing.Size(136, 20);
-            this.nudCoins.TabIndex = 18;
-            this.nudCoins.ThousandsSeparator = true;
+            this.dlgSaveAs.Filter = "Battery Save Files (*.sav)|*.sav";
+            this.dlgSaveAs.Title = "Save Battery As";
             // 
             // FormMain
             // 
@@ -542,14 +566,14 @@
             this.fraParty.ResumeLayout(false);
             this.fraTrainer.ResumeLayout(false);
             this.fraTrainer.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudCoins)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMoney)).EndInit();
             this.tbpBoxes.ResumeLayout(false);
             this.tbpBoxes.PerformLayout();
             this.pnlBoxButtons.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.nudBoxActive)).EndInit();
             this.mnsMenu.ResumeLayout(false);
             this.mnsMenu.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudMoney)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudCoins)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -597,6 +621,8 @@
         private System.Windows.Forms.Label lblBoxHoverInfo;
         private System.Windows.Forms.NumericUpDown nudCoins;
         private System.Windows.Forms.NumericUpDown nudMoney;
+        private System.Windows.Forms.OpenFileDialog dlgOpen;
+        private System.Windows.Forms.SaveFileDialog dlgSaveAs;
     }
 }
 

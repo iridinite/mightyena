@@ -12,6 +12,8 @@ namespace Mightyena {
 
     public partial class FormMain : Form {
 
+        private string saveFilePath;
+        private bool dirty;
         //private readonly Button[] PcBoxButtons;
 
         public FormMain() {
@@ -37,7 +39,6 @@ namespace Mightyena {
 
         private void FormMain_Load(object sender, EventArgs e) {
             Species.Load();
-            OpenFile("emerald3.sav");
         }
 
         private void mnuFileExit_Click(object sender, EventArgs e) {
@@ -45,21 +46,42 @@ namespace Mightyena {
         }
 
         private void OpenFile(string filename) {
+            saveFilePath = filename;
+
             var format = CultureInfo.InvariantCulture.NumberFormat;
             Gen3Save sav = Gen3Save.FromFile(filename);
             Gen3Save.Inst = sav;
 
+            // trainer page
             txtName.Text = sav.Name;
             cmbGender.SelectedIndex = sav.Gender;
             txtTrainerID.Text = (sav.TrainerID & 0xFFFF).ToString("D5", format);
             txtSecretID.Text = ((sav.TrainerID & 0xFFFF0000) >> 16).ToString("D5", format);
             nudMoney.Value = sav.Money;
             nudCoins.Value = sav.Coins;
-
             lblDebugInfo.Text = $"{sav.GameCode} | {sav.SaveIndexDesc} | {sav.SecurityKey:D10}";
+
+            // box page
             nudBoxActive.Value = sav.BoxActive + 1;
             txtBoxName.Text = Gen3Save.Inst.BoxNames[sav.BoxActive];
             fraParty.Invalidate();
+
+            // enable editing and saving controls
+            dirty = false;
+            tabs.Enabled = true;
+            mnuFileSave.Enabled = false;
+            mnuFileSaveAs.Enabled = true;
+        }
+
+        private void MakeDirty() {
+            dirty = true;
+            mnuFileSave.Enabled = true;
+        }
+
+        private void SaveFile() {
+            Gen3Save.Inst.Save(saveFilePath);
+            mnuFileSave.Enabled = false;
+            dirty = false;
         }
 
         private void mnuHelpAbout_Click(object sender, EventArgs e) {
@@ -73,16 +95,22 @@ namespace Mightyena {
 
             FormPokemonEdit frm = new FormPokemonEdit();
             frm.Target = Gen3Save.Inst.Team[partyIndex];
-            if (frm.ShowDialog() == DialogResult.OK)
+            if (frm.ShowDialog() == DialogResult.OK) {
                 self.Invalidate();
+                MakeDirty();
+            }
         }
 
         private void PartyButton_Paint(object sender, PaintEventArgs e) {
+            // must have an open save
+            if (Gen3Save.Inst == null) return;
+
             Button self = (Button)sender;
             int partyIndex = int.Parse((string)self.Tag);
 
             Gen3Pokemon mon = Gen3Save.Inst.Team[partyIndex];
             if (mon.Exists) {
+                // draw a picture of this mon
                 self.Text = String.Empty;
                 Utils.DrawPokemonSprite(e.Graphics, mon.Species.DexNumber, mon.Shiny);
             } else {
@@ -93,6 +121,7 @@ namespace Mightyena {
         private void PartyButton_MouseEnter(object sender, EventArgs e) {
             int partyIndex = int.Parse((string)((Button)sender).Tag);
 
+            // show info about this mon
             Gen3Pokemon mon = Gen3Save.Inst.Team[partyIndex];
             lblPartyHoverInfo.Text = mon.Exists
                 ? mon.ToString()
@@ -126,8 +155,10 @@ namespace Mightyena {
 
             FormPokemonEdit frm = new FormPokemonEdit();
             frm.Target = Gen3Save.Inst.Box[(boxNo - 1) * 30 + index];
-            if (frm.ShowDialog() == DialogResult.OK)
+            if (frm.ShowDialog() == DialogResult.OK) {
                 self.Invalidate();
+                MakeDirty();
+            }
         }
 
         private void BoxButton_MouseEnter(object sender, EventArgs e) {
@@ -147,6 +178,26 @@ namespace Mightyena {
         private void nudBoxActive_ValueChanged(object sender, EventArgs e) {
             txtBoxName.Text = Gen3Save.Inst.BoxNames[(int)nudBoxActive.Value - 1];
             pnlBoxButtons.Invalidate();
+        }
+
+        private void mnuFileLoad_Click(object sender, EventArgs e) {
+            if (dlgOpen.ShowDialog() == DialogResult.OK)
+                OpenFile(dlgOpen.FileName);
+        }
+
+        private void mnuFileSave_Click(object sender, EventArgs e) {
+            SaveFile();
+        }
+
+        private void mnuFileSaveAs_Click(object sender, EventArgs e) {
+            if (dlgSaveAs.ShowDialog() != DialogResult.OK) return;
+
+            saveFilePath = dlgSaveAs.FileName;
+            SaveFile();
+        }
+
+        private void MakeDirtyEventHandler(object sender, EventArgs e) {
+            MakeDirty();
         }
 
     }
