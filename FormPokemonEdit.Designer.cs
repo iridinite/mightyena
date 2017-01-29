@@ -1126,6 +1126,7 @@
             this.cmdAccept.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.cmdAccept.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.cmdAccept.UseVisualStyleBackColor = true;
+            this.cmdAccept.Click += new System.EventHandler(this.cmdAccept_Click);
             // 
             // cmdCancel
             // 
@@ -1255,7 +1256,7 @@
             this.mnuEVSep1,
             this.mnuEVRedist520});
             this.cmsGenerateEV.Name = "cmsGenerateEV";
-            this.cmsGenerateEV.Size = new System.Drawing.Size(159, 98);
+            this.cmsGenerateEV.Size = new System.Drawing.Size(159, 76);
             // 
             // mnuEV255
             // 

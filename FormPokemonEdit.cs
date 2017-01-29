@@ -3,6 +3,7 @@
  * (C) Mika Molenkamp, 2017.
 */
 
+using System;
 using System.Drawing;
 using System.Globalization;
 using System.Windows.Forms;
@@ -298,6 +299,62 @@ namespace Mightyena {
                         break;
                 }
             }
+        }
+
+        private void cmdAccept_Click(object sender, EventArgs e) {
+            // save all information back to the target Pokémon entry
+
+            Target.Nickname.SetValue(txtNickname.Text);
+            Target.OTName.SetValue(txtTrainerName.Text);
+
+            Target.SpeciesIndex = Species.ByDexNumber((ushort)(cmbSpecies.SelectedIndex + 1)).SpeciesIndex;
+            Target.Lang = (Language)Enum.Parse(typeof(Language), (string)cmbLanguage.SelectedItem);
+            Target.HeldItem = (ushort)cmbItem.SelectedIndex;
+            Target.Experience = (uint)nudExp.Value;
+
+            Target.Move1 = (ushort)cmbMove1.SelectedIndex;
+            Target.Move2 = (ushort)cmbMove2.SelectedIndex;
+            Target.Move3 = (ushort)cmbMove3.SelectedIndex;
+            Target.Move4 = (ushort)cmbMove4.SelectedIndex;
+            Target.PP1 = (byte)nudPP1.Value;
+            Target.PP2 = (byte)nudPP2.Value;
+            Target.PP3 = (byte)nudPP3.Value;
+            Target.PP4 = (byte)nudPP4.Value;
+            Target.PPBonuses =
+                (byte)(cmbPPB1.SelectedIndex | (cmbPPB2.SelectedIndex << 2) | (cmbPPB3.SelectedIndex << 4) | (cmbPPB4.SelectedIndex << 6));
+            cmbPPB1.SelectedIndex = Target.PPBonuses & 0x3;
+            cmbPPB2.SelectedIndex = (Target.PPBonuses & 0xC) >> 2;
+            cmbPPB3.SelectedIndex = (Target.PPBonuses & 0x30) >> 4;
+            cmbPPB4.SelectedIndex = (Target.PPBonuses & 0xC0) >> 6;
+
+            Target.IVHP = (byte)nudIVHP.Value;
+            Target.IVAttack = (byte)nudIVAttack.Value;
+            Target.IVDefense = (byte)nudIVDefense.Value;
+            Target.IVSpAttack = (byte)nudIVSpAttack.Value;
+            Target.IVSpDefense = (byte)nudIVSpDefense.Value;
+            Target.IVSpeed = (byte)nudIVSpeed.Value;
+
+            Target.EVHP = (byte)nudEVHP.Value;
+            Target.EVAttack = (byte)nudEVAttack.Value;
+            Target.EVDefense = (byte)nudEVDefense.Value;
+            Target.EVSpAttack = (byte)nudEVSpAttack.Value;
+            Target.EVSpDefense = (byte)nudEVSpDefense.Value;
+            Target.EVSpeed = (byte)nudEVSpeed.Value;
+
+            Target.Origins = (ushort)
+                ((cmbTrainerGender.SelectedIndex << 15) |
+                ((cmbPokeBall.SelectedIndex + 1) << 11) |
+                (cmbGameOfOrigin.SelectedIndex << 7) |
+                (ushort)nudLevelMet.Value);
+            Target.MetLocation = (byte)cmbMetLocation.SelectedIndex;
+
+            Target.FatefulEncounter = chkFatefulEncounter.Checked;
+
+            Target.OTID = currentOTID;
+            Target.Personality = currentPVal;
+
+            DialogResult = DialogResult.OK;
+            Close();
         }
 
     }
