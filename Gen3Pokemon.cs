@@ -397,7 +397,7 @@ namespace Mightyena {
         /// <param name="ev">The Effort Value of the stat.</param>
         /// <param name="nature">The stat multiplier. 0.9 if hindered, 1.0 if neutral, 1.1 if benificial.</param>
         private static ushort CalculateStat(byte level, byte statbase, ushort iv, ushort ev, double nature) {
-            double neutralstat = Math.Floor((2.0 * statbase + iv + Math.Floor(ev / 4.0) * level) / 100) + 5;
+            double neutralstat = Math.Floor((2.0 * statbase + iv + Math.Floor(ev / 4.0)) * level / 100) + 5;
             return (ushort)Math.Floor(neutralstat * nature);
         }
 
@@ -408,7 +408,7 @@ namespace Mightyena {
             // recalculate statistics
             if (!boxed) {
                 byte level = (byte)Utils.GetLevelForExp(Species.ExpGroup, Experience);
-                ushort hp = (ushort)(Math.Floor((2.0 * Species.BaseHP + IVHP + Math.Floor(EVHP / 4.0) * level) / 100) + level + 10);
+                ushort hp = (ushort)(Math.Floor((2.0 * Species.BaseHP + IVHP + Math.Floor(EVHP / 4.0)) * level / 100) + level + 10);
 
                 // write stats
                 frame[offset + 84] = level;
