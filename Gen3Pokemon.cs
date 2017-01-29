@@ -127,7 +127,7 @@ namespace Mightyena {
         /// <summary>
         /// Gets or sets the species index.
         /// </summary>
-        private ushort SpeciesIndex {
+        public ushort SpeciesIndex {
             get { return BitConverter.ToUInt16(data, order.GrowthOffset); }
             set { Buffer.BlockCopy(BitConverter.GetBytes(value), 0, data, order.GrowthOffset, 2); }
         }
