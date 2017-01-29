@@ -55,9 +55,10 @@ namespace Mightyena {
             new SubstructureOrder("MAEG"), new SubstructureOrder("MEGA"), new SubstructureOrder("MEAG")
         };
 
-        private readonly byte[] frame;   // reference to the containing save section
-        private readonly byte[] data;    // decrypted inner data
+        private readonly byte[] frame;  // reference to the containing save section
+        private readonly byte[] data;   // decrypted inner data
         private readonly int offset;
+        private readonly bool boxed;    // whether the entry is missing the last 20 bytes
         private readonly SubstructureOrder order;
 
         /// <summary>
@@ -372,6 +373,7 @@ namespace Mightyena {
         public Gen3Pokemon(byte[] frame, int offset, bool boxed) {
             this.frame = frame;
             this.offset = offset;
+            this.boxed = boxed;
             Nickname = Gen3String.Decode(frame, offset + 0x08, 10, Lang == Language.Japanese);
             OTName = Gen3String.Decode(frame, offset + 0x14, 7, Lang == Language.Japanese);
 
