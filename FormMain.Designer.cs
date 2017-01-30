@@ -54,7 +54,6 @@
             this.lblBoxNo = new System.Windows.Forms.Label();
             this.nudBoxActive = new System.Windows.Forms.NumericUpDown();
             this.txtBoxName = new System.Windows.Forms.TextBox();
-            this.tbpDex = new System.Windows.Forms.TabPage();
             this.mnsMenu = new System.Windows.Forms.MenuStrip();
             this.mnuFile = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuFileLoad = new System.Windows.Forms.ToolStripMenuItem();
@@ -83,7 +82,6 @@
             this.tabs.Controls.Add(this.tbpGeneral);
             this.tabs.Controls.Add(this.tbpBags);
             this.tabs.Controls.Add(this.tbpBoxes);
-            this.tabs.Controls.Add(this.tbpDex);
             this.tabs.Enabled = false;
             this.tabs.Location = new System.Drawing.Point(8, 32);
             this.tabs.Name = "tabs";
@@ -448,15 +446,6 @@
             this.txtBoxName.Size = new System.Drawing.Size(116, 21);
             this.txtBoxName.TabIndex = 2;
             // 
-            // tbpDex
-            // 
-            this.tbpDex.Location = new System.Drawing.Point(4, 22);
-            this.tbpDex.Name = "tbpDex";
-            this.tbpDex.Size = new System.Drawing.Size(496, 286);
-            this.tbpDex.TabIndex = 4;
-            this.tbpDex.Text = "PokéDex";
-            this.tbpDex.UseVisualStyleBackColor = true;
-            // 
             // mnsMenu
             // 
             this.mnsMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -592,7 +581,6 @@
         private System.Windows.Forms.ToolStripMenuItem mnuHelpAbout;
         private System.Windows.Forms.TabPage tbpBags;
         private System.Windows.Forms.TabPage tbpBoxes;
-        private System.Windows.Forms.TabPage tbpDex;
         private System.Windows.Forms.Label lblName;
         private System.Windows.Forms.TextBox txtName;
         private System.Windows.Forms.Label lblGender;
