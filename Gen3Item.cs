@@ -48,7 +48,7 @@ namespace Mightyena {
         /// Returns a string describing the contents of this item entry.
         /// </summary>
         public override string ToString() {
-            return $"{Index} x {Quantity}";
+            return $"{Utils.ItemNames[Index]} x {Quantity}";
         }
 
     }
