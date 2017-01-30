@@ -69,6 +69,11 @@ namespace Mightyena {
         public byte BaseSpAttack { get; }
         public byte BaseSpDefense { get; }
 
+        public byte Ability1 { get; }
+        public byte Ability2 { get; }
+
+        public bool HasSecondAbility { get { return Ability2 != 0; } }
+
         public PokemonType Type1 { get; }
         public PokemonType Type2 { get; }
         public byte GenderRatio { get; }
@@ -80,7 +85,7 @@ namespace Mightyena {
         public Species(string dataline) {
             // split the line into chunks
             string[] parts = dataline?.Split(',');
-            if (parts == null || parts.Length != 13)
+            if (parts == null || parts.Length != 15)
                 throw new ArgumentException("Invalid data line", nameof(dataline));
 
             // parse all the properties in the line
@@ -102,6 +107,9 @@ namespace Mightyena {
 
                 GenderRatio = byte.Parse(parts[11]);
                 ExpGroup = (ExpGroup)byte.Parse(parts[12]);
+
+                Ability1 = byte.Parse(parts[13]);
+                Ability2 = byte.Parse(parts[14]);
 
             } catch (Exception e) {
                 throw new ArgumentException("Malformed data line contents", nameof(dataline), e);
