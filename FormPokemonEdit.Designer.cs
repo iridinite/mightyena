@@ -117,9 +117,6 @@
             this.lblGameOfOrigin = new System.Windows.Forms.Label();
             this.cmbPokeBall = new System.Windows.Forms.ComboBox();
             this.lblPokeBall = new System.Windows.Forms.Label();
-            this.cmdAccept = new System.Windows.Forms.Button();
-            this.cmdCancel = new System.Windows.Forms.Button();
-            this.picSprite = new System.Windows.Forms.PictureBox();
             this.fraPokerus = new System.Windows.Forms.GroupBox();
             this.nudPokerusDays = new System.Windows.Forms.NumericUpDown();
             this.lblPokerusDays = new System.Windows.Forms.Label();
@@ -141,6 +138,10 @@
             this.mnuEVSep1 = new System.Windows.Forms.ToolStripSeparator();
             this.mnuEVRedist520 = new System.Windows.Forms.ToolStripMenuItem();
             this.button1 = new System.Windows.Forms.Button();
+            this.cmdAccept = new System.Windows.Forms.Button();
+            this.cmdCancel = new System.Windows.Forms.Button();
+            this.picSprite = new System.Windows.Forms.PictureBox();
+            this.picItem = new System.Windows.Forms.PictureBox();
             this.fraOT.SuspendLayout();
             this.fraPVal.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudLevel)).BeginInit();
@@ -166,12 +167,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudIVHP)).BeginInit();
             this.fraOrigins.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudLevelMet)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picSprite)).BeginInit();
             this.fraPokerus.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudPokerusDays)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudPokerusStrain)).BeginInit();
             this.cmsGenerateIV.SuspendLayout();
             this.cmsGenerateEV.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picSprite)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picItem)).BeginInit();
             this.SuspendLayout();
             // 
             // txtNickname
@@ -478,10 +480,11 @@
             // cmbItem
             // 
             this.cmbItem.FormattingEnabled = true;
-            this.cmbItem.Location = new System.Drawing.Point(248, 72);
+            this.cmbItem.Location = new System.Drawing.Point(272, 72);
             this.cmbItem.Name = "cmbItem";
-            this.cmbItem.Size = new System.Drawing.Size(128, 21);
+            this.cmbItem.Size = new System.Drawing.Size(104, 21);
             this.cmbItem.TabIndex = 22;
+            this.cmbItem.SelectedIndexChanged += new System.EventHandler(this.cmbItem_SelectedIndexChanged);
             // 
             // nudLevel
             // 
@@ -1225,41 +1228,6 @@
             this.lblPokeBall.TabIndex = 0;
             this.lblPokeBall.Text = "Poké Ball:";
             // 
-            // cmdAccept
-            // 
-            this.cmdAccept.Image = global::Mightyena.Properties.Resources.accept;
-            this.cmdAccept.Location = new System.Drawing.Point(248, 648);
-            this.cmdAccept.Name = "cmdAccept";
-            this.cmdAccept.Size = new System.Drawing.Size(112, 24);
-            this.cmdAccept.TabIndex = 24;
-            this.cmdAccept.Text = "Accept";
-            this.cmdAccept.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.cmdAccept.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.cmdAccept.UseVisualStyleBackColor = true;
-            this.cmdAccept.Click += new System.EventHandler(this.cmdAccept_Click);
-            // 
-            // cmdCancel
-            // 
-            this.cmdCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.cmdCancel.Image = global::Mightyena.Properties.Resources.decline;
-            this.cmdCancel.Location = new System.Drawing.Point(368, 648);
-            this.cmdCancel.Name = "cmdCancel";
-            this.cmdCancel.Size = new System.Drawing.Size(104, 24);
-            this.cmdCancel.TabIndex = 25;
-            this.cmdCancel.Text = "Cancel";
-            this.cmdCancel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.cmdCancel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.cmdCancel.UseVisualStyleBackColor = true;
-            // 
-            // picSprite
-            // 
-            this.picSprite.Location = new System.Drawing.Point(16, 16);
-            this.picSprite.Name = "picSprite";
-            this.picSprite.Size = new System.Drawing.Size(80, 80);
-            this.picSprite.TabIndex = 0;
-            this.picSprite.TabStop = false;
-            this.picSprite.Paint += new System.Windows.Forms.PaintEventHandler(this.picSprite_Paint);
-            // 
             // fraPokerus
             // 
             this.fraPokerus.Controls.Add(this.nudPokerusDays);
@@ -1439,6 +1407,50 @@
             this.button1.Text = "Condition...";
             this.button1.UseVisualStyleBackColor = true;
             // 
+            // cmdAccept
+            // 
+            this.cmdAccept.Image = global::Mightyena.Properties.Resources.accept;
+            this.cmdAccept.Location = new System.Drawing.Point(248, 648);
+            this.cmdAccept.Name = "cmdAccept";
+            this.cmdAccept.Size = new System.Drawing.Size(112, 24);
+            this.cmdAccept.TabIndex = 24;
+            this.cmdAccept.Text = "Accept";
+            this.cmdAccept.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.cmdAccept.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.cmdAccept.UseVisualStyleBackColor = true;
+            this.cmdAccept.Click += new System.EventHandler(this.cmdAccept_Click);
+            // 
+            // cmdCancel
+            // 
+            this.cmdCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.cmdCancel.Image = global::Mightyena.Properties.Resources.decline;
+            this.cmdCancel.Location = new System.Drawing.Point(368, 648);
+            this.cmdCancel.Name = "cmdCancel";
+            this.cmdCancel.Size = new System.Drawing.Size(104, 24);
+            this.cmdCancel.TabIndex = 25;
+            this.cmdCancel.Text = "Cancel";
+            this.cmdCancel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.cmdCancel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.cmdCancel.UseVisualStyleBackColor = true;
+            // 
+            // picSprite
+            // 
+            this.picSprite.Location = new System.Drawing.Point(16, 16);
+            this.picSprite.Name = "picSprite";
+            this.picSprite.Size = new System.Drawing.Size(80, 80);
+            this.picSprite.TabIndex = 0;
+            this.picSprite.TabStop = false;
+            this.picSprite.Paint += new System.Windows.Forms.PaintEventHandler(this.picSprite_Paint);
+            // 
+            // picItem
+            // 
+            this.picItem.Location = new System.Drawing.Point(242, 68);
+            this.picItem.Name = "picItem";
+            this.picItem.Size = new System.Drawing.Size(30, 30);
+            this.picItem.TabIndex = 34;
+            this.picItem.TabStop = false;
+            this.picItem.Paint += new System.Windows.Forms.PaintEventHandler(this.picItem_Paint);
+            // 
             // FormPokemonEdit
             // 
             this.AcceptButton = this.cmdAccept;
@@ -1469,6 +1481,7 @@
             this.Controls.Add(this.cmbSpecies);
             this.Controls.Add(this.txtNickname);
             this.Controls.Add(this.picSprite);
+            this.Controls.Add(this.picItem);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -1507,13 +1520,14 @@
             this.fraOrigins.ResumeLayout(false);
             this.fraOrigins.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudLevelMet)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picSprite)).EndInit();
             this.fraPokerus.ResumeLayout(false);
             this.fraPokerus.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudPokerusDays)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudPokerusStrain)).EndInit();
             this.cmsGenerateIV.ResumeLayout(false);
             this.cmsGenerateEV.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.picSprite)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picItem)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1638,5 +1652,6 @@
         private System.Windows.Forms.CheckBox chkMark2;
         private System.Windows.Forms.CheckBox chkMark1;
         private System.Windows.Forms.CheckBox chkMark0;
+        private System.Windows.Forms.PictureBox picItem;
     }
 }

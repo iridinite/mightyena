@@ -102,10 +102,11 @@ namespace Mightyena {
 
         private void picSprite_Paint(object sender, PaintEventArgs e) {
             // draw species sprite
-            Utils.DrawPokemonSprite(
-                e.Graphics,
-                cmbSpecies.SelectedIndex + 1,
-                Utils.GetIsShiny(currentOTID, currentPVal));
+            Utils.DrawPokemonSprite(e.Graphics, cmbSpecies.SelectedIndex + 1, Utils.GetIsShiny(currentOTID, currentPVal));
+        }
+
+        private void picItem_Paint(object sender, PaintEventArgs e) {
+            Utils.DrawItemIcon(e.Graphics, cmbItem.SelectedIndex, 0, 0);
         }
 
         private void UpdateDynamicStats() {
@@ -393,6 +394,21 @@ namespace Mightyena {
 
         private void chkEgg_CheckedChanged(object sender, EventArgs e) {
             lblFriendship.Text = chkEgg.Checked ? "Egg Cycles:" : "Friendship:";
+        }
+
+        private void cmbItem_SelectedIndexChanged(object sender, EventArgs e) {
+            // if item is selected, open some room for the item sprite
+            if (cmbItem.SelectedIndex > 0) {
+                cmbItem.Size = new Size(104, 21);
+                cmbItem.Location = new Point(272, 72);
+            } else {
+                cmbItem.Size = new Size(128, 21);
+                cmbItem.Location = new Point(248, 72);
+            }
+            // redraw item sprite
+            cmbItem.SelectionStart = 0;
+            cmbItem.SelectionLength = 0;
+            picItem.Invalidate();
         }
 
     }
