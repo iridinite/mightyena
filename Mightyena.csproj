@@ -122,9 +122,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\PokemonSprites.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\accept.png" />
   </ItemGroup>
   <ItemGroup>
@@ -153,9 +150,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\save_as.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\PokemonSpritesSmall.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\PokeIcons.png" />
@@ -191,6 +185,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="EditorIcon.ico" />
+    <None Include="Resources\ItemIcons.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -18,7 +18,7 @@ namespace Mightyena {
     internal static class Utils {
 
         private static readonly Random rng = new Random();
-        private static readonly Bitmap CacheSprites, CacheSpriteShiny, CacheIcons;
+        private static readonly Bitmap CacheSprites, CacheSpriteShiny, CacheIcons, CacheItems;
         public static List<string> MoveNames { get; }
         public static List<string> LocationNames { get; }
         public static List<string> NatureNames { get; }
@@ -27,6 +27,7 @@ namespace Mightyena {
         public const int SpriteSize = 80;
         public const int IconSizeW = 40;
         public const int IconSizeH = 30;
+        public const int ItemIconSize = 30;
 
         static Utils() {
             // prepare sprite bitmap in 32bppPARGB format
@@ -41,13 +42,22 @@ namespace Mightyena {
                     gfx.DrawImage(Resources.PokeSpritesShiny, new Rectangle(0, 0, width, height), new Rectangle(0, 0, width, height), GraphicsUnit.Pixel);
             }
 
-            // prepare icons bitmap in 32bppPARGB format
+            // prepare pokemon icons bitmap in 32bppPARGB format
             {
                 int width = Resources.PokeIcons.Width;
                 int height = Resources.PokeIcons.Height;
                 CacheIcons = new Bitmap(width, height, PixelFormat.Format32bppPArgb);
                 using (Graphics gfx = Graphics.FromImage(CacheIcons))
                     gfx.DrawImage(Resources.PokeIcons, new Rectangle(0, 0, width, height), new Rectangle(0, 0, width, height), GraphicsUnit.Pixel);
+            }
+
+            // prepare item icons bitmap in 32bppPARGB format
+            {
+                int width = Resources.ItemIcons.Width;
+                int height = Resources.ItemIcons.Height;
+                CacheItems = new Bitmap(width, height, PixelFormat.Format32bppPArgb);
+                using (Graphics gfx = Graphics.FromImage(CacheItems))
+                    gfx.DrawImage(Resources.ItemIcons, new Rectangle(0, 0, width, height), new Rectangle(0, 0, width, height), GraphicsUnit.Pixel);
             }
 
             // load strings from text files
@@ -115,7 +125,23 @@ namespace Mightyena {
                 new Rectangle(col * SpriteSize, row * SpriteSize, SpriteSize, SpriteSize),
                 GraphicsUnit.Pixel);
         }
-        
+
+        /// <summary>
+        /// Draws an icon associated with the specified item.
+        /// </summary>
+        /// <param name="gfx">The <seealso cref="Graphics"/> to draw with.</param>
+        /// <param name="itemID">The item index number.</param>
+        /// <param name="x">X coordinate to draw at.</param>
+        /// <param name="y">Y coordinate to draw at.</param>
+        public static void DrawItemIcon(Graphics gfx, int itemID, int x, int y) {
+            int col = itemID % 25;
+            int row = itemID / 25;
+            gfx.DrawImage(CacheItems,
+                new Rectangle(x, y, ItemIconSize, ItemIconSize),
+                new Rectangle(col * ItemIconSize, row * ItemIconSize, ItemIconSize, ItemIconSize),
+                GraphicsUnit.Pixel);
+        }
+
         /// <summary>
         /// Returns a value indicating whether the specified OT ID and PVal make the Pokémon shiny.
         /// </summary>
@@ -192,7 +218,7 @@ namespace Mightyena {
                 delta = Math.Max(delta / 2, 1);
             }
         }
-        
+
         /// <summary>
         /// Returns the name of the specified move.
         /// </summary>
