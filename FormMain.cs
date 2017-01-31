@@ -4,6 +4,7 @@
 */
 
 using System;
+using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
 using System.Windows.Forms;
@@ -14,13 +15,13 @@ namespace Mightyena {
 
         private string saveFilePath;
         private bool dirty;
-        //private readonly Button[] PcBoxButtons;
+
+        private readonly ItemBox[] ItemBoxes;
 
         public FormMain() {
             InitializeComponent();
 
             // generate the 30 buttons on the PC Box page
-            //PcBoxButtons = new Button[30];
             for (int i = 0; i < 30; i++) {
                 Button btn = new Button();
                 btn.Size = new Size(92, 32);
@@ -32,8 +33,20 @@ namespace Mightyena {
                 btn.Paint += BoxButton_Paint;
                 btn.MouseEnter += BoxButton_MouseEnter;
                 btn.MouseLeave += BoxButton_MouseLeave;
-                //PcBoxButtons[i] = boxbt;
                 pnlBoxButtons.Controls.Add(btn);
+            }
+
+            // generate controls for item slots
+            cmbSelectedItem.Items.AddRange(Utils.ItemNames.ToArray());
+            ItemBoxes = new ItemBox[64]; // largest bag is 64 entries (TM/HM in RSE)
+            for (int i = 0; i < 64; i++) {
+                ItemBox itb = new ItemBox();
+                itb.Location = new Point(i % 13 * 36, i / 13 * 36);
+                itb.BoxNo = i;
+                itb.ItemClick += ItemBox_Click;
+                itb.Visible = false;
+                ItemBoxes[i] = itb;
+                pnlBag.Controls.Add(itb);
             }
         }
 
@@ -61,6 +74,10 @@ namespace Mightyena {
             nudCoins.Value = sav.Coins;
             lblDebugInfo.Text = $"{sav.GameCode} | {sav.SaveIndexDesc} | {sav.SecurityKey:D10}";
 
+            // items page
+            optBagItem.Checked = true;
+            ShowBag(sav.ItemsPocket);
+
             // box page
             nudBoxActive.Value = sav.BoxActive + 1;
             txtBoxName.Text = Gen3Save.Inst.BoxNames[sav.BoxActive];
@@ -87,6 +104,24 @@ namespace Mightyena {
         private void mnuHelpAbout_Click(object sender, EventArgs e) {
             FormAbout frm = new FormAbout();
             frm.ShowDialog();
+        }
+
+        private void ItemBox_Click(int boxNo) {
+            // select this new box
+            int oldSelect = ItemBox.Selection;
+            ItemBox.Selection = boxNo;
+            // remove selection outline from the previously selected box
+            if (oldSelect > -1)
+                ItemBoxes[oldSelect].Invalidate();
+
+            // update editing controls
+            Gen3Item item = ItemBoxes[ItemBox.Selection].Item;
+            Debug.Assert(item != null, "ItemBox has null Gen3Item ref");
+            cmbSelectedItem.SelectedIndex = item.Index;
+            nudSelectedItemQuantity.Value = item.Quantity;
+            cmbSelectedItem.Enabled = true;
+            nudSelectedItemQuantity.Enabled = true;
+            picSelectedItem.Visible = true;
         }
 
         private void PartyButton_Click(object sender, EventArgs e) {
@@ -198,6 +233,72 @@ namespace Mightyena {
 
         private void MakeDirtyEventHandler(object sender, EventArgs e) {
             MakeDirty();
+        }
+
+        private void cmbSelectedItem_SelectedIndexChanged(object sender, EventArgs e) {
+            // avoid making edits while changing item pages
+            if (!cmbSelectedItem.Enabled) return;
+            // update item entry with new selection
+            ItemBoxes[ItemBox.Selection].Item.Index = (ushort)cmbSelectedItem.SelectedIndex;
+            ItemBoxes[ItemBox.Selection].Invalidate();
+            picSelectedItem.Invalidate();
+        }
+
+        private void nudSelectedItemQuantity_ValueChanged(object sender, EventArgs e) {
+            ItemBoxes[ItemBox.Selection].Item.Quantity = (ushort)nudSelectedItemQuantity.Value;
+            ItemBoxes[ItemBox.Selection].Invalidate();
+        }
+
+        private void ShowBag(Gen3Item[] bag) {
+            // clear selection
+            ItemBox.Selection = -1;
+            // update and hide/show required boxes
+            int len = bag.Length; // cache
+            for (int i = 0; i < 64; i++) {
+                ItemBoxes[i].Item = i < len ? bag[i] : null;
+                ItemBoxes[i].Visible = i < len;
+                ItemBoxes[i].Invalidate();
+            }
+            // make sure to disable editing controls until a box is selected
+            cmbSelectedItem.Enabled = false;
+            cmbSelectedItem.SelectedIndex = 0;
+            nudSelectedItemQuantity.Enabled = false;
+            picSelectedItem.Visible = false;
+        }
+
+        private void optBagPC_CheckedChanged(object sender, EventArgs e) {
+            if (!optBagPC.Checked) return;
+            ShowBag(Gen3Save.Inst.ItemsPC);
+        }
+
+        private void optBagItem_CheckedChanged(object sender, EventArgs e) {
+            if (!optBagItem.Checked) return;
+            ShowBag(Gen3Save.Inst.ItemsPocket);
+        }
+
+        private void optBagKey_CheckedChanged(object sender, EventArgs e) {
+            if (!optBagKey.Checked) return;
+            ShowBag(Gen3Save.Inst.ItemsKey);
+        }
+
+        private void optBagBalls_CheckedChanged(object sender, EventArgs e) {
+            if (!optBagBalls.Checked) return;
+            ShowBag(Gen3Save.Inst.ItemsBall);
+        }
+
+        private void optBagTM_CheckedChanged(object sender, EventArgs e) {
+            if (!optBagTM.Checked) return;
+            ShowBag(Gen3Save.Inst.ItemsTM);
+        }
+
+        private void optBagBerry_CheckedChanged(object sender, EventArgs e) {
+            if (!optBagBerry.Checked) return;
+            ShowBag(Gen3Save.Inst.ItemsBerry);
+        }
+
+        private void picSelectedItem_Paint(object sender, PaintEventArgs e) {
+            if (ItemBox.Selection > -1)
+                Utils.DrawItemIcon(e.Graphics, cmbSelectedItem.SelectedIndex, 0, 0);
         }
 
     }

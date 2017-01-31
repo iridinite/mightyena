@@ -82,6 +82,12 @@
     <Compile Include="Gen3Pokemon.cs" />
     <Compile Include="Gen3Save.cs" />
     <Compile Include="Gen3String.cs" />
+    <Compile Include="ItemBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ItemBox.Designer.cs">
+      <DependentUpon>ItemBox.cs</DependentUpon>
+    </Compile>
     <Compile Include="Species.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -97,6 +103,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormPval.resx">
       <DependentUpon>FormPval.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ItemBox.resx">
+      <DependentUpon>ItemBox.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

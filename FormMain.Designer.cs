@@ -49,6 +49,16 @@
             this.lblMoney = new System.Windows.Forms.Label();
             this.txtSecretID = new System.Windows.Forms.TextBox();
             this.tbpBags = new System.Windows.Forms.TabPage();
+            this.picSelectedItem = new System.Windows.Forms.PictureBox();
+            this.nudSelectedItemQuantity = new System.Windows.Forms.NumericUpDown();
+            this.cmbSelectedItem = new System.Windows.Forms.ComboBox();
+            this.pnlBag = new System.Windows.Forms.Panel();
+            this.optBagBerry = new System.Windows.Forms.RadioButton();
+            this.optBagTM = new System.Windows.Forms.RadioButton();
+            this.optBagBalls = new System.Windows.Forms.RadioButton();
+            this.optBagKey = new System.Windows.Forms.RadioButton();
+            this.optBagItem = new System.Windows.Forms.RadioButton();
+            this.optBagPC = new System.Windows.Forms.RadioButton();
             this.tbpBoxes = new System.Windows.Forms.TabPage();
             this.pnlBoxButtons = new System.Windows.Forms.Panel();
             this.lblBoxHoverInfo = new System.Windows.Forms.Label();
@@ -72,6 +82,9 @@
             this.fraTrainer.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudCoins)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudMoney)).BeginInit();
+            this.tbpBags.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picSelectedItem)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudSelectedItemQuantity)).BeginInit();
             this.tbpBoxes.SuspendLayout();
             this.pnlBoxButtons.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudBoxActive)).BeginInit();
@@ -370,12 +383,136 @@
             // 
             // tbpBags
             // 
+            this.tbpBags.Controls.Add(this.picSelectedItem);
+            this.tbpBags.Controls.Add(this.nudSelectedItemQuantity);
+            this.tbpBags.Controls.Add(this.cmbSelectedItem);
+            this.tbpBags.Controls.Add(this.pnlBag);
+            this.tbpBags.Controls.Add(this.optBagBerry);
+            this.tbpBags.Controls.Add(this.optBagTM);
+            this.tbpBags.Controls.Add(this.optBagBalls);
+            this.tbpBags.Controls.Add(this.optBagKey);
+            this.tbpBags.Controls.Add(this.optBagItem);
+            this.tbpBags.Controls.Add(this.optBagPC);
             this.tbpBags.Location = new System.Drawing.Point(4, 22);
             this.tbpBags.Name = "tbpBags";
             this.tbpBags.Size = new System.Drawing.Size(496, 286);
             this.tbpBags.TabIndex = 2;
             this.tbpBags.Text = "Bags";
             this.tbpBags.UseVisualStyleBackColor = true;
+            // 
+            // picSelectedItem
+            // 
+            this.picSelectedItem.Location = new System.Drawing.Point(12, 252);
+            this.picSelectedItem.Name = "picSelectedItem";
+            this.picSelectedItem.Size = new System.Drawing.Size(30, 30);
+            this.picSelectedItem.TabIndex = 13;
+            this.picSelectedItem.TabStop = false;
+            this.picSelectedItem.Paint += new System.Windows.Forms.PaintEventHandler(this.picSelectedItem_Paint);
+            // 
+            // nudSelectedItemQuantity
+            // 
+            this.nudSelectedItemQuantity.Enabled = false;
+            this.nudSelectedItemQuantity.Location = new System.Drawing.Point(216, 256);
+            this.nudSelectedItemQuantity.Maximum = new decimal(new int[] {
+            99,
+            0,
+            0,
+            0});
+            this.nudSelectedItemQuantity.Name = "nudSelectedItemQuantity";
+            this.nudSelectedItemQuantity.Size = new System.Drawing.Size(48, 20);
+            this.nudSelectedItemQuantity.TabIndex = 12;
+            this.nudSelectedItemQuantity.ValueChanged += new System.EventHandler(this.nudSelectedItemQuantity_ValueChanged);
+            // 
+            // cmbSelectedItem
+            // 
+            this.cmbSelectedItem.Enabled = false;
+            this.cmbSelectedItem.FormattingEnabled = true;
+            this.cmbSelectedItem.Location = new System.Drawing.Point(48, 256);
+            this.cmbSelectedItem.Name = "cmbSelectedItem";
+            this.cmbSelectedItem.Size = new System.Drawing.Size(160, 21);
+            this.cmbSelectedItem.TabIndex = 11;
+            this.cmbSelectedItem.SelectedIndexChanged += new System.EventHandler(this.cmbSelectedItem_SelectedIndexChanged);
+            // 
+            // pnlBag
+            // 
+            this.pnlBag.Location = new System.Drawing.Point(16, 48);
+            this.pnlBag.Name = "pnlBag";
+            this.pnlBag.Size = new System.Drawing.Size(464, 192);
+            this.pnlBag.TabIndex = 10;
+            // 
+            // optBagBerry
+            // 
+            this.optBagBerry.Appearance = System.Windows.Forms.Appearance.Button;
+            this.optBagBerry.Location = new System.Drawing.Point(416, 8);
+            this.optBagBerry.Name = "optBagBerry";
+            this.optBagBerry.Size = new System.Drawing.Size(72, 24);
+            this.optBagBerry.TabIndex = 5;
+            this.optBagBerry.Text = "Berries";
+            this.optBagBerry.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.optBagBerry.UseVisualStyleBackColor = true;
+            this.optBagBerry.CheckedChanged += new System.EventHandler(this.optBagBerry_CheckedChanged);
+            // 
+            // optBagTM
+            // 
+            this.optBagTM.Appearance = System.Windows.Forms.Appearance.Button;
+            this.optBagTM.Location = new System.Drawing.Point(336, 8);
+            this.optBagTM.Name = "optBagTM";
+            this.optBagTM.Size = new System.Drawing.Size(72, 24);
+            this.optBagTM.TabIndex = 4;
+            this.optBagTM.Text = "TM / HMs";
+            this.optBagTM.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.optBagTM.UseVisualStyleBackColor = true;
+            this.optBagTM.CheckedChanged += new System.EventHandler(this.optBagTM_CheckedChanged);
+            // 
+            // optBagBalls
+            // 
+            this.optBagBalls.Appearance = System.Windows.Forms.Appearance.Button;
+            this.optBagBalls.Location = new System.Drawing.Point(256, 8);
+            this.optBagBalls.Name = "optBagBalls";
+            this.optBagBalls.Size = new System.Drawing.Size(72, 24);
+            this.optBagBalls.TabIndex = 3;
+            this.optBagBalls.Text = "Poké Balls";
+            this.optBagBalls.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.optBagBalls.UseVisualStyleBackColor = true;
+            this.optBagBalls.CheckedChanged += new System.EventHandler(this.optBagBalls_CheckedChanged);
+            // 
+            // optBagKey
+            // 
+            this.optBagKey.Appearance = System.Windows.Forms.Appearance.Button;
+            this.optBagKey.Location = new System.Drawing.Point(176, 8);
+            this.optBagKey.Name = "optBagKey";
+            this.optBagKey.Size = new System.Drawing.Size(72, 24);
+            this.optBagKey.TabIndex = 2;
+            this.optBagKey.Text = "Key Items";
+            this.optBagKey.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.optBagKey.UseVisualStyleBackColor = true;
+            this.optBagKey.CheckedChanged += new System.EventHandler(this.optBagKey_CheckedChanged);
+            // 
+            // optBagItem
+            // 
+            this.optBagItem.Appearance = System.Windows.Forms.Appearance.Button;
+            this.optBagItem.Checked = true;
+            this.optBagItem.Location = new System.Drawing.Point(96, 8);
+            this.optBagItem.Name = "optBagItem";
+            this.optBagItem.Size = new System.Drawing.Size(72, 24);
+            this.optBagItem.TabIndex = 1;
+            this.optBagItem.TabStop = true;
+            this.optBagItem.Text = "Items";
+            this.optBagItem.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.optBagItem.UseVisualStyleBackColor = true;
+            this.optBagItem.CheckedChanged += new System.EventHandler(this.optBagItem_CheckedChanged);
+            // 
+            // optBagPC
+            // 
+            this.optBagPC.Appearance = System.Windows.Forms.Appearance.Button;
+            this.optBagPC.Location = new System.Drawing.Point(8, 8);
+            this.optBagPC.Name = "optBagPC";
+            this.optBagPC.Size = new System.Drawing.Size(72, 24);
+            this.optBagPC.TabIndex = 0;
+            this.optBagPC.Text = "PC";
+            this.optBagPC.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.optBagPC.UseVisualStyleBackColor = true;
+            this.optBagPC.CheckedChanged += new System.EventHandler(this.optBagPC_CheckedChanged);
             // 
             // tbpBoxes
             // 
@@ -559,6 +696,9 @@
             this.fraTrainer.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudCoins)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudMoney)).EndInit();
+            this.tbpBags.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.picSelectedItem)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudSelectedItemQuantity)).EndInit();
             this.tbpBoxes.ResumeLayout(false);
             this.tbpBoxes.PerformLayout();
             this.pnlBoxButtons.ResumeLayout(false);
@@ -613,6 +753,16 @@
         private System.Windows.Forms.NumericUpDown nudMoney;
         private System.Windows.Forms.OpenFileDialog dlgOpen;
         private System.Windows.Forms.SaveFileDialog dlgSaveAs;
+        private System.Windows.Forms.RadioButton optBagBerry;
+        private System.Windows.Forms.RadioButton optBagTM;
+        private System.Windows.Forms.RadioButton optBagBalls;
+        private System.Windows.Forms.RadioButton optBagKey;
+        private System.Windows.Forms.RadioButton optBagItem;
+        private System.Windows.Forms.RadioButton optBagPC;
+        private System.Windows.Forms.Panel pnlBag;
+        private System.Windows.Forms.ComboBox cmbSelectedItem;
+        private System.Windows.Forms.PictureBox picSelectedItem;
+        private System.Windows.Forms.NumericUpDown nudSelectedItemQuantity;
     }
 }
 
