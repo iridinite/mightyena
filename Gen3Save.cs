@@ -321,7 +321,14 @@ namespace Mightyena {
         /// <param name="filename">The path to the save file.</param>
         public void Save(string filename) {
             // TODO: write Trainer section
-            // TODO: recompile PC box sections
+
+            // copy box buffer back into the pc box sections
+            int boxoffset = 0;
+            for (SectionID sid = SectionID.PCBoxA; sid <= SectionID.PCBoxI; sid++) {
+                Section boxsection = GetSection(sid);
+                Buffer.BlockCopy(boxdata, boxoffset, boxsection.data, 0, boxsection.GetSize());
+                boxoffset += boxsection.GetSize();
+            }
 
             // recalculate checksums on all sections and copy them back to sram
             for (int i = 0; i < 28; i++) {
