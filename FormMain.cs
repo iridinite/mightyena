@@ -7,6 +7,7 @@ using System;
 using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
+using System.IO;
 using System.Windows.Forms;
 
 namespace Mightyena {
@@ -106,6 +107,10 @@ namespace Mightyena {
         }
 
         private void SaveFile() {
+            // make a backup of the previous file
+            if (mnuFileBackup.Checked)
+                File.Copy(saveFilePath, Path.ChangeExtension(saveFilePath, "sav.bak"), true);
+            // write the new file
             Gen3Save.Inst.Save(saveFilePath);
             mnuFileSave.Enabled = false;
             dirty = false;

@@ -76,6 +76,8 @@
             this.mnuHelpAbout = new System.Windows.Forms.ToolStripMenuItem();
             this.dlgOpen = new System.Windows.Forms.OpenFileDialog();
             this.dlgSaveAs = new System.Windows.Forms.SaveFileDialog();
+            this.mnuFileBackup = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnsFileSep2 = new System.Windows.Forms.ToolStripSeparator();
             this.tabs.SuspendLayout();
             this.tbpGeneral.SuspendLayout();
             this.fraParty.SuspendLayout();
@@ -602,6 +604,8 @@
             this.mnuFileSave,
             this.mnuFileSaveAs,
             this.mnsFileSep1,
+            this.mnuFileBackup,
+            this.mnsFileSep2,
             this.mnuFileExit});
             this.mnuFile.Name = "mnuFile";
             this.mnuFile.Size = new System.Drawing.Size(37, 20);
@@ -660,7 +664,7 @@
             // mnuHelpAbout
             // 
             this.mnuHelpAbout.Name = "mnuHelpAbout";
-            this.mnuHelpAbout.Size = new System.Drawing.Size(116, 22);
+            this.mnuHelpAbout.Size = new System.Drawing.Size(152, 22);
             this.mnuHelpAbout.Text = "About...";
             this.mnuHelpAbout.Click += new System.EventHandler(this.mnuHelpAbout_Click);
             // 
@@ -673,6 +677,20 @@
             // 
             this.dlgSaveAs.Filter = "Battery Save Files (*.sav)|*.sav";
             this.dlgSaveAs.Title = "Save Battery As";
+            // 
+            // mnuFileBackup
+            // 
+            this.mnuFileBackup.Checked = true;
+            this.mnuFileBackup.CheckOnClick = true;
+            this.mnuFileBackup.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.mnuFileBackup.Name = "mnuFileBackup";
+            this.mnuFileBackup.Size = new System.Drawing.Size(192, 22);
+            this.mnuFileBackup.Text = "Auto Backup";
+            // 
+            // mnsFileSep2
+            // 
+            this.mnsFileSep2.Name = "mnsFileSep2";
+            this.mnsFileSep2.Size = new System.Drawing.Size(189, 6);
             // 
             // FormMain
             // 
@@ -763,6 +781,8 @@
         private System.Windows.Forms.ComboBox cmbSelectedItem;
         private System.Windows.Forms.PictureBox picSelectedItem;
         private System.Windows.Forms.NumericUpDown nudSelectedItemQuantity;
+        private System.Windows.Forms.ToolStripMenuItem mnuFileBackup;
+        private System.Windows.Forms.ToolStripSeparator mnsFileSep2;
     }
 }
 
