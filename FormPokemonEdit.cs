@@ -4,6 +4,7 @@
 */
 
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Globalization;
 using System.Windows.Forms;
@@ -278,39 +279,30 @@ namespace Mightyena {
         }
 
         private void mnuEVRedist520_Click(object sender, EventArgs e) {
-            nudEVHP.Value = 0;
-            nudEVAttack.Value = 0;
-            nudEVDefense.Value = 0;
-            nudEVSpeed.Value = 0;
-            nudEVSpAttack.Value = 0;
-            nudEVSpDefense.Value = 0;
+            List<int> statlist = new List<int> {0, 1, 2, 3, 4, 5};
+            List<int> lottery = new List<int>(21);
+            int[] evs = new int[6];
 
-            int pointsLeft = 520;
-            while (pointsLeft > 0) {
-                pointsLeft--;
-
-                int stat = Utils.RandInt(0, 6);
-                switch (stat) {
-                    case 0:
-                        nudEVHP.Value++;
-                        break;
-                    case 1:
-                        nudEVAttack.Value++;
-                        break;
-                    case 2:
-                        nudEVDefense.Value++;
-                        break;
-                    case 3:
-                        nudEVSpeed.Value++;
-                        break;
-                    case 4:
-                        nudEVSpAttack.Value++;
-                        break;
-                    case 5:
-                        nudEVSpDefense.Value++;
-                        break;
-                }
+            // randomly prioritize stats
+            for (int i = 6; i > 0; i--) {
+                // get a random stat and give it a number of lots equal to i
+                int stat = statlist[Utils.RandInt(0, statlist.Count)];
+                for (int j = 0; j < i; j++) lottery.Add(stat);
+                // make sure this stat doesn't get picked again
+                statlist.Remove(stat);
             }
+
+            // now randomly assign 520 EV points using the lottery
+            for (int i = 0; i < 520; i++)
+                evs[lottery[Utils.RandInt(0, lottery.Count)]]++;
+
+            // and save the generated EVs
+            nudEVHP.Value = evs[0];
+            nudEVAttack.Value = evs[1];
+            nudEVDefense.Value = evs[2];
+            nudEVSpeed.Value = evs[3];
+            nudEVSpAttack.Value = evs[4];
+            nudEVSpDefense.Value = evs[5];
         }
 
         private void Save() {
