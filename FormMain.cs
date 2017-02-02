@@ -14,7 +14,10 @@ namespace Mightyena {
     public partial class FormMain : Form {
 
         private string saveFilePath;
+        private string saveFileShort;
+
         private bool dirty;
+        private bool canMakeDirty;
 
         private readonly ItemBox[] ItemBoxes;
 
@@ -58,8 +61,10 @@ namespace Mightyena {
             Close();
         }
 
-        private void OpenFile(string filename) {
+        private void OpenFile(string filename, string shortname) {
+            canMakeDirty = false;
             saveFilePath = filename;
+            saveFileShort = shortname;
 
             var format = CultureInfo.InvariantCulture.NumberFormat;
             Gen3Save sav = Gen3Save.FromFile(filename);
@@ -88,17 +93,23 @@ namespace Mightyena {
             tabs.Enabled = true;
             mnuFileSave.Enabled = false;
             mnuFileSaveAs.Enabled = true;
+            this.Text = saveFileShort + " - Mightyena";
+            canMakeDirty = true;
         }
 
         private void MakeDirty() {
+            if (!canMakeDirty) return;
+
             dirty = true;
             mnuFileSave.Enabled = true;
+            this.Text = "* " + saveFileShort + " - Mightyena";
         }
 
         private void SaveFile() {
             Gen3Save.Inst.Save(saveFilePath);
             mnuFileSave.Enabled = false;
             dirty = false;
+            this.Text = saveFileShort + " - Mightyena";
         }
 
         private void mnuHelpAbout_Click(object sender, EventArgs e) {
@@ -117,11 +128,15 @@ namespace Mightyena {
             // update editing controls
             Gen3Item item = ItemBoxes[ItemBox.Selection].Item;
             Debug.Assert(item != null, "ItemBox has null Gen3Item ref");
+            canMakeDirty = false;
+
             cmbSelectedItem.SelectedIndex = item.Index;
             nudSelectedItemQuantity.Value = item.Quantity;
             cmbSelectedItem.Enabled = true;
             nudSelectedItemQuantity.Enabled = true;
             picSelectedItem.Visible = true;
+
+            canMakeDirty = true;
         }
 
         private void PartyButton_Click(object sender, EventArgs e) {
@@ -223,7 +238,7 @@ namespace Mightyena {
 
         private void mnuFileLoad_Click(object sender, EventArgs e) {
             if (dlgOpen.ShowDialog() == DialogResult.OK)
-                OpenFile(dlgOpen.FileName);
+                OpenFile(dlgOpen.FileName, dlgOpen.SafeFileName);
         }
 
         private void mnuFileSave_Click(object sender, EventArgs e) {
@@ -243,16 +258,21 @@ namespace Mightyena {
 
         private void cmbSelectedItem_SelectedIndexChanged(object sender, EventArgs e) {
             // avoid making edits while changing item pages
-            if (!cmbSelectedItem.Enabled) return;
+            if (!canMakeDirty || !cmbSelectedItem.Enabled) return;
             // update item entry with new selection
             ItemBoxes[ItemBox.Selection].Item.Index = (ushort)cmbSelectedItem.SelectedIndex;
             ItemBoxes[ItemBox.Selection].Invalidate();
             picSelectedItem.Invalidate();
+            MakeDirty();
         }
 
         private void nudSelectedItemQuantity_ValueChanged(object sender, EventArgs e) {
+            // avoid making edits while changing item pages
+            if (!canMakeDirty || !cmbSelectedItem.Enabled) return;
+
             ItemBoxes[ItemBox.Selection].Item.Quantity = (ushort)nudSelectedItemQuantity.Value;
             ItemBoxes[ItemBox.Selection].Invalidate();
+            MakeDirty();
         }
 
         private void ShowBag(Gen3Item[] bag) {
