@@ -389,6 +389,19 @@ namespace Mightyena {
         }
 
         /// <summary>
+        /// Writes this <see cref="Gen3Pokemon"/> to a file on disk, which can later be loaded with FromFile.
+        /// </summary>
+        /// <param name="filename"></param>
+        public void Export(string filename) {
+            // make sure frame is up to date
+            Save();
+            // copy out this specific mon and save it
+            byte[] fileframe = new byte[80]; // always boxed
+            Buffer.BlockCopy(frame, offset, fileframe, 0, 80);
+            File.WriteAllBytes(filename, fileframe);
+        }
+
+        /// <summary>
         /// Copies the data of this Pokémon to the target.
         /// </summary>
         /// <param name="target">The Pokémon instance whose data to overwrite.</param>
