@@ -313,9 +313,7 @@ namespace Mightyena {
             }
         }
 
-        private void cmdAccept_Click(object sender, EventArgs e) {
-            // save all information back to the target Pokémon entry
-
+        private void Save() {
             Target.Nickname.SetValue(txtNickname.Text);
             Target.OTName.SetValue(txtTrainerName.Text);
 
@@ -377,6 +375,11 @@ namespace Mightyena {
             Target.OTID = currentOTID;
             Target.Personality = currentPVal;
             Target.Save();
+        }
+
+        private void cmdAccept_Click(object sender, EventArgs e) {
+            // save all information back to the target Pokémon entry
+            Save();
 
             DialogResult = DialogResult.OK;
             Close();
