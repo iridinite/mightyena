@@ -252,10 +252,6 @@ namespace Mightyena {
             SaveFile();
         }
 
-        private void MakeDirtyEventHandler(object sender, EventArgs e) {
-            MakeDirty();
-        }
-
         private void cmbSelectedItem_SelectedIndexChanged(object sender, EventArgs e) {
             // avoid making edits while changing item pages
             if (!canMakeDirty || !cmbSelectedItem.Enabled) return;
@@ -325,6 +321,54 @@ namespace Mightyena {
         private void picSelectedItem_Paint(object sender, PaintEventArgs e) {
             if (ItemBox.Selection > -1)
                 Utils.DrawItemIcon(e.Graphics, cmbSelectedItem.SelectedIndex, 0, 0);
+        }
+
+        private void txtName_TextChanged(object sender, EventArgs e) {
+            if (!canMakeDirty) return;
+            Gen3Save.Inst.Name.SetValue(txtName.Text);
+            MakeDirty();
+        }
+
+        private void cmbGender_SelectedIndexChanged(object sender, EventArgs e) {
+            if (!canMakeDirty) return;
+            Gen3Save.Inst.Gender = (byte)cmbGender.SelectedIndex;
+            MakeDirty();
+        }
+
+        private void txtTrainerID_TextChanged(object sender, EventArgs e) {
+            if (!canMakeDirty) return;
+
+            // either of the OT ID boxes lost focus, validate input and change ID if we can
+            ushort tid, sid;
+            var format = CultureInfo.InvariantCulture.NumberFormat;
+
+            if (ushort.TryParse(txtTrainerID.Text, NumberStyles.Integer, format, out tid)) {
+                txtTrainerID.BackColor = Color.White;
+
+                if (ushort.TryParse(txtSecretID.Text, NumberStyles.Integer, format, out sid)) {
+                    txtSecretID.BackColor = Color.White;
+                    Gen3Save.Inst.TrainerID = ((uint)sid << 16) | tid;
+                    MakeDirty();
+
+                } else {
+                    txtSecretID.BackColor = Color.IndianRed;
+                }
+
+            } else {
+                txtTrainerID.BackColor = Color.IndianRed;
+            }
+        }
+
+        private void nudMoney_ValueChanged(object sender, EventArgs e) {
+            if (!canMakeDirty) return;
+            Gen3Save.Inst.Money = (uint)nudMoney.Value;
+            MakeDirty();
+        }
+
+        private void nudCoins_ValueChanged(object sender, EventArgs e) {
+            if (!canMakeDirty) return;
+            Gen3Save.Inst.Coins = (ushort)nudCoins.Value;
+            MakeDirty();
         }
 
     }

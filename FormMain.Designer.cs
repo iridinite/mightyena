@@ -266,7 +266,7 @@
             this.nudCoins.Size = new System.Drawing.Size(136, 20);
             this.nudCoins.TabIndex = 18;
             this.nudCoins.ThousandsSeparator = true;
-            this.nudCoins.ValueChanged += new System.EventHandler(this.MakeDirtyEventHandler);
+            this.nudCoins.ValueChanged += new System.EventHandler(this.nudCoins_ValueChanged);
             // 
             // nudMoney
             // 
@@ -285,7 +285,7 @@
             this.nudMoney.Size = new System.Drawing.Size(136, 20);
             this.nudMoney.TabIndex = 17;
             this.nudMoney.ThousandsSeparator = true;
-            this.nudMoney.ValueChanged += new System.EventHandler(this.MakeDirtyEventHandler);
+            this.nudMoney.ValueChanged += new System.EventHandler(this.nudMoney_ValueChanged);
             // 
             // lblName
             // 
@@ -303,7 +303,7 @@
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(136, 20);
             this.txtName.TabIndex = 1;
-            this.txtName.TextChanged += new System.EventHandler(this.MakeDirtyEventHandler);
+            this.txtName.TextChanged += new System.EventHandler(this.txtName_TextChanged);
             // 
             // cmbGender
             // 
@@ -316,7 +316,7 @@
             this.cmbGender.Name = "cmbGender";
             this.cmbGender.Size = new System.Drawing.Size(136, 21);
             this.cmbGender.TabIndex = 4;
-            this.cmbGender.SelectedIndexChanged += new System.EventHandler(this.MakeDirtyEventHandler);
+            this.cmbGender.SelectedIndexChanged += new System.EventHandler(this.cmbGender_SelectedIndexChanged);
             // 
             // lblGender
             // 
@@ -352,7 +352,7 @@
             this.txtTrainerID.Name = "txtTrainerID";
             this.txtTrainerID.Size = new System.Drawing.Size(64, 20);
             this.txtTrainerID.TabIndex = 5;
-            this.txtTrainerID.TextChanged += new System.EventHandler(this.MakeDirtyEventHandler);
+            this.txtTrainerID.TextChanged += new System.EventHandler(this.txtTrainerID_TextChanged);
             // 
             // lblSecretID
             // 
@@ -379,7 +379,7 @@
             this.txtSecretID.Name = "txtSecretID";
             this.txtSecretID.Size = new System.Drawing.Size(64, 20);
             this.txtSecretID.TabIndex = 7;
-            this.txtSecretID.TextChanged += new System.EventHandler(this.MakeDirtyEventHandler);
+            this.txtSecretID.TextChanged += new System.EventHandler(this.txtTrainerID_TextChanged);
             // 
             // tbpBags
             // 
