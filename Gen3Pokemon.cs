@@ -5,6 +5,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 
 namespace Mightyena {
 
@@ -58,8 +59,8 @@ namespace Mightyena {
         private readonly byte[] frame;  // reference to the containing save section
         private readonly byte[] data;   // decrypted inner data
         private readonly int offset;
-        private readonly bool boxed;    // whether the entry is missing the last 20 bytes
-        private readonly SubstructureOrder order;
+        private bool boxed;             // whether the entry is missing the last 20 bytes
+        private SubstructureOrder order;
 
         /// <summary>
         /// The Pokémon's 32-bit personality value.
@@ -374,18 +375,32 @@ namespace Mightyena {
             this.frame = frame;
             this.offset = offset;
             this.boxed = boxed;
-            Nickname = Gen3String.Decode(frame, offset + 0x08, 10, Lang == Language.Japanese);
-            OTName = Gen3String.Decode(frame, offset + 0x14, 7, Lang == Language.Japanese);
+            this.data = new byte[48];
+            Decrypt();
+        }
 
-            // read the inner data section
-            uint cryptokey = OTID ^ Personality;
-            order = structOrders[(int)(Personality % 24)];
-            data = new byte[48];
-            for (int i = 0; i < 12; i++) {
-                // decrypt the data, 4 bytes at a time
-                uint decrypted = BitConverter.ToUInt32(frame, offset + 32 + i * 4) ^ cryptokey;
-                Buffer.BlockCopy(BitConverter.GetBytes(decrypted), 0, data, i * 4, 4);
-            }
+        /// <summary>
+        /// Parses a <see cref="Gen3Pokemon"/> from a .pkm file.
+        /// </summary>
+        /// <param name="filename">The path to the file.</param>
+        public static Gen3Pokemon FromFile(string filename) {
+            byte[] frame = File.ReadAllBytes(filename);
+            return new Gen3Pokemon(frame, 0, true);
+        }
+
+        /// <summary>
+        /// Copies the data of this Pokémon to the target.
+        /// </summary>
+        /// <param name="target">The Pokémon instance whose data to overwrite.</param>
+        public void CopyTo(Gen3Pokemon target) {
+            // make sure our frame is accurate
+            Save();
+
+            // copy frame and metadata
+            Buffer.BlockCopy(frame, offset, target.frame, target.offset, boxed ? 80 : 100);
+            target.boxed = this.boxed;
+            target.order = this.order;
+            target.Decrypt();
         }
 
         /// <summary>
@@ -399,6 +414,23 @@ namespace Mightyena {
         private static ushort CalculateStat(byte level, byte statbase, ushort iv, ushort ev, double nature) {
             double neutralstat = Math.Floor((2.0 * statbase + iv + Math.Floor(ev / 4.0)) * level / 100) + 5;
             return (ushort)Math.Floor(neutralstat * nature);
+        }
+
+        /// <summary>
+        /// Parses and decrypts the Pokémon entry.
+        /// </summary>
+        private void Decrypt() {
+            Nickname = Gen3String.Decode(frame, offset + 0x08, 10, Lang == Language.Japanese);
+            OTName = Gen3String.Decode(frame, offset + 0x14, 7, Lang == Language.Japanese);
+
+            // read the inner data section
+            uint cryptokey = OTID ^ Personality;
+            order = structOrders[(int)(Personality % 24)];
+            for (int i = 0; i < 12; i++) {
+                // decrypt the data, 4 bytes at a time
+                uint decrypted = BitConverter.ToUInt32(frame, offset + 32 + i * 4) ^ cryptokey;
+                Buffer.BlockCopy(BitConverter.GetBytes(decrypted), 0, data, i * 4, 4);
+            }
         }
 
         /// <summary>
