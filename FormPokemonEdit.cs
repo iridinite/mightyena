@@ -34,7 +34,7 @@ namespace Mightyena {
             cmbMove4.Items.AddRange(movelist);
         }
 
-        private void FormPokemonEdit_Load(object sender, System.EventArgs e) {
+        private void FormPokemonEdit_Load(object sender, EventArgs e) {
             // copy out all info on this 'mon and fill in the form
             this.Text = "Editing " + Target.Nickname;
 
@@ -137,7 +137,7 @@ namespace Mightyena {
             picSprite.Invalidate();
         }
 
-        private void txtPval_Leave(object sender, System.EventArgs e) {
+        private void txtPval_Leave(object sender, EventArgs e) {
             // validate info, if it's a valid uint, replace pval
             var format = CultureInfo.InvariantCulture.NumberFormat;
             if (uint.TryParse(txtPval.Text, NumberStyles.Integer, format, out currentPVal)) {
@@ -148,22 +148,22 @@ namespace Mightyena {
             }
         }
 
-        private void cmbSpecies_SelectedIndexChanged(object sender, System.EventArgs e) {
+        private void cmbSpecies_SelectedIndexChanged(object sender, EventArgs e) {
             if (init) return;
             UpdateDynamicStats();
         }
 
-        private void nudLevel_ValueChanged(object sender, System.EventArgs e) {
+        private void nudLevel_ValueChanged(object sender, EventArgs e) {
             if (init) return;
             nudExp.Value = Utils.GetExpForLevel(Target.Species.ExpGroup, (int)nudLevel.Value);
         }
 
-        private void nudExp_ValueChanged(object sender, System.EventArgs e) {
+        private void nudExp_ValueChanged(object sender, EventArgs e) {
             if (init) return;
             nudLevel.Value = Utils.GetLevelForExp(Target.Species.ExpGroup, (uint)nudExp.Value);
         }
 
-        private void cmdEditPval_Click(object sender, System.EventArgs e) {
+        private void cmdEditPval_Click(object sender, EventArgs e) {
             // show a dialog where the user can generate a PVal
             FormPval frm = new FormPval();
             frm.Species = Species.ByDexNumber((ushort)(cmbSpecies.SelectedIndex + 1));
@@ -175,7 +175,7 @@ namespace Mightyena {
             UpdateDynamicStats();
         }
 
-        private void OTBoxes_Leave(object sender, System.EventArgs e) {
+        private void OTBoxes_Leave(object sender, EventArgs e) {
             // either of the OT ID boxes lost focus, validate input and change ID if we can
             ushort tid, sid;
             var format = CultureInfo.InvariantCulture.NumberFormat;
@@ -197,7 +197,7 @@ namespace Mightyena {
             }
         }
 
-        private void cmdSetOT_Click(object sender, System.EventArgs e) {
+        private void cmdSetOT_Click(object sender, EventArgs e) {
             // set OT data to this save's trainer
             currentOTID = Gen3Save.Inst.TrainerID;
             txtTrainerName.Text = Gen3Save.Inst.Name;
@@ -205,17 +205,17 @@ namespace Mightyena {
             UpdateDynamicStats();
         }
 
-        private void cmdGenerateIV_Click(object sender, System.EventArgs e) {
+        private void cmdGenerateIV_Click(object sender, EventArgs e) {
             Button self = (Button)sender;
             cmsGenerateIV.Show(self, new Point(0, self.Size.Height));
         }
 
-        private void cmdGenerateEV_Click(object sender, System.EventArgs e) {
+        private void cmdGenerateEV_Click(object sender, EventArgs e) {
             Button self = (Button)sender;
             cmsGenerateEV.Show(self, new Point(0, self.Size.Height));
         }
 
-        private void mnuIV31_Click(object sender, System.EventArgs e) {
+        private void mnuIV31_Click(object sender, EventArgs e) {
             nudIVHP.Value = 31;
             nudIVAttack.Value = 31;
             nudIVDefense.Value = 31;
@@ -224,7 +224,7 @@ namespace Mightyena {
             nudIVSpDefense.Value = 31;
         }
 
-        private void mnuIV0_Click(object sender, System.EventArgs e) {
+        private void mnuIV0_Click(object sender, EventArgs e) {
             nudIVHP.Value = 0;
             nudIVAttack.Value = 0;
             nudIVDefense.Value = 0;
@@ -243,23 +243,23 @@ namespace Mightyena {
             nudIVSpDefense.Value = Utils.RandInt(min, max);
         }
 
-        private void mnuIVRandNatural_Click(object sender, System.EventArgs e) {
+        private void mnuIVRandNatural_Click(object sender, EventArgs e) {
             RandomizeIV(0, 31);
         }
 
-        private void mnuIVRandPoor_Click(object sender, System.EventArgs e) {
+        private void mnuIVRandPoor_Click(object sender, EventArgs e) {
             RandomizeIV(0, 12);
         }
 
-        private void mnuIVRandAverage_Click(object sender, System.EventArgs e) {
+        private void mnuIVRandAverage_Click(object sender, EventArgs e) {
             RandomizeIV(6, 24);
         }
 
-        private void mnuIVRandGood_Click(object sender, System.EventArgs e) {
+        private void mnuIVRandGood_Click(object sender, EventArgs e) {
             RandomizeIV(12, 31);
         }
 
-        private void mnuEV255_Click(object sender, System.EventArgs e) {
+        private void mnuEV255_Click(object sender, EventArgs e) {
             nudEVHP.Value = 255;
             nudEVAttack.Value = 255;
             nudEVDefense.Value = 255;
@@ -268,7 +268,7 @@ namespace Mightyena {
             nudEVSpDefense.Value = 255;
         }
 
-        private void mnuEV0_Click(object sender, System.EventArgs e) {
+        private void mnuEV0_Click(object sender, EventArgs e) {
             nudEVHP.Value = 0;
             nudEVAttack.Value = 0;
             nudEVDefense.Value = 0;
@@ -277,7 +277,7 @@ namespace Mightyena {
             nudEVSpDefense.Value = 0;
         }
 
-        private void mnuEVRedist520_Click(object sender, System.EventArgs e) {
+        private void mnuEVRedist520_Click(object sender, EventArgs e) {
             nudEVHP.Value = 0;
             nudEVAttack.Value = 0;
             nudEVDefense.Value = 0;

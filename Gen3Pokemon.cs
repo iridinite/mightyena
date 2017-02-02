@@ -44,7 +44,7 @@ namespace Mightyena {
         }
 
         // http://bulbapedia.bulbagarden.net/wiki/Pok%C3%A9mon_data_substructures_in_Generation_III#Substructure_order
-        private static readonly List<SubstructureOrder> structOrders = new List<SubstructureOrder>() {
+        private static readonly List<SubstructureOrder> structOrders = new List<SubstructureOrder> {
             new SubstructureOrder("GAEM"), new SubstructureOrder("GAME"), new SubstructureOrder("GEAM"),
             new SubstructureOrder("GEMA"), new SubstructureOrder("GMAE"), new SubstructureOrder("GMEA"),
             new SubstructureOrder("AGEM"), new SubstructureOrder("AGME"), new SubstructureOrder("AEGM"),

@@ -153,14 +153,14 @@ namespace Mightyena {
         }
 
         /// <summary>
-        /// Returns the Unicode <see cref="String"/> value of this <see cref="Gen3String"/>.
+        /// Returns the Unicode <see cref="string"/> value of this <see cref="Gen3String"/>.
         /// </summary>
         public static implicit operator string(Gen3String g3str) {
             return g3str.ToString();
         }
 
         /// <summary>
-        /// Returns the Unicode <see cref="String"/> value of this <see cref="Gen3String"/>.
+        /// Returns the Unicode <see cref="string"/> value of this <see cref="Gen3String"/>.
         /// </summary>
         public override string ToString() {
             return value;

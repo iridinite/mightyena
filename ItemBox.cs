@@ -3,6 +3,7 @@
  * (C) Mika Molenkamp, 2017.
 */
 
+using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
@@ -25,7 +26,7 @@ namespace Mightyena {
         public Gen3Item Item { get; set; }
         public int BoxNo { get; set; }
 
-        private bool hovering = false;
+        private bool hovering;
         private readonly Pen borderPen = new Pen(Color.DarkSlateGray);
         private readonly Font quantityFont = new Font(FontFamily.GenericSansSerif, 8f, FontStyle.Bold);
         private readonly Brush quantityBrush = new SolidBrush(Color.White);
@@ -71,17 +72,17 @@ namespace Mightyena {
             }
         }
 
-        private void ItemBox_MouseEnter(object sender, System.EventArgs e) {
+        private void ItemBox_MouseEnter(object sender, EventArgs e) {
             hovering = true;
             Invalidate();
         }
 
-        private void ItemBox_MouseLeave(object sender, System.EventArgs e) {
+        private void ItemBox_MouseLeave(object sender, EventArgs e) {
             hovering = false;
             Invalidate();
         }
 
-        private void ItemBox_Click(object sender, System.EventArgs e) {
+        private void ItemBox_Click(object sender, EventArgs e) {
             ItemClick?.Invoke(BoxNo);
             Invalidate();
         }

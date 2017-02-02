@@ -3,6 +3,7 @@
  * (C) Mika Molenkamp, 2017.
 */
 
+using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Windows.Forms;
@@ -18,7 +19,7 @@ namespace Mightyena {
             157, // Typhlosion
             172, // Pichu
             196, // Espeon
-            261, // Poochyena
+            261 // Poochyena
         };
 
         private readonly int chosenPokemon;
@@ -37,7 +38,7 @@ namespace Mightyena {
             Utils.DrawPokemonSprite(e.Graphics, chosenPokemon);
         }
 
-        private void cmdClose_Click(object sender, System.EventArgs e) {
+        private void cmdClose_Click(object sender, EventArgs e) {
             Close();
         }
 
