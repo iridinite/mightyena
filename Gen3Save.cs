@@ -320,9 +320,39 @@ namespace Mightyena {
         /// </summary>
         /// <param name="filename">The path to the save file.</param>
         public void Save(string filename) {
-            // TODO: write Trainer section
+            // --------- TRAINER section --------- //
+            byte[] trainerData = GetSection(SectionID.Trainer).data;
+            Name.Encode(trainerData, 0);
+            trainerData[0x0008] = Gender;
+            Buffer.BlockCopy(BitConverter.GetBytes(TrainerID), 0, trainerData, 0x000A, 4);
 
-            // copy box buffer back into the pc box sections
+            // convert the TimeSpan back to the ushort/byte/byte/byte format
+            Buffer.BlockCopy(BitConverter.GetBytes((ushort)TimePlayed.TotalHours), 0, trainerData, 0x000E, 2);
+            trainerData[0x0010] = (byte)TimePlayed.Minutes;
+            trainerData[0x0011] = (byte)TimePlayed.Seconds;
+            trainerData[0x0012] = (byte)(TimePlayed.Milliseconds * 60 / 1000);
+
+            // --------- TEAM section --------- //
+            byte[] teamData = GetSection(SectionID.Team).data;
+            switch (GameCode) { // games have different addresses
+                case GameVersion.RubySapphire:
+                    Buffer.BlockCopy(BitConverter.GetBytes(TeamSize), 0, teamData, 0x0234, 4);
+                    Buffer.BlockCopy(BitConverter.GetBytes(Money), 0, teamData, 0x0490, 4);
+                    Buffer.BlockCopy(BitConverter.GetBytes(Coins), 0, teamData, 0x0494, 2);
+                    break;
+                case GameVersion.FireRedLeafGreen:
+                    Buffer.BlockCopy(BitConverter.GetBytes(TeamSize), 0, teamData, 0x0034, 4);
+                    Buffer.BlockCopy(BitConverter.GetBytes(Money ^ SecurityKey), 0, teamData, 0x0290, 4);
+                    Buffer.BlockCopy(BitConverter.GetBytes((ushort)(Coins ^ SecurityKey)), 0, teamData, 0x0294, 2);
+                    break;
+                case GameVersion.Emerald:
+                    Buffer.BlockCopy(BitConverter.GetBytes(TeamSize), 0, teamData, 0x0234, 4);
+                    Buffer.BlockCopy(BitConverter.GetBytes(Money ^ SecurityKey), 0, teamData, 0x0490, 4);
+                    Buffer.BlockCopy(BitConverter.GetBytes((ushort)(Coins ^ SecurityKey)), 0, teamData, 0x0494, 2);
+                    break;
+            }
+
+            // --------- PC BOX sections --------- //
             int boxoffset = 0;
             for (SectionID sid = SectionID.PCBoxA; sid <= SectionID.PCBoxI; sid++) {
                 Section boxsection = GetSection(sid);
