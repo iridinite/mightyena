@@ -71,13 +71,14 @@
             this.mnuFileSave = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuFileSaveAs = new System.Windows.Forms.ToolStripMenuItem();
             this.mnsFileSep1 = new System.Windows.Forms.ToolStripSeparator();
+            this.mnuFileBackup = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnsFileSep2 = new System.Windows.Forms.ToolStripSeparator();
             this.mnuFileExit = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuHelp = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuHelpAbout = new System.Windows.Forms.ToolStripMenuItem();
             this.dlgOpen = new System.Windows.Forms.OpenFileDialog();
             this.dlgSaveAs = new System.Windows.Forms.SaveFileDialog();
-            this.mnuFileBackup = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnsFileSep2 = new System.Windows.Forms.ToolStripSeparator();
+            this.dlgImport = new System.Windows.Forms.OpenFileDialog();
             this.tabs.SuspendLayout();
             this.tbpGeneral.SuspendLayout();
             this.fraParty.SuspendLayout();
@@ -646,6 +647,20 @@
             this.mnsFileSep1.Name = "mnsFileSep1";
             this.mnsFileSep1.Size = new System.Drawing.Size(189, 6);
             // 
+            // mnuFileBackup
+            // 
+            this.mnuFileBackup.Checked = true;
+            this.mnuFileBackup.CheckOnClick = true;
+            this.mnuFileBackup.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.mnuFileBackup.Name = "mnuFileBackup";
+            this.mnuFileBackup.Size = new System.Drawing.Size(192, 22);
+            this.mnuFileBackup.Text = "Auto Backup";
+            // 
+            // mnsFileSep2
+            // 
+            this.mnsFileSep2.Name = "mnsFileSep2";
+            this.mnsFileSep2.Size = new System.Drawing.Size(189, 6);
+            // 
             // mnuFileExit
             // 
             this.mnuFileExit.Name = "mnuFileExit";
@@ -664,7 +679,7 @@
             // mnuHelpAbout
             // 
             this.mnuHelpAbout.Name = "mnuHelpAbout";
-            this.mnuHelpAbout.Size = new System.Drawing.Size(152, 22);
+            this.mnuHelpAbout.Size = new System.Drawing.Size(116, 22);
             this.mnuHelpAbout.Text = "About...";
             this.mnuHelpAbout.Click += new System.EventHandler(this.mnuHelpAbout_Click);
             // 
@@ -678,19 +693,10 @@
             this.dlgSaveAs.Filter = "Battery Save Files (*.sav)|*.sav";
             this.dlgSaveAs.Title = "Save Battery As";
             // 
-            // mnuFileBackup
+            // dlgImport
             // 
-            this.mnuFileBackup.Checked = true;
-            this.mnuFileBackup.CheckOnClick = true;
-            this.mnuFileBackup.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.mnuFileBackup.Name = "mnuFileBackup";
-            this.mnuFileBackup.Size = new System.Drawing.Size(192, 22);
-            this.mnuFileBackup.Text = "Auto Backup";
-            // 
-            // mnsFileSep2
-            // 
-            this.mnsFileSep2.Name = "mnsFileSep2";
-            this.mnsFileSep2.Size = new System.Drawing.Size(189, 6);
+            this.dlgImport.Filter = "Pokémon Data Files (*.pkm)|*.pkm";
+            this.dlgImport.Title = "Import Pokémon into Empty Slot";
             // 
             // FormMain
             // 
@@ -783,6 +789,7 @@
         private System.Windows.Forms.NumericUpDown nudSelectedItemQuantity;
         private System.Windows.Forms.ToolStripMenuItem mnuFileBackup;
         private System.Windows.Forms.ToolStripSeparator mnsFileSep2;
+        private System.Windows.Forms.OpenFileDialog dlgImport;
     }
 }
 

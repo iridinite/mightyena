@@ -117,6 +117,31 @@ namespace Mightyena {
             this.Text = saveFileShort + " - Mightyena";
         }
 
+        private bool EditPokemon(Gen3Pokemon mon) {
+            if (mon.Exists) {
+                // edit an existing 'mon slot
+                FormPokemonEdit frm = new FormPokemonEdit(mon);
+                if (frm.ShowDialog() != DialogResult.OK) return false;
+
+                // copy the edited pokemon
+                frm.Target.CopyTo(mon);
+            } else {
+                // this slot is empty, user can import a file into the slot
+                if (dlgImport.ShowDialog() != DialogResult.OK) return false;
+
+                Gen3Pokemon tempmon = Gen3Pokemon.FromFile(dlgImport.FileName);
+                if (tempmon == null) return false;
+
+                FormPokemonEdit frm = new FormPokemonEdit(tempmon);
+                if (frm.ShowDialog() != DialogResult.OK) return false;
+
+                // copy the edited pokemon to the real box slot
+                frm.Target.CopyTo(mon);
+            }
+
+            return true;
+        }
+
         private void mnuHelpAbout_Click(object sender, EventArgs e) {
             FormAbout frm = new FormAbout();
             frm.ShowDialog();
@@ -148,12 +173,8 @@ namespace Mightyena {
         private void PartyButton_Click(object sender, EventArgs e) {
             Button self = (Button)sender;
             int partyIndex = int.Parse((string)self.Tag);
-
-            Gen3Pokemon mon = Gen3Save.Inst.Team[partyIndex];
-            FormPokemonEdit frm = new FormPokemonEdit(mon);
-            if (frm.ShowDialog() == DialogResult.OK) {
-                // copy the edited pokemon
-                frm.Target.CopyTo(mon);
+            
+            if (EditPokemon(Gen3Save.Inst.Team[partyIndex])) {
                 // refresh form
                 self.Invalidate();
                 MakeDirty();
@@ -212,11 +233,7 @@ namespace Mightyena {
             int index = (int)self.Tag;
             int boxNo = (int)nudBoxActive.Value;
 
-            Gen3Pokemon mon = Gen3Save.Inst.Box[(boxNo - 1) * 30 + index];
-            FormPokemonEdit frm = new FormPokemonEdit(mon);
-            if (frm.ShowDialog() == DialogResult.OK) {
-                // copy the edited pokemon
-                frm.Target.CopyTo(mon);
+            if (EditPokemon(Gen3Save.Inst.Box[(boxNo - 1) * 30 + index])) {
                 // refresh form
                 self.Invalidate();
                 MakeDirty();
