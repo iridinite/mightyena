@@ -14,7 +14,7 @@ namespace Mightyena {
     public partial class FormPokemonEdit : Form {
 
         public Gen3Pokemon Target { get; }
-        
+
         private bool init;
 
         public FormPokemonEdit(Gen3Pokemon editTarget) {
@@ -40,7 +40,20 @@ namespace Mightyena {
         private void FormPokemonEdit_Load(object sender, EventArgs e) {
             // copy out all info on this 'mon and fill in the form
             this.Text = "Editing " + Target.Nickname;
+            UpdateEverything();
+            init = false;
+        }
 
+        private void picSprite_Paint(object sender, PaintEventArgs e) {
+            // draw species sprite
+            Utils.DrawPokemonSprite(e.Graphics, cmbSpecies.SelectedIndex + 1, Utils.GetIsShiny(Target.OTID, Target.Personality));
+        }
+
+        private void picItem_Paint(object sender, PaintEventArgs e) {
+            Utils.DrawItemIcon(e.Graphics, cmbItem.SelectedIndex, 0, 0);
+        }
+
+        private void UpdateEverything() {
             txtNickname.Text = Target.Nickname;
             txtTrainerName.Text = Target.OTName;
             cmbTrainerGender.SelectedIndex = (Target.Origins & 0x8000) >> 15;
@@ -95,19 +108,8 @@ namespace Mightyena {
             nudPokerusStrain.Value = Target.PokeRus & 0xF;
             nudPokerusDays.Value = (Target.PokeRus & 0xF0) >> 4;
             Pokerus_ValueChanged(null, EventArgs.Empty); // make sure the text is updated
-            
+
             UpdateDynamicStats();
-
-            init = false;
-        }
-
-        private void picSprite_Paint(object sender, PaintEventArgs e) {
-            // draw species sprite
-            Utils.DrawPokemonSprite(e.Graphics, cmbSpecies.SelectedIndex + 1, Utils.GetIsShiny(Target.OTID, Target.Personality));
-        }
-
-        private void picItem_Paint(object sender, PaintEventArgs e) {
-            Utils.DrawItemIcon(e.Graphics, cmbItem.SelectedIndex, 0, 0);
         }
 
         private void UpdateDynamicStats() {
@@ -406,6 +408,29 @@ namespace Mightyena {
             cmbItem.SelectionStart = 0;
             cmbItem.SelectionLength = 0;
             picItem.Invalidate();
+        }
+
+        private void cmdImport_Click(object sender, EventArgs e) {
+            // user picks a file
+            if (dlgImport.ShowDialog() != DialogResult.OK) return;
+
+            // read the pkm file and replace the edit target
+            var filemon = Gen3Pokemon.FromFile(dlgImport.FileName);
+            filemon.CopyTo(Target);
+            Target.Save(); // recalculate stats
+
+            // refresh all UI elements
+            init = true;
+            UpdateEverything();
+            init = false;
+        }
+
+        private void cmdExport_Click(object sender, EventArgs e) {
+            // user picks a save location
+            if (dlgExport.ShowDialog() != DialogResult.OK) return;
+
+            // write the editing target to disk
+            Target.Export(dlgExport.FileName);
         }
 
     }

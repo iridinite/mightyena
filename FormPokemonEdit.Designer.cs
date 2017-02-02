@@ -142,6 +142,10 @@
             this.cmdCancel = new System.Windows.Forms.Button();
             this.picSprite = new System.Windows.Forms.PictureBox();
             this.picItem = new System.Windows.Forms.PictureBox();
+            this.cmdImport = new System.Windows.Forms.Button();
+            this.cmdExport = new System.Windows.Forms.Button();
+            this.dlgImport = new System.Windows.Forms.OpenFileDialog();
+            this.dlgExport = new System.Windows.Forms.SaveFileDialog();
             this.fraOT.SuspendLayout();
             this.fraPVal.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudLevel)).BeginInit();
@@ -446,7 +450,7 @@
             // lblLanguage
             // 
             this.lblLanguage.AutoSize = true;
-            this.lblLanguage.Location = new System.Drawing.Point(248, 16);
+            this.lblLanguage.Location = new System.Drawing.Point(192, 64);
             this.lblLanguage.Name = "lblLanguage";
             this.lblLanguage.Size = new System.Drawing.Size(58, 13);
             this.lblLanguage.TabIndex = 21;
@@ -463,9 +467,9 @@
             "Italian",
             "German",
             "Spanish"});
-            this.cmbLanguage.Location = new System.Drawing.Point(248, 32);
+            this.cmbLanguage.Location = new System.Drawing.Point(192, 80);
             this.cmbLanguage.Name = "cmbLanguage";
-            this.cmbLanguage.Size = new System.Drawing.Size(128, 21);
+            this.cmbLanguage.Size = new System.Drawing.Size(88, 21);
             this.cmbLanguage.TabIndex = 20;
             // 
             // lblItem
@@ -488,14 +492,14 @@
             // 
             // nudLevel
             // 
-            this.nudLevel.Location = new System.Drawing.Point(384, 32);
+            this.nudLevel.Location = new System.Drawing.Point(248, 32);
             this.nudLevel.Minimum = new decimal(new int[] {
             1,
             0,
             0,
             0});
             this.nudLevel.Name = "nudLevel";
-            this.nudLevel.Size = new System.Drawing.Size(88, 20);
+            this.nudLevel.Size = new System.Drawing.Size(48, 20);
             this.nudLevel.TabIndex = 26;
             this.nudLevel.Value = new decimal(new int[] {
             1,
@@ -507,7 +511,7 @@
             // lblLevel
             // 
             this.lblLevel.AutoSize = true;
-            this.lblLevel.Location = new System.Drawing.Point(384, 16);
+            this.lblLevel.Location = new System.Drawing.Point(248, 16);
             this.lblLevel.Name = "lblLevel";
             this.lblLevel.Size = new System.Drawing.Size(36, 13);
             this.lblLevel.TabIndex = 27;
@@ -516,7 +520,7 @@
             // lblExp
             // 
             this.lblExp.AutoSize = true;
-            this.lblExp.Location = new System.Drawing.Point(384, 56);
+            this.lblExp.Location = new System.Drawing.Point(304, 16);
             this.lblExp.Name = "lblExp";
             this.lblExp.Size = new System.Drawing.Size(63, 13);
             this.lblExp.TabIndex = 29;
@@ -529,14 +533,14 @@
             0,
             0,
             0});
-            this.nudExp.Location = new System.Drawing.Point(384, 72);
+            this.nudExp.Location = new System.Drawing.Point(304, 32);
             this.nudExp.Maximum = new decimal(new int[] {
             1700000,
             0,
             0,
             0});
             this.nudExp.Name = "nudExp";
-            this.nudExp.Size = new System.Drawing.Size(88, 20);
+            this.nudExp.Size = new System.Drawing.Size(72, 20);
             this.nudExp.TabIndex = 28;
             this.nudExp.ThousandsSeparator = true;
             this.nudExp.ValueChanged += new System.EventHandler(this.nudExp_ValueChanged);
@@ -625,7 +629,7 @@
             // 
             this.nudPP4.Location = new System.Drawing.Point(168, 104);
             this.nudPP4.Maximum = new decimal(new int[] {
-            50,
+            99,
             0,
             0,
             0});
@@ -637,7 +641,7 @@
             // 
             this.nudPP3.Location = new System.Drawing.Point(168, 80);
             this.nudPP3.Maximum = new decimal(new int[] {
-            50,
+            99,
             0,
             0,
             0});
@@ -649,7 +653,7 @@
             // 
             this.nudPP2.Location = new System.Drawing.Point(168, 56);
             this.nudPP2.Maximum = new decimal(new int[] {
-            50,
+            99,
             0,
             0,
             0});
@@ -661,7 +665,7 @@
             // 
             this.nudPP1.Location = new System.Drawing.Point(168, 32);
             this.nudPP1.Maximum = new decimal(new int[] {
-            50,
+            99,
             0,
             0,
             0});
@@ -1109,6 +1113,8 @@
             this.fraOrigins.Controls.Add(this.lblGameOfOrigin);
             this.fraOrigins.Controls.Add(this.cmbPokeBall);
             this.fraOrigins.Controls.Add(this.lblPokeBall);
+            this.fraOrigins.Controls.Add(this.cmbLanguage);
+            this.fraOrigins.Controls.Add(this.lblLanguage);
             this.fraOrigins.Location = new System.Drawing.Point(184, 480);
             this.fraOrigins.Name = "fraOrigins";
             this.fraOrigins.Size = new System.Drawing.Size(288, 144);
@@ -1119,7 +1125,7 @@
             // lblLevelMet
             // 
             this.lblLevelMet.AutoSize = true;
-            this.lblLevelMet.Location = new System.Drawing.Point(200, 64);
+            this.lblLevelMet.Location = new System.Drawing.Point(224, 16);
             this.lblLevelMet.Name = "lblLevelMet";
             this.lblLevelMet.Size = new System.Drawing.Size(57, 13);
             this.lblLevelMet.TabIndex = 29;
@@ -1138,14 +1144,14 @@
             // 
             // nudLevelMet
             // 
-            this.nudLevelMet.Location = new System.Drawing.Point(200, 80);
+            this.nudLevelMet.Location = new System.Drawing.Point(224, 32);
             this.nudLevelMet.Minimum = new decimal(new int[] {
             1,
             0,
             0,
             0});
             this.nudLevelMet.Name = "nudLevelMet";
-            this.nudLevelMet.Size = new System.Drawing.Size(80, 20);
+            this.nudLevelMet.Size = new System.Drawing.Size(56, 20);
             this.nudLevelMet.TabIndex = 28;
             this.nudLevelMet.Value = new decimal(new int[] {
             1,
@@ -1159,7 +1165,7 @@
             this.cmbMetLocation.FormattingEnabled = true;
             this.cmbMetLocation.Location = new System.Drawing.Point(8, 80);
             this.cmbMetLocation.Name = "cmbMetLocation";
-            this.cmbMetLocation.Size = new System.Drawing.Size(184, 21);
+            this.cmbMetLocation.Size = new System.Drawing.Size(176, 21);
             this.cmbMetLocation.TabIndex = 25;
             // 
             // lblMetLocation
@@ -1183,15 +1189,15 @@
             "FireRed",
             "LeafGreen",
             "Colosseum / XD"});
-            this.cmbGameOfOrigin.Location = new System.Drawing.Point(136, 32);
+            this.cmbGameOfOrigin.Location = new System.Drawing.Point(104, 32);
             this.cmbGameOfOrigin.Name = "cmbGameOfOrigin";
-            this.cmbGameOfOrigin.Size = new System.Drawing.Size(144, 21);
+            this.cmbGameOfOrigin.Size = new System.Drawing.Size(112, 21);
             this.cmbGameOfOrigin.TabIndex = 23;
             // 
             // lblGameOfOrigin
             // 
             this.lblGameOfOrigin.AutoSize = true;
-            this.lblGameOfOrigin.Location = new System.Drawing.Point(136, 16);
+            this.lblGameOfOrigin.Location = new System.Drawing.Point(104, 16);
             this.lblGameOfOrigin.Name = "lblGameOfOrigin";
             this.lblGameOfOrigin.Size = new System.Drawing.Size(80, 13);
             this.lblGameOfOrigin.TabIndex = 22;
@@ -1216,7 +1222,7 @@
             "Premier Ball"});
             this.cmbPokeBall.Location = new System.Drawing.Point(8, 32);
             this.cmbPokeBall.Name = "cmbPokeBall";
-            this.cmbPokeBall.Size = new System.Drawing.Size(120, 21);
+            this.cmbPokeBall.Size = new System.Drawing.Size(88, 21);
             this.cmbPokeBall.TabIndex = 21;
             // 
             // lblPokeBall
@@ -1288,7 +1294,7 @@
             // cmdRibbons
             // 
             this.cmdRibbons.Enabled = false;
-            this.cmdRibbons.Location = new System.Drawing.Point(32, 632);
+            this.cmdRibbons.Location = new System.Drawing.Point(32, 640);
             this.cmdRibbons.Name = "cmdRibbons";
             this.cmdRibbons.Size = new System.Drawing.Size(120, 24);
             this.cmdRibbons.TabIndex = 31;
@@ -1400,7 +1406,7 @@
             // button1
             // 
             this.button1.Enabled = false;
-            this.button1.Location = new System.Drawing.Point(32, 600);
+            this.button1.Location = new System.Drawing.Point(32, 608);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(120, 24);
             this.button1.TabIndex = 32;
@@ -1451,6 +1457,40 @@
             this.picItem.TabStop = false;
             this.picItem.Paint += new System.Windows.Forms.PaintEventHandler(this.picItem_Paint);
             // 
+            // cmdImport
+            // 
+            this.cmdImport.Image = global::Mightyena.Properties.Resources.open;
+            this.cmdImport.Location = new System.Drawing.Point(392, 24);
+            this.cmdImport.Name = "cmdImport";
+            this.cmdImport.Size = new System.Drawing.Size(80, 24);
+            this.cmdImport.TabIndex = 35;
+            this.cmdImport.Text = "Import...";
+            this.cmdImport.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.cmdImport.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.cmdImport.UseVisualStyleBackColor = true;
+            this.cmdImport.Click += new System.EventHandler(this.cmdImport_Click);
+            // 
+            // cmdExport
+            // 
+            this.cmdExport.Image = global::Mightyena.Properties.Resources.save;
+            this.cmdExport.Location = new System.Drawing.Point(392, 56);
+            this.cmdExport.Name = "cmdExport";
+            this.cmdExport.Size = new System.Drawing.Size(80, 24);
+            this.cmdExport.TabIndex = 36;
+            this.cmdExport.Text = "Export...";
+            this.cmdExport.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.cmdExport.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.cmdExport.UseVisualStyleBackColor = true;
+            this.cmdExport.Click += new System.EventHandler(this.cmdExport_Click);
+            // 
+            // dlgImport
+            // 
+            this.dlgImport.Filter = "Pokémon Data Files (*.pkm)|*.pkm";
+            // 
+            // dlgExport
+            // 
+            this.dlgExport.Filter = "Pokémon Data Files (*.pkm)|*.pkm";
+            // 
             // FormPokemonEdit
             // 
             this.AcceptButton = this.cmdAccept;
@@ -1458,6 +1498,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.cmdCancel;
             this.ClientSize = new System.Drawing.Size(489, 689);
+            this.Controls.Add(this.cmdExport);
+            this.Controls.Add(this.cmdImport);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.cmdRibbons);
             this.Controls.Add(this.fraPokerus);
@@ -1472,8 +1514,6 @@
             this.Controls.Add(this.cmdAccept);
             this.Controls.Add(this.lblItem);
             this.Controls.Add(this.cmbItem);
-            this.Controls.Add(this.lblLanguage);
-            this.Controls.Add(this.cmbLanguage);
             this.Controls.Add(this.fraPVal);
             this.Controls.Add(this.fraOT);
             this.Controls.Add(this.lblSpecies);
@@ -1653,5 +1693,9 @@
         private System.Windows.Forms.CheckBox chkMark1;
         private System.Windows.Forms.CheckBox chkMark0;
         private System.Windows.Forms.PictureBox picItem;
+        private System.Windows.Forms.Button cmdImport;
+        private System.Windows.Forms.Button cmdExport;
+        private System.Windows.Forms.OpenFileDialog dlgImport;
+        private System.Windows.Forms.SaveFileDialog dlgExport;
     }
 }
