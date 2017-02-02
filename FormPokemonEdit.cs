@@ -13,16 +13,18 @@ namespace Mightyena {
 
     public partial class FormPokemonEdit : Form {
 
-        public Gen3Pokemon Target { get; set; }
-
-        private uint currentOTID;
-        private uint currentPVal;
-
+        public Gen3Pokemon Target { get; }
+        
         private bool init;
 
-        public FormPokemonEdit() {
+        public FormPokemonEdit(Gen3Pokemon editTarget) {
             init = true;
             InitializeComponent();
+
+            // copy the target pokemon so we can freely change stats without affecting the original
+            byte[] targetFrame = new byte[100];
+            Target = new Gen3Pokemon(targetFrame, 0, false);
+            editTarget.CopyTo(Target);
 
             // initialize comboboxes with lists of possible items
             object[] movelist = Utils.MoveNames.ToArray();
@@ -93,9 +95,7 @@ namespace Mightyena {
             nudPokerusStrain.Value = Target.PokeRus & 0xF;
             nudPokerusDays.Value = (Target.PokeRus & 0xF0) >> 4;
             Pokerus_ValueChanged(null, EventArgs.Empty); // make sure the text is updated
-
-            currentOTID = Target.OTID;
-            currentPVal = Target.Personality;
+            
             UpdateDynamicStats();
 
             init = false;
@@ -103,7 +103,7 @@ namespace Mightyena {
 
         private void picSprite_Paint(object sender, PaintEventArgs e) {
             // draw species sprite
-            Utils.DrawPokemonSprite(e.Graphics, cmbSpecies.SelectedIndex + 1, Utils.GetIsShiny(currentOTID, currentPVal));
+            Utils.DrawPokemonSprite(e.Graphics, cmbSpecies.SelectedIndex + 1, Utils.GetIsShiny(Target.OTID, Target.Personality));
         }
 
         private void picItem_Paint(object sender, PaintEventArgs e) {
@@ -113,9 +113,9 @@ namespace Mightyena {
         private void UpdateDynamicStats() {
             // update OT and Pval
             var format = CultureInfo.InvariantCulture.NumberFormat;
-            txtTrainerID.Text = (currentOTID & 0xFFFF).ToString("D5", format);
-            txtSecretID.Text = ((currentOTID & 0xFFFF0000) >> 16).ToString("D5", format);
-            txtPval.Text = currentPVal.ToString("D10", format);
+            txtTrainerID.Text = (Target.OTID & 0xFFFF).ToString("D5", format);
+            txtSecretID.Text = ((Target.OTID & 0xFFFF0000) >> 16).ToString("D5", format);
+            txtPval.Text = Target.Personality.ToString("D10", format);
 
             // calculate gender based on gender ratio
             byte genderRatio = Species.ByDexNumber((ushort)(cmbSpecies.SelectedIndex + 1)).GenderRatio;
@@ -126,13 +126,13 @@ namespace Mightyena {
             } else if (genderRatio == 255) {
                 lblGender.Text = "Genderless";
             } else {
-                lblGender.Text = (currentPVal & 0xFF) >= genderRatio ? "Male" : "Female";
+                lblGender.Text = (Target.Personality & 0xFF) >= genderRatio ? "Male" : "Female";
             }
 
             // update info
-            lblAbility.Text = (currentPVal & 0x1) == 0 ? "Primary" : "Secondary";
-            lblShiny.Text = Utils.GetIsShiny(currentOTID, currentPVal) ? "Yes" : "No";
-            lblNature.Text = Utils.NatureNames[(int)(currentPVal % 25)];
+            lblAbility.Text = (Target.Personality & 0x1) == 0 ? "Primary" : "Secondary";
+            lblShiny.Text = Utils.GetIsShiny(Target.OTID, Target.Personality) ? "Yes" : "No";
+            lblNature.Text = Utils.NatureNames[(int)(Target.Personality % 25)];
 
             // redraw picture, shiny state may have changed
             picSprite.Invalidate();
@@ -140,8 +140,10 @@ namespace Mightyena {
 
         private void txtPval_Leave(object sender, EventArgs e) {
             // validate info, if it's a valid uint, replace pval
+            uint pval;
             var format = CultureInfo.InvariantCulture.NumberFormat;
-            if (uint.TryParse(txtPval.Text, NumberStyles.Integer, format, out currentPVal)) {
+            if (uint.TryParse(txtPval.Text, NumberStyles.Integer, format, out pval)) {
+                Target.Personality = pval;
                 txtPval.BackColor = Color.White;
                 UpdateDynamicStats();
             } else {
@@ -168,11 +170,11 @@ namespace Mightyena {
             // show a dialog where the user can generate a PVal
             FormPval frm = new FormPval();
             frm.Species = Species.ByDexNumber((ushort)(cmbSpecies.SelectedIndex + 1));
-            frm.OTID = currentOTID;
-            frm.PVal = currentPVal;
+            frm.OTID = Target.OTID;
+            frm.PVal = Target.Personality;
 
             if (frm.ShowDialog() != DialogResult.OK) return;
-            currentPVal = frm.PVal;
+            Target.Personality = frm.PVal;
             UpdateDynamicStats();
         }
 
@@ -186,7 +188,7 @@ namespace Mightyena {
 
                 if (ushort.TryParse(txtSecretID.Text, NumberStyles.Integer, format, out sid)) {
                     txtSecretID.BackColor = Color.White;
-                    currentOTID = ((uint)sid << 16) | tid;
+                    Target.OTID = ((uint)sid << 16) | tid;
                     UpdateDynamicStats();
 
                 } else {
@@ -200,7 +202,7 @@ namespace Mightyena {
 
         private void cmdSetOT_Click(object sender, EventArgs e) {
             // set OT data to this save's trainer
-            currentOTID = Gen3Save.Inst.TrainerID;
+            Target.OTID = Gen3Save.Inst.TrainerID;
             txtTrainerName.Text = Gen3Save.Inst.Name;
             cmbTrainerGender.SelectedIndex = Gen3Save.Inst.Gender;
             UpdateDynamicStats();
@@ -279,7 +281,7 @@ namespace Mightyena {
         }
 
         private void mnuEVRedist520_Click(object sender, EventArgs e) {
-            List<int> statlist = new List<int> {0, 1, 2, 3, 4, 5};
+            List<int> statlist = new List<int> { 0, 1, 2, 3, 4, 5 };
             List<int> lottery = new List<int>(21);
             int[] evs = new int[6];
 
@@ -359,13 +361,13 @@ namespace Mightyena {
 
             Target.FatefulEncounter = chkFatefulEncounter.Checked;
             Target.Genes = (Target.Genes & ~0xC0000000)
-                           | ((currentPVal & 0x1) << 31) // ability flag
+                           | ((Target.Personality & 0x1) << 31) // ability flag
                            | ((chkEgg.Checked ? 1U : 0U) << 30); // egg flag
 
             Target.PokeRus = (byte)((int)nudPokerusStrain.Value | ((int)nudPokerusDays.Value << 4));
 
-            Target.OTID = currentOTID;
-            Target.Personality = currentPVal;
+            Target.OTID = Target.OTID;
+            Target.Personality = Target.Personality;
             Target.Save();
         }
 

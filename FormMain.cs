@@ -128,9 +128,12 @@ namespace Mightyena {
             Button self = (Button)sender;
             int partyIndex = int.Parse((string)self.Tag);
 
-            FormPokemonEdit frm = new FormPokemonEdit();
-            frm.Target = Gen3Save.Inst.Team[partyIndex];
+            Gen3Pokemon mon = Gen3Save.Inst.Team[partyIndex];
+            FormPokemonEdit frm = new FormPokemonEdit(mon);
             if (frm.ShowDialog() == DialogResult.OK) {
+                // copy the edited pokemon
+                frm.Target.CopyTo(mon);
+                // refresh form
                 self.Invalidate();
                 MakeDirty();
             }
@@ -188,9 +191,12 @@ namespace Mightyena {
             int index = (int)self.Tag;
             int boxNo = (int)nudBoxActive.Value;
 
-            FormPokemonEdit frm = new FormPokemonEdit();
-            frm.Target = Gen3Save.Inst.Box[(boxNo - 1) * 30 + index];
+            Gen3Pokemon mon = Gen3Save.Inst.Box[(boxNo - 1) * 30 + index];
+            FormPokemonEdit frm = new FormPokemonEdit(mon);
             if (frm.ShowDialog() == DialogResult.OK) {
+                // copy the edited pokemon
+                frm.Target.CopyTo(mon);
+                // refresh form
                 self.Invalidate();
                 MakeDirty();
             }
