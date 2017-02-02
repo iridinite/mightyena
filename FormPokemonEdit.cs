@@ -368,8 +368,6 @@ namespace Mightyena {
 
             Target.PokeRus = (byte)((int)nudPokerusStrain.Value | ((int)nudPokerusDays.Value << 4));
 
-            Target.OTID = Target.OTID;
-            Target.Personality = Target.Personality;
             Target.Save();
         }
 
