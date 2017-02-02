@@ -140,6 +140,7 @@ namespace Mightyena {
             cmbSelectedItem.Enabled = true;
             nudSelectedItemQuantity.Enabled = true;
             picSelectedItem.Visible = true;
+            picSelectedItem.Invalidate();
 
             canMakeDirty = true;
         }
