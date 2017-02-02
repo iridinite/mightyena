@@ -411,7 +411,9 @@ namespace Mightyena {
 
             // copy frame and metadata
             Buffer.BlockCopy(frame, offset, target.frame, target.offset, boxed ? 80 : 100);
-            target.boxed = this.boxed;
+            // fixed: don't change boxed on target, because this will cause pkm imported
+            // as party pokemon to not update their footer on save, causing game glitches
+            //target.boxed = this.boxed;
             target.order = this.order;
             target.Decrypt();
         }
