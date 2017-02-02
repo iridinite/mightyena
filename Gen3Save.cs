@@ -71,14 +71,14 @@ namespace Mightyena {
             /// <summary>
             /// Recalculates the checksum field.
             /// </summary>
-            public void CalculateChecksum() {
+            public ushort GetChecksum() {
                 // http://bulbapedia.bulbagarden.net/wiki/Save_data_structure_in_Generation_III#Checksum
                 unchecked {
                     uint result = 0U;
                     for (int i = 0; i < GetSize() / 4; i++)
                         result += BitConverter.ToUInt32(data, i * 4);
                     result = ((result & 0xFFFF0000) >> 16) + (result & 0x0000FFFF);
-                    checksum = (ushort)result;
+                    return (ushort)result;
                 }
             }
 
@@ -333,7 +333,7 @@ namespace Mightyena {
             // recalculate checksums on all sections and copy them back to sram
             for (int i = 0; i < 28; i++) {
                 Section section = sections[i];
-                section.CalculateChecksum();
+                section.checksum = section.GetChecksum();
                 // save metadata back to the section footer
                 Buffer.BlockCopy(BitConverter.GetBytes((ushort)section.id), 0, section.data, 0x0FF4, 2);
                 Buffer.BlockCopy(BitConverter.GetBytes(section.checksum), 0, section.data, 0x0FF6, 2);
