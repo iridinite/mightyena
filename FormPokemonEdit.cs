@@ -363,7 +363,7 @@ namespace Mightyena {
 
             Target.FatefulEncounter = chkFatefulEncounter.Checked;
             Target.Genes = (Target.Genes & ~0xC0000000)
-                           | ((Target.Personality & 0x1) << 31) // ability flag
+                           | (Target.Species.HasSecondAbility ? ((Target.Personality & 0x1) << 31) : 0) // ability flag
                            | ((chkEgg.Checked ? 1U : 0U) << 30); // egg flag
 
             Target.PokeRus = (byte)((int)nudPokerusStrain.Value | ((int)nudPokerusDays.Value << 4));
