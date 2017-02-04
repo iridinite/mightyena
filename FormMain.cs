@@ -177,7 +177,7 @@ namespace Mightyena {
             cmbSelectedItem.SelectedIndex = item.Index;
             nudSelectedItemQuantity.Value = item.Quantity;
             cmbSelectedItem.Enabled = true;
-            nudSelectedItemQuantity.Enabled = true;
+            nudSelectedItemQuantity.Enabled = item.Index > 0;
             picSelectedItem.Visible = true;
             picSelectedItem.Invalidate();
 
@@ -323,6 +323,14 @@ namespace Mightyena {
         private void cmbSelectedItem_SelectedIndexChanged(object sender, EventArgs e) {
             // avoid making edits while changing item pages
             if (!canMakeDirty || !cmbSelectedItem.Enabled) return;
+            // if No Item is selected, cannot modify quantity
+            if (cmbSelectedItem.SelectedIndex > 0) {
+                nudSelectedItemQuantity.Enabled = true;
+                nudSelectedItemQuantity.Value = Math.Max(1, nudSelectedItemQuantity.Value);
+            } else {
+                nudSelectedItemQuantity.Enabled = false;
+                nudSelectedItemQuantity.Value = 0;
+            }
             // update item entry with new selection
             ItemBoxes[ItemBox.Selection].Item.Index = (ushort)cmbSelectedItem.SelectedIndex;
             ItemBoxes[ItemBox.Selection].Invalidate();
@@ -333,6 +341,10 @@ namespace Mightyena {
         private void nudSelectedItemQuantity_ValueChanged(object sender, EventArgs e) {
             // avoid making edits while changing item pages
             if (!canMakeDirty || !cmbSelectedItem.Enabled) return;
+
+            // if quantity is zero, set type to No Item
+            if (nudSelectedItemQuantity.Value == 0)
+                cmbSelectedItem.SelectedIndex = 0;
 
             ItemBoxes[ItemBox.Selection].Item.Quantity = (ushort)nudSelectedItemQuantity.Value;
             ItemBoxes[ItemBox.Selection].Invalidate();
