@@ -461,25 +461,28 @@ namespace Mightyena {
         /// Saves and re-encrypts changes back to the encapsulating frame.
         /// </summary>
         public void Save() {
-            // recalculate statistics
-            if (!boxed) {
-                byte level = (byte)Utils.GetLevelForExp(Species.ExpGroup, Experience);
-                ushort hp = (ushort)(Math.Floor((2.0 * Species.BaseHP + IVHP + Math.Floor(EVHP / 4.0)) * level / 100) + level + 10);
+            // avoid saving stats to empty slots
+            if (Exists) {
+                // recalculate statistics
+                if (!boxed) {
+                    byte level = (byte)Utils.GetLevelForExp(Species.ExpGroup, Experience);
+                    ushort hp = (ushort)(Math.Floor((2.0 * Species.BaseHP + IVHP + Math.Floor(EVHP / 4.0)) * level / 100) + level + 10);
 
-                // write stats
-                frame[offset + 84] = level;
-                Buffer.BlockCopy(BitConverter.GetBytes(hp), 0, frame, offset + 86, 2); // current hp
-                Buffer.BlockCopy(BitConverter.GetBytes(hp), 0, frame, offset + 88, 2); // total hp
-                Buffer.BlockCopy(BitConverter.GetBytes(CalculateStat(level, Species.BaseAttack, IVAttack, EVAttack, 1.0)), 0, frame, offset + 90, 2);
-                Buffer.BlockCopy(BitConverter.GetBytes(CalculateStat(level, Species.BaseDefense, IVDefense, EVDefense, 1.0)), 0, frame, offset + 92, 2);
-                Buffer.BlockCopy(BitConverter.GetBytes(CalculateStat(level, Species.BaseSpeed, IVSpeed, EVSpeed, 1.0)), 0, frame, offset + 94, 2);
-                Buffer.BlockCopy(BitConverter.GetBytes(CalculateStat(level, Species.BaseSpAttack, IVSpAttack, EVSpAttack, 1.0)), 0, frame, offset + 96, 2);
-                Buffer.BlockCopy(BitConverter.GetBytes(CalculateStat(level, Species.BaseSpDefense, IVSpDefense, EVSpDefense, 1.0)), 0, frame, offset + 98, 2);
+                    // write stats
+                    frame[offset + 84] = level;
+                    Buffer.BlockCopy(BitConverter.GetBytes(hp), 0, frame, offset + 86, 2); // current hp
+                    Buffer.BlockCopy(BitConverter.GetBytes(hp), 0, frame, offset + 88, 2); // total hp
+                    Buffer.BlockCopy(BitConverter.GetBytes(CalculateStat(level, Species.BaseAttack, IVAttack, EVAttack, 1.0)), 0, frame, offset + 90, 2);
+                    Buffer.BlockCopy(BitConverter.GetBytes(CalculateStat(level, Species.BaseDefense, IVDefense, EVDefense, 1.0)), 0, frame, offset + 92, 2);
+                    Buffer.BlockCopy(BitConverter.GetBytes(CalculateStat(level, Species.BaseSpeed, IVSpeed, EVSpeed, 1.0)), 0, frame, offset + 94, 2);
+                    Buffer.BlockCopy(BitConverter.GetBytes(CalculateStat(level, Species.BaseSpAttack, IVSpAttack, EVSpAttack, 1.0)), 0, frame, offset + 96, 2);
+                    Buffer.BlockCopy(BitConverter.GetBytes(CalculateStat(level, Species.BaseSpDefense, IVSpDefense, EVSpDefense, 1.0)), 0, frame, offset + 98, 2);
+                }
+
+                // save strings
+                Nickname.Encode(frame, offset + 0x08);
+                OTName.Encode(frame, offset + 0x14);
             }
-
-            // save strings
-            Nickname.Encode(frame, offset + 0x08);
-            OTName.Encode(frame, offset + 0x14);
 
             // re-order the substructures based on the new pval (it might have changed)
             byte[] finaldata = new byte[48];
