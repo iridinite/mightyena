@@ -185,12 +185,41 @@ namespace Mightyena {
         private void PartyButton_Click(object sender, EventArgs e) {
             Button self = (Button)sender;
             int partyIndex = int.Parse((string)self.Tag);
+            Gen3Pokemon[] team = Gen3Save.Inst.Team;
 
-            if (EditPokemon(Gen3Save.Inst.Team[partyIndex])) {
-                // refresh form
-                self.Invalidate();
-                MakeDirty();
+            if (!EditPokemon(team[partyIndex])) return;
+            MakeDirty();
+
+            // shift party pokemon so there are no empty slots in between
+            uint teamSize;
+            while (true) {
+                teamSize = 0U;
+                int hole = -1;
+                for (int i = 0; i < 6; i++) {
+                    if (team[i].Exists)
+                        teamSize++;
+                    // check if this entry is a hole
+                    if (!team[i].Exists && hole == -1) {
+                        hole = i;
+                        continue;
+                    }
+                    // found an entry and there is a hole
+                    if (team[i].Exists && hole != -1) {
+                        // swap the entries
+                        team[i].CopyTo(team[hole]);
+                        team[i].Delete();
+                        break;
+                    }
+                }
+
+                // if there were no holes in the previous run, then exit
+                if (hole == -1 || hole >= teamSize)
+                    break;
             }
+            // save the new number of party members
+            Gen3Save.Inst.TeamSize = teamSize;
+            // because we may have swapped mons around, redraw the entire party
+            fraParty.Invalidate();
         }
 
         private void PartyButton_Paint(object sender, PaintEventArgs e) {
