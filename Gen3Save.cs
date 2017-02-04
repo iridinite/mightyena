@@ -5,6 +5,7 @@
 
 using System;
 using System.IO;
+using System.Windows.Forms;
 
 namespace Mightyena {
 
@@ -193,11 +194,21 @@ namespace Mightyena {
         /// </summary>
         /// <param name="filename">The path to the save file.</param>
         public static Gen3Save FromFile(string filename) {
+            // sanity test: file size
+            FileInfo fi = new FileInfo(filename);
+            if (!fi.Exists)
+                throw new InvalidDataException("The specified file does not exist.");
+            if (fi.Length < 131072) // 128 kB
+                throw new InvalidDataException("The specified file is invalid. A save file must be at least 128 kB.");
+            if (fi.Length > 4194304) // 4 MB
+                throw new InvalidDataException("The specified file is invalid. It's way too big, silly.");
+
             Gen3Save ret = new Gen3Save();
             ret.sram = File.ReadAllBytes(filename);
 
-            if (ret.sram.Length < 131072) // 128 kB
-                throw new InvalidDataException("File is smaller than 128 kB and cannot be a valid save file");
+            // variables for testing save corruption
+            int corruptSections = 0;
+            uint saveIndex1 = 0U, saveIndex2 = 0U;
 
             // load all sections in the file
             ret.sections = new Section[28]; // 14 sections * 2 saves
@@ -209,7 +220,38 @@ namespace Mightyena {
                 section.id = (SectionID)BitConverter.ToUInt16(section.data, 0x0FF4);
                 section.checksum = BitConverter.ToUInt16(section.data, 0x0FF6);
                 section.saveindex = BitConverter.ToUInt32(section.data, 0x0FFC);
+
+                // perform sanity checks on section ID and save indices
+                if (!Enum.IsDefined(typeof(SectionID), section.id))
+                    throw new InvalidDataException($"Save file is unreadable. (section {i} has unrecognized ID {section.id})");
+                // assume that the save indices on sections 0 and 14 are correct
+                if (i == 0) saveIndex1 = section.saveindex;
+                if (i == 14) saveIndex2 = section.saveindex;
+                // check that all other sections save indices match
+                if (i > 0 && i <= 13 && section.saveindex != saveIndex1)
+                    throw new InvalidDataException($"Save file is unreadable. (mismatching save index on section {i}: got {section.saveindex}, expected {saveIndex1})");
+                if (i > 14 && i <= 27 && section.saveindex != saveIndex2)
+                    throw new InvalidDataException($"Save file is unreadable. (mismatching save index on section {i}: got {section.saveindex}, expected {saveIndex2})");
+
+                // verify the section checksum
+                if (section.checksum != section.GetChecksum())
+                    corruptSections++;
+
                 ret.sections[i] = section;
+            }
+
+            // warn about a damaged save file
+            if (corruptSections > 4) {
+                // 4 is a rather arbitrary number, but I think that with this many corrupt sections,
+                // the save file ought to be considered invalid entirely
+                throw new InvalidDataException("File is either not a valid save file, or has been corrupted.");
+            }
+            if (corruptSections > 0 &&
+                MessageBox.Show(
+                    "The save file contains " + corruptSections +
+                    " corrupted sections. Program behaviour may be unpredictable. Would you like to continue loading this save file?",
+                    "Mightyena", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.No) {
+                return null;
             }
 
             // determine which of the two game saves is more recent

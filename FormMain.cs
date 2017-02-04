@@ -63,13 +63,25 @@ namespace Mightyena {
         }
 
         private void OpenFile(string filename, string shortname) {
+            var format = CultureInfo.InvariantCulture.NumberFormat;
+
+            // try to load the save file
+            Gen3Save sav;
+            try {
+                sav = Gen3Save.FromFile(filename);
+                if (sav == null) return;
+
+            } catch (InvalidDataException ex) {
+                // show the error message
+                MessageBox.Show(ex.Message, "Mightyena", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
             canMakeDirty = false;
+            Gen3Save.Inst = sav;
+
             saveFilePath = filename;
             saveFileShort = shortname;
-
-            var format = CultureInfo.InvariantCulture.NumberFormat;
-            Gen3Save sav = Gen3Save.FromFile(filename);
-            Gen3Save.Inst = sav;
 
             // trainer page
             txtName.Text = sav.Name;
@@ -173,7 +185,7 @@ namespace Mightyena {
         private void PartyButton_Click(object sender, EventArgs e) {
             Button self = (Button)sender;
             int partyIndex = int.Parse((string)self.Tag);
-            
+
             if (EditPokemon(Gen3Save.Inst.Team[partyIndex])) {
                 // refresh form
                 self.Invalidate();
