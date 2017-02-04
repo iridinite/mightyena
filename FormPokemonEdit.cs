@@ -431,6 +431,18 @@ namespace Mightyena {
             Target.Export(dlgExport.FileName);
         }
 
+        private void cmdDelete_Click(object sender, EventArgs e) {
+            if (MessageBox.Show(
+                    "Are you sure you want to delete this Pokémon? Unless you exported it, this operation cannot be undone.",
+                    $"Delete {Target.Nickname}?", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) != DialogResult.Yes)
+                return;
+
+            // erase the mon's data and close the editor
+            Target.Delete();
+            DialogResult = DialogResult.OK;
+            Close();
+        }
+
     }
 
 }

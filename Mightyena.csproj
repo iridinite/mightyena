@@ -194,6 +194,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="EditorIcon.ico" />
+    <None Include="Resources\trash.png" />
     <None Include="Resources\ItemIcons.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

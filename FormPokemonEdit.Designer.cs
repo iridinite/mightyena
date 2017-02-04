@@ -146,6 +146,7 @@
             this.cmdExport = new System.Windows.Forms.Button();
             this.dlgImport = new System.Windows.Forms.OpenFileDialog();
             this.dlgExport = new System.Windows.Forms.SaveFileDialog();
+            this.cmdDelete = new System.Windows.Forms.Button();
             this.fraOT.SuspendLayout();
             this.fraPVal.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudLevel)).BeginInit();
@@ -1460,7 +1461,7 @@
             // cmdImport
             // 
             this.cmdImport.Image = global::Mightyena.Properties.Resources.open;
-            this.cmdImport.Location = new System.Drawing.Point(392, 24);
+            this.cmdImport.Location = new System.Drawing.Point(392, 16);
             this.cmdImport.Name = "cmdImport";
             this.cmdImport.Size = new System.Drawing.Size(80, 24);
             this.cmdImport.TabIndex = 35;
@@ -1473,7 +1474,7 @@
             // cmdExport
             // 
             this.cmdExport.Image = global::Mightyena.Properties.Resources.save;
-            this.cmdExport.Location = new System.Drawing.Point(392, 56);
+            this.cmdExport.Location = new System.Drawing.Point(392, 42);
             this.cmdExport.Name = "cmdExport";
             this.cmdExport.Size = new System.Drawing.Size(80, 24);
             this.cmdExport.TabIndex = 36;
@@ -1491,6 +1492,19 @@
             // 
             this.dlgExport.Filter = "Pokémon Data Files (*.pkm)|*.pkm";
             // 
+            // cmdDelete
+            // 
+            this.cmdDelete.Image = global::Mightyena.Properties.Resources.trash;
+            this.cmdDelete.Location = new System.Drawing.Point(392, 76);
+            this.cmdDelete.Name = "cmdDelete";
+            this.cmdDelete.Size = new System.Drawing.Size(80, 24);
+            this.cmdDelete.TabIndex = 37;
+            this.cmdDelete.Text = "Delete...";
+            this.cmdDelete.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.cmdDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.cmdDelete.UseVisualStyleBackColor = true;
+            this.cmdDelete.Click += new System.EventHandler(this.cmdDelete_Click);
+            // 
             // FormPokemonEdit
             // 
             this.AcceptButton = this.cmdAccept;
@@ -1498,6 +1512,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.cmdCancel;
             this.ClientSize = new System.Drawing.Size(489, 689);
+            this.Controls.Add(this.cmdDelete);
             this.Controls.Add(this.cmdExport);
             this.Controls.Add(this.cmdImport);
             this.Controls.Add(this.button1);
@@ -1697,5 +1712,6 @@
         private System.Windows.Forms.Button cmdExport;
         private System.Windows.Forms.OpenFileDialog dlgImport;
         private System.Windows.Forms.SaveFileDialog dlgExport;
+        private System.Windows.Forms.Button cmdDelete;
     }
 }

@@ -449,6 +449,15 @@ namespace Mightyena {
         }
 
         /// <summary>
+        /// Deletes the Pokémon by zeroing the data buffer.
+        /// </summary>
+        public void Delete() {
+            Array.Clear(data, 0, 48);
+            Array.Clear(frame, offset, boxed ? 80 : 100);
+            Decrypt();
+        }
+
+        /// <summary>
         /// Saves and re-encrypts changes back to the encapsulating frame.
         /// </summary>
         public void Save() {
