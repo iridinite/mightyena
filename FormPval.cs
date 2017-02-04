@@ -48,9 +48,15 @@ namespace Mightyena {
         }
 
         private void FormPval_Load(object sender, EventArgs e) {
+            // cannot require gender for species with no gender ratio
             if (Species.GenderRatio == 0 || Species.GenderRatio >= 254) {
                 optGenderDc.Checked = true;
                 fraGender.Enabled = false;
+            }
+            // cannot require ability for species with only one ability
+            if (!Species.HasSecondAbility) {
+                optAbilityDc.Checked = true;
+                fraAbility.Enabled = false;
             }
         }
         
