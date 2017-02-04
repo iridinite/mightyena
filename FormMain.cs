@@ -58,6 +58,21 @@ namespace Mightyena {
             Species.Load();
         }
 
+        private void FormMain_FormClosing(object sender, FormClosingEventArgs e) {
+            if (!dirty) return;
+
+            DialogResult dr = MessageBox.Show($"Save changes to {saveFileShort}?", "Mightyena",
+                MessageBoxButtons.YesNoCancel, MessageBoxIcon.Exclamation);
+            switch (dr) {
+                case DialogResult.Cancel:
+                    e.Cancel = true;
+                    return;
+                case DialogResult.Yes:
+                    SaveFile();
+                    break;
+            }
+        }
+
         private void mnuFileExit_Click(object sender, EventArgs e) {
             Close();
         }

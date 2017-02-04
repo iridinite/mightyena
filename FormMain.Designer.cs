@@ -712,6 +712,7 @@
             this.Name = "FormMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Mightyena: Gen-III Pokémon Save Editor";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormMain_FormClosing);
             this.Load += new System.EventHandler(this.FormMain_Load);
             this.tabs.ResumeLayout(false);
             this.tbpGeneral.ResumeLayout(false);
