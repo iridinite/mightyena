@@ -110,7 +110,7 @@ namespace Mightyena {
         /// </summary>
         public static Gen3Save Inst { get; set; }
 
-        private byte[] sram;
+        private byte[] flashmem;
         private byte[] boxdata;
         private int sectionOffset;
         private Section[] sections;
@@ -204,7 +204,7 @@ namespace Mightyena {
                 throw new InvalidDataException("The specified file is invalid. It's way too big, silly.");
 
             Gen3Save ret = new Gen3Save();
-            ret.sram = File.ReadAllBytes(filename);
+            ret.flashmem = File.ReadAllBytes(filename);
 
             // variables for testing save corruption
             int corruptSections = 0;
@@ -216,7 +216,7 @@ namespace Mightyena {
                 Section section = new Section();
                 section.data = new byte[4096];
 
-                Buffer.BlockCopy(ret.sram, 4096 * i, section.data, 0, 4096);
+                Buffer.BlockCopy(ret.flashmem, 4096 * i, section.data, 0, 4096);
                 section.id = (SectionID)BitConverter.ToUInt16(section.data, 0x0FF4);
                 section.checksum = BitConverter.ToUInt16(section.data, 0x0FF6);
                 section.saveindex = BitConverter.ToUInt32(section.data, 0x0FFC);
@@ -358,7 +358,7 @@ namespace Mightyena {
         }
 
         /// <summary>
-        /// Writes all changes back to the SRAM dump and saves that to a file.
+        /// Writes all changes back to the flash memory and saves that to a file.
         /// </summary>
         /// <param name="filename">The path to the save file.</param>
         public void Save(string filename) {
@@ -402,7 +402,7 @@ namespace Mightyena {
                 boxoffset += boxsection.GetSize();
             }
 
-            // recalculate checksums on all sections and copy them back to sram
+            // recalculate checksums on all sections and copy them back to flashmem
             for (int i = 0; i < 28; i++) {
                 Section section = sections[i];
                 section.checksum = section.GetChecksum();
@@ -410,12 +410,12 @@ namespace Mightyena {
                 Buffer.BlockCopy(BitConverter.GetBytes((ushort)section.id), 0, section.data, 0x0FF4, 2);
                 Buffer.BlockCopy(BitConverter.GetBytes(section.checksum), 0, section.data, 0x0FF6, 2);
                 Buffer.BlockCopy(BitConverter.GetBytes(section.saveindex), 0, section.data, 0x0FFC, 4);
-                // write section to sram
-                Buffer.BlockCopy(section.data, 0, sram, 4096 * i, 4096);
+                // write section to flash
+                Buffer.BlockCopy(section.data, 0, flashmem, 4096 * i, 4096);
             }
 
-            // finally, flush the sram to disk
-            File.WriteAllBytes(filename, sram);
+            // finally, flush the flash memory to disk
+            File.WriteAllBytes(filename, flashmem);
         }
 
     }
