@@ -129,10 +129,11 @@ namespace Mightyena {
             this.Text = saveFileShort + " - Mightyena";
         }
 
-        private bool EditPokemon(Gen3Pokemon mon) {
+        private bool EditPokemon(Gen3Pokemon mon, bool allowDelete = true) {
             if (mon.Exists) {
                 // edit an existing 'mon slot
                 FormPokemonEdit frm = new FormPokemonEdit(mon);
+                frm.CanDelete = allowDelete;
                 if (frm.ShowDialog() != DialogResult.OK) return false;
 
                 // copy the edited pokemon
@@ -145,6 +146,7 @@ namespace Mightyena {
                 if (tempmon == null) return false;
 
                 FormPokemonEdit frm = new FormPokemonEdit(tempmon);
+                frm.CanDelete = false; // the slot is already empty
                 if (frm.ShowDialog() != DialogResult.OK) return false;
 
                 // copy the edited pokemon to the real box slot
@@ -187,7 +189,9 @@ namespace Mightyena {
             int partyIndex = int.Parse((string)self.Tag);
             Gen3Pokemon[] team = Gen3Save.Inst.Team;
 
-            if (!EditPokemon(team[partyIndex])) return;
+            if (!EditPokemon(team[partyIndex],
+                Gen3Save.Inst.TeamSize > 1)) // forbid deleting if this is last party member
+                return;
             MakeDirty();
 
             // shift party pokemon so there are no empty slots in between

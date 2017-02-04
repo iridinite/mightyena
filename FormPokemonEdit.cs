@@ -13,7 +13,18 @@ namespace Mightyena {
 
     public partial class FormPokemonEdit : Form {
 
+        /// <summary>
+        /// References the Pokémon that is being edited.
+        /// </summary>
         public Gen3Pokemon Target { get; }
+
+        /// <summary>
+        /// Whether or not the Delete button is enabled.
+        /// </summary>
+        public bool CanDelete {
+            get { return cmdDelete.Enabled; }
+            set { cmdDelete.Enabled = value; }
+        }
 
         private bool init;
 
