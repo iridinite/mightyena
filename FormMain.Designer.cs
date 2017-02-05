@@ -62,9 +62,6 @@
             this.tbpBoxes = new System.Windows.Forms.TabPage();
             this.pnlBoxButtons = new System.Windows.Forms.Panel();
             this.lblBoxHoverInfo = new System.Windows.Forms.Label();
-            this.lblBoxNo = new System.Windows.Forms.Label();
-            this.nudBoxActive = new System.Windows.Forms.NumericUpDown();
-            this.txtBoxName = new System.Windows.Forms.TextBox();
             this.mnsMenu = new System.Windows.Forms.MenuStrip();
             this.mnuFile = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuFileLoad = new System.Windows.Forms.ToolStripMenuItem();
@@ -79,6 +76,9 @@
             this.dlgOpen = new System.Windows.Forms.OpenFileDialog();
             this.dlgSaveAs = new System.Windows.Forms.SaveFileDialog();
             this.dlgImport = new System.Windows.Forms.OpenFileDialog();
+            this.pnlBoxNumbers = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.cmdBoxSettings = new System.Windows.Forms.Button();
             this.tabs.SuspendLayout();
             this.tbpGeneral.SuspendLayout();
             this.fraParty.SuspendLayout();
@@ -90,8 +90,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudSelectedItemQuantity)).BeginInit();
             this.tbpBoxes.SuspendLayout();
             this.pnlBoxButtons.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudBoxActive)).BeginInit();
             this.mnsMenu.SuspendLayout();
+            this.pnlBoxNumbers.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabs
@@ -519,10 +519,8 @@
             // 
             // tbpBoxes
             // 
+            this.tbpBoxes.Controls.Add(this.pnlBoxNumbers);
             this.tbpBoxes.Controls.Add(this.pnlBoxButtons);
-            this.tbpBoxes.Controls.Add(this.lblBoxNo);
-            this.tbpBoxes.Controls.Add(this.nudBoxActive);
-            this.tbpBoxes.Controls.Add(this.txtBoxName);
             this.tbpBoxes.Location = new System.Drawing.Point(4, 22);
             this.tbpBoxes.Name = "tbpBoxes";
             this.tbpBoxes.Size = new System.Drawing.Size(496, 286);
@@ -540,52 +538,11 @@
             // 
             // lblBoxHoverInfo
             // 
-            this.lblBoxHoverInfo.Location = new System.Drawing.Point(8, 224);
+            this.lblBoxHoverInfo.Location = new System.Drawing.Point(104, 0);
             this.lblBoxHoverInfo.Name = "lblBoxHoverInfo";
-            this.lblBoxHoverInfo.Size = new System.Drawing.Size(464, 16);
+            this.lblBoxHoverInfo.Size = new System.Drawing.Size(272, 24);
             this.lblBoxHoverInfo.TabIndex = 27;
             this.lblBoxHoverInfo.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // lblBoxNo
-            // 
-            this.lblBoxNo.Location = new System.Drawing.Point(8, 8);
-            this.lblBoxNo.Name = "lblBoxNo";
-            this.lblBoxNo.Size = new System.Drawing.Size(32, 21);
-            this.lblBoxNo.TabIndex = 5;
-            this.lblBoxNo.Text = "Box:";
-            this.lblBoxNo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // nudBoxActive
-            // 
-            this.nudBoxActive.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nudBoxActive.Location = new System.Drawing.Point(40, 8);
-            this.nudBoxActive.Maximum = new decimal(new int[] {
-            14,
-            0,
-            0,
-            0});
-            this.nudBoxActive.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.nudBoxActive.Name = "nudBoxActive";
-            this.nudBoxActive.Size = new System.Drawing.Size(48, 21);
-            this.nudBoxActive.TabIndex = 4;
-            this.nudBoxActive.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.nudBoxActive.ValueChanged += new System.EventHandler(this.nudBoxActive_ValueChanged);
-            // 
-            // txtBoxName
-            // 
-            this.txtBoxName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBoxName.Location = new System.Drawing.Point(96, 8);
-            this.txtBoxName.Name = "txtBoxName";
-            this.txtBoxName.Size = new System.Drawing.Size(116, 21);
-            this.txtBoxName.TabIndex = 2;
             // 
             // mnsMenu
             // 
@@ -698,6 +655,32 @@
             this.dlgImport.Filter = "Pokémon Data Files (*.pkm)|*.pkm";
             this.dlgImport.Title = "Import Pokémon into Empty Slot";
             // 
+            // pnlBoxNumbers
+            // 
+            this.pnlBoxNumbers.Controls.Add(this.cmdBoxSettings);
+            this.pnlBoxNumbers.Controls.Add(this.label1);
+            this.pnlBoxNumbers.Location = new System.Drawing.Point(8, 8);
+            this.pnlBoxNumbers.Name = "pnlBoxNumbers";
+            this.pnlBoxNumbers.Size = new System.Drawing.Size(480, 24);
+            this.pnlBoxNumbers.TabIndex = 28;
+            // 
+            // label1
+            // 
+            this.label1.Location = new System.Drawing.Point(8, 224);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(464, 16);
+            this.label1.TabIndex = 27;
+            this.label1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // cmdBoxSettings
+            // 
+            this.cmdBoxSettings.Location = new System.Drawing.Point(456, 0);
+            this.cmdBoxSettings.Name = "cmdBoxSettings";
+            this.cmdBoxSettings.Size = new System.Drawing.Size(24, 24);
+            this.cmdBoxSettings.TabIndex = 28;
+            this.cmdBoxSettings.Text = "...";
+            this.cmdBoxSettings.UseVisualStyleBackColor = true;
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -725,11 +708,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.picSelectedItem)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudSelectedItemQuantity)).EndInit();
             this.tbpBoxes.ResumeLayout(false);
-            this.tbpBoxes.PerformLayout();
             this.pnlBoxButtons.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.nudBoxActive)).EndInit();
             this.mnsMenu.ResumeLayout(false);
             this.mnsMenu.PerformLayout();
+            this.pnlBoxNumbers.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -767,9 +749,6 @@
         private System.Windows.Forms.Button cmdParty2;
         private System.Windows.Forms.Button cmdParty4;
         private System.Windows.Forms.Button cmdParty3;
-        private System.Windows.Forms.TextBox txtBoxName;
-        private System.Windows.Forms.NumericUpDown nudBoxActive;
-        private System.Windows.Forms.Label lblBoxNo;
         private System.Windows.Forms.Panel pnlBoxButtons;
         private System.Windows.Forms.Label lblPartyHoverInfo;
         private System.Windows.Forms.ToolStripMenuItem mnuFileSaveAs;
@@ -791,6 +770,9 @@
         private System.Windows.Forms.ToolStripMenuItem mnuFileBackup;
         private System.Windows.Forms.ToolStripSeparator mnsFileSep2;
         private System.Windows.Forms.OpenFileDialog dlgImport;
+        private System.Windows.Forms.Panel pnlBoxNumbers;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button cmdBoxSettings;
     }
 }
 

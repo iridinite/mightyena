@@ -21,15 +21,38 @@ namespace Mightyena {
         private bool canMakeDirty;
 
         private readonly ItemBox[] ItemBoxes;
+        private readonly RadioButton[] BoxNumButtons;
+        private int selectedBox;
 
         public FormMain() {
             InitializeComponent();
+
+            // generate box number buttons
+            BoxNumButtons = new RadioButton[14];
+            for (int i = 0; i < 14; i++) {
+                RadioButton rad = new RadioButton();
+                rad.Appearance = Appearance.Button;
+                rad.Size = new Size(28, 24);
+                rad.Location = new Point(i * 30, 0);
+                rad.Text = (i + 1).ToString();
+                rad.TextAlign = ContentAlignment.MiddleCenter;
+                rad.Tag = i;
+                rad.CheckedChanged += (sender, args) => {
+                    // if button got checked, update selected box ID and redraw
+                    RadioButton self = (RadioButton)sender;
+                    if (!self.Checked) return;
+                    selectedBox = (int)self.Tag;
+                    pnlBoxButtons.Invalidate();
+                };
+                pnlBoxNumbers.Controls.Add(rad);
+                BoxNumButtons[i] = rad;
+            }
 
             // generate the 30 buttons on the PC Box page
             for (int i = 0; i < 30; i++) {
                 Button btn = new Button();
                 btn.Size = new Size(92, 32);
-                btn.Location = new Point(i % 5 * 97, i / 5 * 37);
+                btn.Location = new Point(i % 5 * 97, i / 5 * 37 + 24);
                 btn.Tag = i;
                 btn.Text = "#" + i;
                 btn.TextAlign = ContentAlignment.MiddleRight;
@@ -113,8 +136,7 @@ namespace Mightyena {
             ShowBag(sav.ItemsPocket);
 
             // box page
-            nudBoxActive.Value = sav.BoxActive + 1;
-            txtBoxName.Text = Gen3Save.Inst.BoxNames[sav.BoxActive];
+            BoxNumButtons[sav.BoxActive].Checked = true;
             fraParty.Invalidate();
 
             // enable editing and saving controls
@@ -276,9 +298,8 @@ namespace Mightyena {
         private void BoxButton_Paint(object sender, PaintEventArgs e) {
             Button self = (Button)sender;
             int index = (int)self.Tag;
-            int boxNo = (int)nudBoxActive.Value;
 
-            Gen3Pokemon mon = Gen3Save.Inst.Box[(boxNo - 1) * 30 + index];
+            Gen3Pokemon mon = Gen3Save.Inst.Box[selectedBox * 30 + index];
             if (mon.Exists) {
                 self.Text = mon.Nickname;
                 self.TextAlign = ContentAlignment.MiddleRight;
@@ -292,9 +313,8 @@ namespace Mightyena {
         private void BoxButton_Click(object sender, EventArgs e) {
             Button self = (Button)sender;
             int index = (int)self.Tag;
-            int boxNo = (int)nudBoxActive.Value;
 
-            if (EditPokemon(Gen3Save.Inst.Box[(boxNo - 1) * 30 + index])) {
+            if (EditPokemon(Gen3Save.Inst.Box[selectedBox * 30 + index])) {
                 // refresh form
                 self.Invalidate();
                 MakeDirty();
@@ -303,9 +323,8 @@ namespace Mightyena {
 
         private void BoxButton_MouseEnter(object sender, EventArgs e) {
             int index = (int)((Button)sender).Tag;
-            int boxNo = (int)nudBoxActive.Value;
 
-            Gen3Pokemon mon = Gen3Save.Inst.Box[(boxNo - 1) * 30 + index];
+            Gen3Pokemon mon = Gen3Save.Inst.Box[selectedBox * 30 + index];
             lblBoxHoverInfo.Text = mon.Exists
                 ? mon.ToString()
                 : "(empty)";
@@ -313,11 +332,6 @@ namespace Mightyena {
 
         private void BoxButton_MouseLeave(object sender, EventArgs e) {
             lblBoxHoverInfo.Text = String.Empty;
-        }
-
-        private void nudBoxActive_ValueChanged(object sender, EventArgs e) {
-            txtBoxName.Text = Gen3Save.Inst.BoxNames[(int)nudBoxActive.Value - 1];
-            pnlBoxButtons.Invalidate();
         }
 
         private void mnuFileLoad_Click(object sender, EventArgs e) {
