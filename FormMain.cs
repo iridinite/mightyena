@@ -43,6 +43,8 @@ namespace Mightyena {
                     if (!self.Checked) return;
                     selectedBox = (int)self.Tag;
                     pnlBoxButtons.Invalidate();
+                    lblBoxHoverInfo.Enabled = false;
+                    lblBoxHoverInfo.Text = Gen3Save.Inst.BoxNames[selectedBox];
                 };
                 pnlBoxNumbers.Controls.Add(rad);
                 BoxNumButtons[i] = rad;
@@ -325,13 +327,13 @@ namespace Mightyena {
             int index = (int)((Button)sender).Tag;
 
             Gen3Pokemon mon = Gen3Save.Inst.Box[selectedBox * 30 + index];
-            lblBoxHoverInfo.Text = mon.Exists
-                ? mon.ToString()
-                : "(empty)";
+            lblBoxHoverInfo.Enabled = true;
+            lblBoxHoverInfo.Text = mon.ToString();
         }
 
         private void BoxButton_MouseLeave(object sender, EventArgs e) {
-            lblBoxHoverInfo.Text = String.Empty;
+            lblBoxHoverInfo.Enabled = false;
+            lblBoxHoverInfo.Text = Gen3Save.Inst.BoxNames[selectedBox];
         }
 
         private void mnuFileLoad_Click(object sender, EventArgs e) {
