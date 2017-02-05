@@ -23,6 +23,7 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.tabs = new System.Windows.Forms.TabControl();
             this.tbpGeneral = new System.Windows.Forms.TabPage();
@@ -49,7 +50,6 @@
             this.lblMoney = new System.Windows.Forms.Label();
             this.txtSecretID = new System.Windows.Forms.TextBox();
             this.tbpBags = new System.Windows.Forms.TabPage();
-            this.picSelectedItem = new System.Windows.Forms.PictureBox();
             this.nudSelectedItemQuantity = new System.Windows.Forms.NumericUpDown();
             this.cmbSelectedItem = new System.Windows.Forms.ComboBox();
             this.pnlBag = new System.Windows.Forms.Panel();
@@ -64,9 +64,6 @@
             this.lblBoxHoverInfo = new System.Windows.Forms.Label();
             this.mnsMenu = new System.Windows.Forms.MenuStrip();
             this.mnuFile = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuFileLoad = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuFileSave = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuFileSaveAs = new System.Windows.Forms.ToolStripMenuItem();
             this.mnsFileSep1 = new System.Windows.Forms.ToolStripSeparator();
             this.mnuFileBackup = new System.Windows.Forms.ToolStripMenuItem();
             this.mnsFileSep2 = new System.Windows.Forms.ToolStripSeparator();
@@ -79,6 +76,15 @@
             this.pnlBoxNumbers = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.cmdBoxSettings = new System.Windows.Forms.Button();
+            this.cmsBoxSettings = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.mnuBoxName = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnsBoxSep1 = new System.Windows.Forms.ToolStripSeparator();
+            this.mnuBoxRename = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuBoxWallpaper = new System.Windows.Forms.ToolStripMenuItem();
+            this.picSelectedItem = new System.Windows.Forms.PictureBox();
+            this.mnuFileLoad = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuFileSave = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuFileSaveAs = new System.Windows.Forms.ToolStripMenuItem();
             this.tabs.SuspendLayout();
             this.tbpGeneral.SuspendLayout();
             this.fraParty.SuspendLayout();
@@ -86,12 +92,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudCoins)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudMoney)).BeginInit();
             this.tbpBags.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picSelectedItem)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudSelectedItemQuantity)).BeginInit();
             this.tbpBoxes.SuspendLayout();
             this.pnlBoxButtons.SuspendLayout();
             this.mnsMenu.SuspendLayout();
             this.pnlBoxNumbers.SuspendLayout();
+            this.cmsBoxSettings.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picSelectedItem)).BeginInit();
             this.SuspendLayout();
             // 
             // tabs
@@ -403,15 +410,6 @@
             this.tbpBags.Text = "Bags";
             this.tbpBags.UseVisualStyleBackColor = true;
             // 
-            // picSelectedItem
-            // 
-            this.picSelectedItem.Location = new System.Drawing.Point(12, 252);
-            this.picSelectedItem.Name = "picSelectedItem";
-            this.picSelectedItem.Size = new System.Drawing.Size(30, 30);
-            this.picSelectedItem.TabIndex = 13;
-            this.picSelectedItem.TabStop = false;
-            this.picSelectedItem.Paint += new System.Windows.Forms.PaintEventHandler(this.picSelectedItem_Paint);
-            // 
             // nudSelectedItemQuantity
             // 
             this.nudSelectedItemQuantity.Enabled = false;
@@ -538,9 +536,9 @@
             // 
             // lblBoxHoverInfo
             // 
-            this.lblBoxHoverInfo.Location = new System.Drawing.Point(104, 0);
+            this.lblBoxHoverInfo.Location = new System.Drawing.Point(8, 0);
             this.lblBoxHoverInfo.Name = "lblBoxHoverInfo";
-            this.lblBoxHoverInfo.Size = new System.Drawing.Size(272, 24);
+            this.lblBoxHoverInfo.Size = new System.Drawing.Size(464, 24);
             this.lblBoxHoverInfo.TabIndex = 27;
             this.lblBoxHoverInfo.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
@@ -568,36 +566,6 @@
             this.mnuFile.Name = "mnuFile";
             this.mnuFile.Size = new System.Drawing.Size(37, 20);
             this.mnuFile.Text = "File";
-            // 
-            // mnuFileLoad
-            // 
-            this.mnuFileLoad.Image = global::Mightyena.Properties.Resources.open;
-            this.mnuFileLoad.Name = "mnuFileLoad";
-            this.mnuFileLoad.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.mnuFileLoad.Size = new System.Drawing.Size(192, 22);
-            this.mnuFileLoad.Text = "Load Battery...";
-            this.mnuFileLoad.Click += new System.EventHandler(this.mnuFileLoad_Click);
-            // 
-            // mnuFileSave
-            // 
-            this.mnuFileSave.Enabled = false;
-            this.mnuFileSave.Image = global::Mightyena.Properties.Resources.save;
-            this.mnuFileSave.Name = "mnuFileSave";
-            this.mnuFileSave.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.mnuFileSave.Size = new System.Drawing.Size(192, 22);
-            this.mnuFileSave.Text = "Save Battery";
-            this.mnuFileSave.Click += new System.EventHandler(this.mnuFileSave_Click);
-            // 
-            // mnuFileSaveAs
-            // 
-            this.mnuFileSaveAs.Enabled = false;
-            this.mnuFileSaveAs.Image = global::Mightyena.Properties.Resources.save_as;
-            this.mnuFileSaveAs.Name = "mnuFileSaveAs";
-            this.mnuFileSaveAs.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt) 
-            | System.Windows.Forms.Keys.S)));
-            this.mnuFileSaveAs.Size = new System.Drawing.Size(192, 22);
-            this.mnuFileSaveAs.Text = "Save As...";
-            this.mnuFileSaveAs.Click += new System.EventHandler(this.mnuFileSaveAs_Click);
             // 
             // mnsFileSep1
             // 
@@ -680,6 +648,82 @@
             this.cmdBoxSettings.TabIndex = 28;
             this.cmdBoxSettings.Text = "...";
             this.cmdBoxSettings.UseVisualStyleBackColor = true;
+            this.cmdBoxSettings.Click += new System.EventHandler(this.cmdBoxSettings_Click);
+            // 
+            // cmsBoxSettings
+            // 
+            this.cmsBoxSettings.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnuBoxName,
+            this.mnsBoxSep1,
+            this.mnuBoxRename,
+            this.mnuBoxWallpaper});
+            this.cmsBoxSettings.Name = "cmsBoxSettings";
+            this.cmsBoxSettings.Size = new System.Drawing.Size(137, 76);
+            // 
+            // mnuBoxName
+            // 
+            this.mnuBoxName.Enabled = false;
+            this.mnuBoxName.Name = "mnuBoxName";
+            this.mnuBoxName.Size = new System.Drawing.Size(136, 22);
+            this.mnuBoxName.Text = "Box Name";
+            // 
+            // mnsBoxSep1
+            // 
+            this.mnsBoxSep1.Name = "mnsBoxSep1";
+            this.mnsBoxSep1.Size = new System.Drawing.Size(133, 6);
+            // 
+            // mnuBoxRename
+            // 
+            this.mnuBoxRename.Name = "mnuBoxRename";
+            this.mnuBoxRename.Size = new System.Drawing.Size(136, 22);
+            this.mnuBoxRename.Text = "Rename...";
+            this.mnuBoxRename.Click += new System.EventHandler(this.mnuBoxRename_Click);
+            // 
+            // mnuBoxWallpaper
+            // 
+            this.mnuBoxWallpaper.Enabled = false;
+            this.mnuBoxWallpaper.Name = "mnuBoxWallpaper";
+            this.mnuBoxWallpaper.Size = new System.Drawing.Size(136, 22);
+            this.mnuBoxWallpaper.Text = "Wallpaper...";
+            // 
+            // picSelectedItem
+            // 
+            this.picSelectedItem.Location = new System.Drawing.Point(12, 252);
+            this.picSelectedItem.Name = "picSelectedItem";
+            this.picSelectedItem.Size = new System.Drawing.Size(30, 30);
+            this.picSelectedItem.TabIndex = 13;
+            this.picSelectedItem.TabStop = false;
+            this.picSelectedItem.Paint += new System.Windows.Forms.PaintEventHandler(this.picSelectedItem_Paint);
+            // 
+            // mnuFileLoad
+            // 
+            this.mnuFileLoad.Image = global::Mightyena.Properties.Resources.open;
+            this.mnuFileLoad.Name = "mnuFileLoad";
+            this.mnuFileLoad.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
+            this.mnuFileLoad.Size = new System.Drawing.Size(192, 22);
+            this.mnuFileLoad.Text = "Load Battery...";
+            this.mnuFileLoad.Click += new System.EventHandler(this.mnuFileLoad_Click);
+            // 
+            // mnuFileSave
+            // 
+            this.mnuFileSave.Enabled = false;
+            this.mnuFileSave.Image = global::Mightyena.Properties.Resources.save;
+            this.mnuFileSave.Name = "mnuFileSave";
+            this.mnuFileSave.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
+            this.mnuFileSave.Size = new System.Drawing.Size(192, 22);
+            this.mnuFileSave.Text = "Save Battery";
+            this.mnuFileSave.Click += new System.EventHandler(this.mnuFileSave_Click);
+            // 
+            // mnuFileSaveAs
+            // 
+            this.mnuFileSaveAs.Enabled = false;
+            this.mnuFileSaveAs.Image = global::Mightyena.Properties.Resources.save_as;
+            this.mnuFileSaveAs.Name = "mnuFileSaveAs";
+            this.mnuFileSaveAs.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt) 
+            | System.Windows.Forms.Keys.S)));
+            this.mnuFileSaveAs.Size = new System.Drawing.Size(192, 22);
+            this.mnuFileSaveAs.Text = "Save As...";
+            this.mnuFileSaveAs.Click += new System.EventHandler(this.mnuFileSaveAs_Click);
             // 
             // FormMain
             // 
@@ -705,13 +749,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudCoins)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudMoney)).EndInit();
             this.tbpBags.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.picSelectedItem)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudSelectedItemQuantity)).EndInit();
             this.tbpBoxes.ResumeLayout(false);
             this.pnlBoxButtons.ResumeLayout(false);
             this.mnsMenu.ResumeLayout(false);
             this.mnsMenu.PerformLayout();
             this.pnlBoxNumbers.ResumeLayout(false);
+            this.cmsBoxSettings.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.picSelectedItem)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -773,6 +818,11 @@
         private System.Windows.Forms.Panel pnlBoxNumbers;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button cmdBoxSettings;
+        private System.Windows.Forms.ContextMenuStrip cmsBoxSettings;
+        private System.Windows.Forms.ToolStripMenuItem mnuBoxName;
+        private System.Windows.Forms.ToolStripSeparator mnsBoxSep1;
+        private System.Windows.Forms.ToolStripMenuItem mnuBoxRename;
+        private System.Windows.Forms.ToolStripMenuItem mnuBoxWallpaper;
     }
 }
 

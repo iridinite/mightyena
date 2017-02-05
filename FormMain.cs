@@ -481,6 +481,19 @@ namespace Mightyena {
             MakeDirty();
         }
 
+        private void cmdBoxSettings_Click(object sender, EventArgs e) {
+            mnuBoxName.Text = Gen3Save.Inst.BoxNames[selectedBox];
+            cmsBoxSettings.Show(cmdBoxSettings, new Point(0, cmdBoxSettings.Height));
+        }
+
+        private void mnuBoxRename_Click(object sender, EventArgs e) {
+            FormBoxRename frm = new FormBoxRename(selectedBox + 1, mnuBoxName.Text);
+            if (frm.ShowDialog() == DialogResult.OK) {
+                Gen3Save.Inst.BoxNames[selectedBox].SetValue(frm.NewName);
+                MakeDirty();
+            }
+        }
+
     }
 
 }
