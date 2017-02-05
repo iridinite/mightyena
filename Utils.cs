@@ -143,19 +143,6 @@ namespace Mightyena {
         }
 
         /// <summary>
-        /// Returns a value indicating whether the specified OT ID and PVal make the Pokémon shiny.
-        /// </summary>
-        /// <param name="OTID">The Original Trainer ID.</param>
-        /// <param name="PVal">A 32-bit personality value.</param>
-        public static bool GetIsShiny(uint OTID, uint PVal) {
-            ushort p1 = (ushort)((PVal & 0xFFFF0000) >> 16);
-            ushort p2 = (ushort)(PVal & 0xFFFF);
-            ushort otid = (ushort)(OTID & 0xFFFF);
-            ushort scid = (ushort)((OTID & 0xFFFF0000) >> 16);
-            return (otid ^ scid ^ p1 ^ p2) < 8;
-        }
-
-        /// <summary>
         /// Returns the total XP required to advance to a certain level.
         /// </summary>
         /// <param name="group">The experience group to use in the calculation.</param>

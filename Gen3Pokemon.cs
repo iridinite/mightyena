@@ -123,7 +123,13 @@ namespace Mightyena {
         /// Returns a value indicating whether this Pokémon is Shiny.
         /// </summary>
         public bool Shiny {
-            get { return Utils.GetIsShiny(OTID, Personality); }
+            get {
+                ushort p1 = (ushort)((Personality & 0xFFFF0000) >> 16);
+                ushort p2 = (ushort)(Personality & 0xFFFF);
+                ushort otid = (ushort)(OTID & 0xFFFF);
+                ushort scid = (ushort)((OTID & 0xFFFF0000) >> 16);
+                return (otid ^ scid ^ p1 ^ p2) < 8;
+            }
         }
 
         /// <summary>

@@ -57,7 +57,7 @@ namespace Mightyena {
 
         private void picSprite_Paint(object sender, PaintEventArgs e) {
             // draw species sprite
-            Utils.DrawPokemonSprite(e.Graphics, cmbSpecies.SelectedIndex + 1, Utils.GetIsShiny(Target.OTID, Target.Personality));
+            Utils.DrawPokemonSprite(e.Graphics, cmbSpecies.SelectedIndex + 1, Target.Shiny);
         }
 
         private void picItem_Paint(object sender, PaintEventArgs e) {
@@ -144,7 +144,7 @@ namespace Mightyena {
 
             // update info
             lblAbility.Text = (Target.Personality & 0x1) == 0 ? "Primary" : "Secondary";
-            lblShiny.Text = Utils.GetIsShiny(Target.OTID, Target.Personality) ? "Yes" : "No";
+            lblShiny.Text = Target.Shiny ? "Yes" : "No";
             lblNature.Text = Utils.NatureNames[(int)(Target.Personality % 25)];
 
             // redraw picture, shiny state may have changed
