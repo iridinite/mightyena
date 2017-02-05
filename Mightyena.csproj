@@ -88,6 +88,7 @@
     <Compile Include="ItemBox.Designer.cs">
       <DependentUpon>ItemBox.cs</DependentUpon>
     </Compile>
+    <Compile Include="Nature.cs" />
     <Compile Include="Species.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

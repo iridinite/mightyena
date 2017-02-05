@@ -154,32 +154,6 @@
             // 
             this.cmbNature.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbNature.FormattingEnabled = true;
-            this.cmbNature.Items.AddRange(new object[] {
-            "Hardy",
-            "Lonely",
-            "Brave",
-            "Adamant",
-            "Naughty",
-            "Bold",
-            "Docile",
-            "Relaxed",
-            "Impish",
-            "Lax",
-            "Timid",
-            "Hasty",
-            "Serious",
-            "Jolly",
-            "Naive",
-            "Modest",
-            "Mild",
-            "Quiet",
-            "Bashful",
-            "Rash",
-            "Calm",
-            "Gentle",
-            "Sassy",
-            "Careful",
-            "Quirky"});
             this.cmbNature.Location = new System.Drawing.Point(80, 22);
             this.cmbNature.Name = "cmbNature";
             this.cmbNature.Size = new System.Drawing.Size(88, 21);

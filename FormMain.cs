@@ -56,6 +56,7 @@ namespace Mightyena {
 
         private void FormMain_Load(object sender, EventArgs e) {
             Species.Load();
+            Nature.Load();
         }
 
         private void FormMain_FormClosing(object sender, FormClosingEventArgs e) {

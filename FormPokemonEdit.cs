@@ -145,7 +145,7 @@ namespace Mightyena {
             // update info
             lblAbility.Text = (Target.Personality & 0x1) == 0 ? "Primary" : "Secondary";
             lblShiny.Text = Target.Shiny ? "Yes" : "No";
-            lblNature.Text = Utils.NatureNames[(int)(Target.Personality % 25)];
+            lblNature.Text = Nature.ByIndex((int)(Target.Personality % 25)).Name;
 
             // redraw picture, shiny state may have changed
             picSprite.Invalidate();

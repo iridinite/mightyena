@@ -31,6 +31,7 @@ namespace Mightyena {
         public FormPval() {
             init = true;
             InitializeComponent();
+            cmbNature.Items.AddRange(Nature.NatureNames.ToArray());
             cmbNature.SelectedIndex = Utils.RandInt(0, cmbNature.Items.Count);
             init = false;
         }

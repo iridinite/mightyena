@@ -21,7 +21,6 @@ namespace Mightyena {
         private static readonly Bitmap CacheSprites, CacheSpriteShiny, CacheIcons, CacheItems;
         public static List<string> MoveNames { get; }
         public static List<string> LocationNames { get; }
-        public static List<string> NatureNames { get; }
         public static List<string> ItemNames { get; }
 
         public const int SpriteSize = 80;
@@ -63,7 +62,6 @@ namespace Mightyena {
             // load strings from text files
             MoveNames = ReadStringList("Data\\moves.txt");
             LocationNames = ReadStringList("Data\\locations.txt");
-            NatureNames = ReadStringList("Data\\natures.txt");
             ItemNames = ReadStringList("Data\\items.txt");
         }
 
